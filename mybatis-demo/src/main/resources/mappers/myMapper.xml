@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisdemo.mapper.MyMapper" >
+    <sql id="columns">
+        DataName,DataValue,ValueType,GenerateTime,StoreTime
+    </sql>
+    <resultMap id="history" type="com.example.mybatisdemo.pojo.HistoryDO">
+        <result column="ID" javaType="java.lang.Integer" property="id" />
+        <result column="DataName" javaType="java.lang.String" property="dataName" />
+        <result column="DataValue" javaType="java.lang.String" property="dataValue" />
+        <result column="ValueType" javaType="java.lang.String" property="valueType" />
+        <result column="GenerateTime" javaType="java.lang.String" property="generateTime" />
+        <result column="StoreTime" javaType="java.lang.String" property="storeTime" />
+    </resultMap>
+
+    <select id="selectTheFirst" statementType="STATEMENT" parameterType="java.lang.String" resultType="java.lang.String">
+        select v from ${tablename} where id = 1
+    </select>
+
+    <select id="selectTables" statementType="PREPARED" resultType="java.lang.String">
+        SELECT
+        table_name
+        FROM
+        information_schema.TABLES
+        WHERE
+        TABLE_schema = #{database}
+        AND  table_name between #{startTime} and #{endTime}
+        ORDER BY
+        table_name;
+    </select>
+
+    <select id="selectCCTrackHistoryInTable" statementType="STATEMENT" parameterType="java.lang.String" resultMap="history">
+      select
+      <include refid="columns" />
+      from ${tableName}
+      where DataName = #{dataName}
+      and (GenerateTime between #{startTime} and #{endTime})
+    </select>
+
+    <select id="selectCoalCutterTrackHistory" statementType="STATEMENT" resultMap="history">
+        Select <include refid="columns" />
+        From (
+            <foreach collection="tableList" separator=" Union " item="item">
+                ${item}
+            </foreach>
+            ) as T
+        Order by T.GenerateTime
+    </select>
+</mapper>
