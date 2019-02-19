@@ -2,19 +2,7 @@ package com.example.mybatisdemo.Util;
 
 import com.example.mybatisdemo.constant.DatabaseConstant;
 
-import javax.validation.constraints.NotNull;
-import java.util.*;
-import java.util.regex.Pattern;
-
 public class DBUtil {
-
-    /* 筛选符合查询时间范围的表名
-    *   表名后缀没做处理,如果位数不一致,会导致查询范围出现问题!*/
-    public static String[] matchTableByTime(@NotNull String[] tablenames,@NotNull String start,@NotNull String end){
-        int s = parseTime(start);
-        int e = parseTime(end);
-        return doMatchingTableName(tablenames,s,e);
-    }
 
     /* 解析theme 返回map中,key-value:"dbName"-数据库名;"dataValue"-查询条件(表中DataName的取值)*/
     public static String[] parseTheme(String theme,Integer n){
@@ -55,24 +43,6 @@ public class DBUtil {
         return result;
     }
 
-    /* 解析时间,从字符串到int,截取前TIME_LENGTH位 */
-    public static int parseTime(String str){
-        char[] chars = str.toCharArray();
-
-        int min = Math.min(chars.length, DatabaseConstant.TIME_LENGTH);
-
-        char[] copy = new char[DatabaseConstant.TIME_LENGTH];
-
-        System.arraycopy(chars, 0, copy, 0, min);
-
-        while (min<DatabaseConstant.TIME_LENGTH){
-            copy[min] = 0;
-            min++;
-        }
-
-        return Integer.parseInt(new String(chars));
-    }
-
     public static String formatTime(String time,boolean isss){
         String YY = "2020";
         String MM = "12";
@@ -107,11 +77,6 @@ public class DBUtil {
         if (isss)
             buffer.append(" ").append(ms);
         return buffer.toString();
-    }
-
-    public static String setSqlParam(String sql, String sqlParam,String param){
-        sql.replaceAll(sqlParam,param);
-        return sql;
     }
 
     public static String xuyimiao(String endTime){
@@ -150,64 +115,5 @@ public class DBUtil {
         return split;
     }
 
-    /* 筛选符合查询时间范围的表名 */
-    private static String[] doMatchingTableName(String[] tablenames,int param1,int param2){
-        int i = 0;
-        int s = 0;
-        int e = 0;
-        int[] ints = doRegextablename(tablenames);
 
-        int length = ints.length;
-
-        while (i <= length && param1 > ints[i]){
-            i++;
-        }
-
-        if(i>length)
-            return null;
-
-        s = i;
-
-        while (i <= length && param2 >= ints[i]){
-            i++;
-        }
-
-        if (i == length){
-            e = i;
-        }else {
-            e = i-1;
-        }
-
-        String[] a = new String[e-s+1];
-
-        for (int n = 0, m = s; n<a.length;n++,m++){
-            a[n] = new StringBuffer(DatabaseConstant.TABLE_NAME_PREFIX).append(ints[m]).toString();
-        }
-
-        return a;
-    }
-
-    /*筛选符合条件的表名*/
-    private static int[] doRegextablename(String[] tablenames){
-        String pattern = "^datavalues_+?\\d*";
-
-        List<String> list = new ArrayList<String>();
-        for(int i = 0;i<tablenames.length;i++){
-            if(Pattern.matches(pattern, tablenames[i]))
-                list.add(tablenames[i]);
-        }
-        String[] strings = (String[]) list.toArray();
-
-        return parseSort(strings);
-    }
-
-    /*将 String[] 数组提取末位成为int[]并排序*/
-    private static int[] parseSort(String[] tablenames){
-        int[] ints = new int[tablenames.length];
-        for(int i = 0;i<tablenames.length;i++){
-            ints[i] = Integer.parseInt(tablenames[i].substring(11));
-        }
-        Arrays.sort(ints);
-        return ints;
-    }
 }

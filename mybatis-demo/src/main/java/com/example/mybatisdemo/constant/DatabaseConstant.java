@@ -7,9 +7,6 @@ public class DatabaseConstant {
     //表名前缀
     public static final String TABLE_NAME_PREFIX = "datavalues_";
 
-    //时间字符长度,精确到秒
-    public static final int TIME_LENGTH = 14;
-
     //主题最低长度
     public static final int THEME_MIN_LENGTH = 4;
 
