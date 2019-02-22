@@ -1,4 +1,4 @@
-package com.example.mybatisdemo;
+package com.zmj.microservice.SupportPressureService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

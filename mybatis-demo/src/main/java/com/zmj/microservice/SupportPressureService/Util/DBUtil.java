@@ -1,6 +1,10 @@
-package com.example.mybatisdemo.Util;
+package com.zmj.microservice.SupportPressureService.Util;
 
-import com.example.mybatisdemo.constant.DatabaseConstant;
+import com.alibaba.fastjson.JSON;
+import com.zmj.microservice.SupportPressureService.constant.DatabaseConstant;
+import com.zmj.microservice.SupportPressureService.pojo.DO.HistoryDO;
+
+import java.util.List;
 
 public class DBUtil {
 
@@ -42,6 +46,11 @@ public class DBUtil {
 
         return result;
     }
+
+    public static String toJson(List<HistoryDO> list){
+        return JSON.toJSONString(list);
+    }
+
 
     public static String formatTime(String time,boolean isss){
         String YY = "2020";
@@ -114,6 +123,12 @@ public class DBUtil {
             return null;
         return split;
     }
+
+    public static String getRedisIndexKey(String databaseName,String dataValue){
+        return new StringBuffer("index-").append(databaseName).append("-").append(dataValue).toString();
+    }
+
+
 
 
 }

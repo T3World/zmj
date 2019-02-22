@@ -1,28 +1,46 @@
-package com.example.mybatisdemo.controller;
+package com.zmj.microservice.SupportPressureService.controller;
 
-import com.example.mybatisdemo.pojo.HistoryDO;
-import com.example.mybatisdemo.service.MyService;
+import com.zmj.microservice.SupportPressureService.pojo.DO.HistoryDO;
+import com.zmj.microservice.SupportPressureService.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class TestController {
+public class HistoryController {
 
     @Autowired
-    private MyService service;
+    private HistoryService service;
+
+//    @RequestMapping(value = "/getSupportPressureData",method = RequestMethod.POST)
+//    public SysResult getSupportPressureData(@RequestBody SupportPressureDTO sp){
+//        service.getSupportPressureData(sp);
+//    }
 
     @RequestMapping("/search/{database}/{table}")
     public String select(@PathVariable("database") String database,
                          @PathVariable("table") String table){
         return service.searchAll(database,table);
     }
-//
-//    @RequestMapping("/select/tables/{database}")
-//    public String[] showtables(@PathVariable("database") String database){
-//        return service.selectTables(database);
-//    }
+
+    @RequestMapping("/test/set/{key}/{value}")
+    public String testSet(@PathVariable("key") String key,@PathVariable("value") String value){
+        HistoryDO historyDO = new HistoryDO();
+        historyDO.setDataName(value);
+        historyDO.setDataValue("value");
+        return service.testSet(key,historyDO);
+    }
+
+    @RequestMapping("/test/get/{key}")
+    public String test(@PathVariable("key") String key){
+        return service.testGet(key);
+    }
+    @RequestMapping("/test/hget/{key}")
+    public String testhget(@PathVariable("key") String key){
+        return service.testGet(key);
+    }
+
 
     @RequestMapping(value = "/select/coalCutterTrack",method = RequestMethod.GET)
     public List<HistoryDO> selectCoalCutterTrackHistory(@RequestParam("theme") String theme,

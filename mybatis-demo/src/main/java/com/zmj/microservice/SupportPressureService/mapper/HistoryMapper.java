@@ -1,11 +1,11 @@
-package com.example.mybatisdemo.mapper;
+package com.zmj.microservice.SupportPressureService.mapper;
 
-import com.example.mybatisdemo.pojo.HistoryDO;
+import com.zmj.microservice.SupportPressureService.pojo.DO.HistoryDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface MyMapper {
+public interface HistoryMapper {
     String selectTheFirst(@Param("tablename") String tablename);
 
     String[] selectTables(@Param("database") String database,

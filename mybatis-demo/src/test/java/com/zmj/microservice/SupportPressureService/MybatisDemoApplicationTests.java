@@ -1,4 +1,4 @@
-package com.example.mybatisdemo;
+package com.zmj.microservice.SupportPressureService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

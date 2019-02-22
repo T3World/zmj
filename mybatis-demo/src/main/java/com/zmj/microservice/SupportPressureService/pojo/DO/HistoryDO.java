@@ -1,4 +1,4 @@
-package com.example.mybatisdemo.pojo;
+package com.zmj.microservice.SupportPressureService.pojo.DO;
 
 import java.io.Serializable;
 

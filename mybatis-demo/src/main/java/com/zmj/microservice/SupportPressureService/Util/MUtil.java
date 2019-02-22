@@ -1,6 +1,6 @@
-package com.example.mybatisdemo.Util;
+package com.zmj.microservice.SupportPressureService.Util;
 
-import com.example.mybatisdemo.config.JdbcDataSourceFactory;
+import com.zmj.microservice.SupportPressureService.config.JdbcDataSourceFactory;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;

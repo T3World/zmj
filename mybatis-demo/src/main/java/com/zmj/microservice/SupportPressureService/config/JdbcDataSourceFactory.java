@@ -1,4 +1,4 @@
-package com.example.mybatisdemo.config;
+package com.zmj.microservice.SupportPressureService.config;
 
 
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSource;
