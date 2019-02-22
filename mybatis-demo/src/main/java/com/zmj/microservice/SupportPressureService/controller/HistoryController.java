@@ -1,6 +1,8 @@
 package com.zmj.microservice.SupportPressureService.controller;
 
 import com.zmj.microservice.SupportPressureService.pojo.DO.HistoryDO;
+import com.zmj.microservice.SupportPressureService.pojo.DTO.SupportPressureDTO;
+import com.zmj.microservice.SupportPressureService.pojo.VO.SysResult;
 import com.zmj.microservice.SupportPressureService.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +15,12 @@ public class HistoryController {
     @Autowired
     private HistoryService service;
 
-//    @RequestMapping(value = "/getSupportPressureData",method = RequestMethod.POST)
-//    public SysResult getSupportPressureData(@RequestBody SupportPressureDTO sp){
-//        service.getSupportPressureData(sp);
-//    }
+    @RequestMapping(value = "/getSupportPressureData",method = RequestMethod.POST)
+    public SysResult getSupportPressureData(@RequestBody SupportPressureDTO sp){
+        SysResult supportPressureData = service.getSupportPressureData(sp);
+
+        return supportPressureData;
+    }
 
     @RequestMapping("/search/{database}/{table}")
     public String select(@PathVariable("database") String database,
