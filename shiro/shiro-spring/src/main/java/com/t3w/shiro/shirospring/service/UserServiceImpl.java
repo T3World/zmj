@@ -48,6 +48,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User doLoginByUsernamePassword(String username, String password) {
-        return userMapper.loginByUsernamePassword(username, password);
+        User user = null;
+        try {
+             user = userMapper.loginByUsernamePassword(username, password);
+        }catch (Throwable t){
+            t.printStackTrace();
+        }
+        return user;
     }
 }

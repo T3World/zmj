@@ -68,10 +68,12 @@ public class MysqlRealm extends AuthorizingRealm {
 
 
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo();
-        //凭证,不知道将来有啥用,先放着
-        //TODO 这里先拿来存放JWT吧
+        //凭证,shiro的用户登录验证机制是,通过Matcher比较这个凭证和Token的凭证,来确定用户是否能成功登陆?
+        //但是登陆不成功会抛出realm不能用的异常....,目前还是存在问题
+        //应该重写matcher
+        //TODO 这里先拿来存放password,
 
-        info.setCredentials(jwtoken);
+        info.setCredentials(password);
         //盐好像是加密密码用的,
         //TODO 搞清楚此处盐的作用
         info.setCredentialsSalt(null);

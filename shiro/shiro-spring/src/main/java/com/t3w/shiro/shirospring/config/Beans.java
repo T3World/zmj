@@ -6,6 +6,10 @@ import com.t3w.shiro.shirospring.shiro.other.StatelessDefaultSubjectFactory;
 import com.t3w.shiro.shirospring.shiro.realm.JWTRealm;
 import com.t3w.shiro.shirospring.shiro.realm.MysqlRealm;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
+import org.apache.shiro.mgt.SessionStorageEvaluator;
+import org.apache.shiro.mgt.SubjectDAO;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -21,22 +25,25 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
-* @description:    不知道起啥名字好,反正是配置类,放springBean的地方
-* @author:         umr
-* @date:           2019/5/17
-*/
+ * @description:    不知道起啥名字好,反正是配置类,放springBean的地方
+ * @author:         umr
+ * @date:           2019/5/17
+ */
 
 @Configuration
 public class Beans {
 
     @Bean("shiroSecurityManager")
-    public WebSecurityManager getSecurityManager(JWTRealm jwtRealm, MysqlRealm mysqlRealm){
+    public WebSecurityManager getSecurityManager(JWTRealm jwtRealm, MysqlRealm mysqlRealm,SubjectDAO subjectDAO){
         LinkedList<Realm> realms = new LinkedList<>();
         realms.add(jwtRealm);
         realms.add(mysqlRealm);
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager(realms);
         manager.setSubjectFactory(new StatelessDefaultSubjectFactory());
-        manager.setSessionManager(new DefaultSessionManager());
+        DefaultSessionManager sessionManager = new DefaultSessionManager();
+        sessionManager.setSessionValidationSchedulerEnabled(false);
+        manager.setSessionManager(sessionManager);
+        manager.setSubjectDAO(subjectDAO);
         SecurityUtils.setSecurityManager(manager);
         return manager;
     }
@@ -69,6 +76,20 @@ public class Beans {
         filter.setOrder(1);
         return filter;
 
+    }
+
+    @Bean
+    public SubjectDAO getSubjectDAO(SessionStorageEvaluator storageEvaluator){
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        subjectDAO.setSessionStorageEvaluator(storageEvaluator);
+        return subjectDAO;
+    }
+
+    @Bean
+    public SessionStorageEvaluator getSessionStorageEvaluator(){
+        DefaultSessionStorageEvaluator storageEvaluator = new DefaultSessionStorageEvaluator();
+        storageEvaluator.setSessionStorageEnabled(false);
+        return storageEvaluator;
     }
 
 }

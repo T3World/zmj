@@ -10,10 +10,10 @@
     </resultMap>
 
     <select id="loginByUsernamePassword" parameterType="String" resultMap="user">
-        select id,username,roles from user where username = #{username} and password = #{password}
+        select id,username,roles from yonghu where username = #{username} and password = #{password}
     </select>
 
     <select id="getUserRolesById" parameterType="Integer" resultType="String">
-        select roles from user where id = #{id}
+        select roles from yonghu where id = #{id}
     </select>
 </mapper>
