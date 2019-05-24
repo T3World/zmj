@@ -8,6 +8,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -23,6 +24,11 @@ public class JWTRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
+    public JWTRealm() {
+        super();
+        this.setCredentialsMatcher(new AllowAllCredentialsMatcher());
+    }
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -45,11 +51,12 @@ public class JWTRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //得到用户ID
-        String userId = (String) token.getPrincipal();
+        //TODO 这里很矛盾,解析token是在这个位置进行的,不行就前台给一个ID?
+//        String userId = (String) token.getPrincipal();
         //得到用户token
         String jwtoken =(String) token.getCredentials();
 
-
+        String userId = JwtUtil.getClaimAsString(jwtoken, "userId");
         if (!JwtUtil.verify(jwtoken))
             throw new AuthenticationException("token过期!请重新登录!");
 

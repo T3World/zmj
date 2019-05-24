@@ -37,9 +37,14 @@ public class  StatelessAuthcFilter extends AccessControlFilter {
         HttpServletRequest r = (HttpServletRequest) request;
         String authentication = r.getHeader("Authentication");
         if (null == authentication){
-            hasNoToken(response);
-            return true;
+            System.out.println("has no token");
+            String requestURI = ((HttpServletRequest) request).getRequestURI();
+            System.out.println(requestURI);
+            if (LOGIN_URL.equals(requestURI))
+                return true;
+            redirect(request,response);
         }else {
+            System.out.println("hasToken!");
             JWToken token = new JWToken(authentication);
             try {
                 shiroManager.getSubject().login(token);
@@ -51,9 +56,11 @@ public class  StatelessAuthcFilter extends AccessControlFilter {
         return false;
     }
 
-    private void hasNoToken(ServletResponse response) throws IOException {
+    private void redirect(ServletRequest request, ServletResponse response) throws IOException {
         //doNothing
         System.out.println("hasNoToken!");
+            HttpServletResponse r = (HttpServletResponse) response;
+            r.sendRedirect("http://47.104.241.168:80");
 //        HttpServletResponse r = (HttpServletResponse) response;
 //        r.setStatus(200);
 //        r.getWriter().write("hasNoToken!");

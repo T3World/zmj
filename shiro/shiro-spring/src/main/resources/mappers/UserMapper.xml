@@ -9,7 +9,7 @@
         <association property="roles" column="roles" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="loginByUsernamePassword" parameterType="String" resultMap="user">
+    <select id="loginByUsernamePassword" parameterType="String" resultType="com.t3w.shiro.shirospring.pojo.User">
         select id,username,roles from yonghu where username = #{username} and password = #{password}
     </select>
 

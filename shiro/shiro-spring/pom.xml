@@ -8,6 +8,7 @@
         <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.t3w.shiro</groupId>
     <artifactId>shiro-spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -72,7 +73,7 @@
             <groupId>com.zmj</groupId>
             <artifactId>microservice-Common-History</artifactId>
             <version>1.0.2</version>
-            <scope>compile</scope>
+            <!--<scope>compile</scope>-->
         </dependency>
 
         <dependency>

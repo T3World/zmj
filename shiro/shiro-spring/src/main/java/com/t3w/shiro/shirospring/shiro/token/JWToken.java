@@ -1,5 +1,6 @@
 package com.t3w.shiro.shirospring.shiro.token;
 
+import com.zmj.microservice.common.history.util.JwtUtil;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
@@ -9,10 +10,24 @@ import org.apache.shiro.authc.AuthenticationToken;
 */
 public class JWToken implements AuthenticationToken {
 
-    private final String token;
+    private String token;
+
+    private String userId;
+
+    public JWToken() {
+    }
 
     public JWToken(String token) {
         this.token = token;
+        this.userId = JwtUtil.getId(token);
+    }
+
+    public void setCredentials(String token) {
+        this.token = token;
+    }
+
+    public void setPrincipal(String userId) {
+        this.userId = userId;
     }
 
     /**
@@ -20,7 +35,7 @@ public class JWToken implements AuthenticationToken {
      * */
     @Override
     public Object getPrincipal() {
-        return null;
+        return userId;
     }
 
     /**

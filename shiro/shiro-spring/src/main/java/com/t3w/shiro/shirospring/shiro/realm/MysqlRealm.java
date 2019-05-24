@@ -6,6 +6,7 @@ import com.t3w.shiro.shirospring.pojo.UserInfo;
 import com.t3w.shiro.shirospring.service.UserService;
 import com.zmj.microservice.common.history.util.JwtUtil;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -21,6 +22,11 @@ public class MysqlRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
+    public MysqlRealm() {
+        super();
+        this.setCredentialsMatcher(new AllowAllCredentialsMatcher());
+    }
 
     /**
      * 授权,根据得到的principals,生成AuthorizationInfo,用于授权
@@ -65,6 +71,7 @@ public class MysqlRealm extends AuthorizingRealm {
         userInfo.setUserId(String.valueOf(user.getId()));
         userInfo.setUsername(username);
         userInfo.setToken(jwtoken);
+        userInfo.setRoles(user.getRoles().split(","));
 
 
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo();
@@ -73,7 +80,7 @@ public class MysqlRealm extends AuthorizingRealm {
         //应该重写matcher
         //TODO 这里先拿来存放password,
 
-        info.setCredentials(password);
+        info.setCredentials("lule");
         //盐好像是加密密码用的,
         //TODO 搞清楚此处盐的作用
         info.setCredentialsSalt(null);

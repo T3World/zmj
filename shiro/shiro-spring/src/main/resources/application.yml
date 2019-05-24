@@ -7,10 +7,9 @@ mybatis:
             lazyLoadingEnabled: true
             aggressiveLazyLoading: false
             cacheEnabled: true
-            logImpl: LOG4J
-#logging:
-#  level:
-#    com.zzmj.mapper: info
+logging:
+  level:
+    com.t3w.shiro.shirospring.mapper: debug
 spring:
     application:
       name: shirotest
