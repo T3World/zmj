@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.t3w.haveadinner.mapper.UserMapper">
+    <resultMap id="user" type="com.t3w.haveadinner.pojo.User">
+        <association property="id" column="id" jdbcType="INTEGER"/>
+        <association property="username" column="username" jdbcType="VARCHAR"/>
+        <association property="roles" column="roles" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="loginByUsernamePassword" parameterType="String" resultType="com.t3w.haveadinner.pojo.User">
+        select id,username,roles from yonghu where username = #{username} and password = #{password}
+    </select>
+
+    <select id="getUserRolesById" parameterType="Integer" resultType="String">
+        select roles from yonghu where id = #{id}
+    </select>
+    <select id="getUserById" parameterType="Integer" resultType="String">
+        select id,username,roles from yonghu where id = #{id}
+    </select>
+</mapper>

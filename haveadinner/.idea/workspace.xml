@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="68e99dc1-bced-4e33-9a6f-5d9603b50985" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/authcenter/target/" />
+    <ignored path="$PROJECT_DIR$/front/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/authcenter/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4934">
+              <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="T2.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/authcenter/src/test/java/com/t3w/T2.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="690">
+              <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PermissionController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/PermissionController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/LoginController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/AuthController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Thread.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/Thread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="13860">
+              <caret line="462" column="36" selection-start-line="462" selection-start-column="36" selection-end-line="462" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/ShiroSpringApplication.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/pojo/vo/CommonResult.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/exception/TheBadTokenException.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/exception/TheBadTokenException.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/service/AuthService.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/pojo/UserInfo.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/service/AuthServiceImpl.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/AuthController.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/token/ZaoKuangUsernamePasswordToken.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/datasource/DatabaseType.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/datasource/DataSourceAspect.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/PermissionController.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/resources/mappers/RoleMapper.xml" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/resources/mappers/ResourceMapper.xml" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/resources/mappers/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/flag/ZaoKuangMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/flag/LocalMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/realm/ZaoKuangManagerRealm.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/datasource/DatabaseContextHolder.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/core/DatabaseContextHolder.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/DataSourceAspect.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/DynamicDataSource.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/PoolDataSource.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/DataSourceProperTies.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/mapper/ZaoKuangModuleMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/mapper/ZaoKuangRoleMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/mapper/ZaoKuangUserMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/service/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/service/ZaoKuangUserService.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/test/java/com/t3w/A.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/test/java/com/t3w/B.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/service/B.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/HaveADinnerApplication.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/UserMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/RoleMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/ResourceMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/service/A.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/core/Poke.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/core/SessionPoke.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/filter/StatelessAuthcFilter.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/realm/MysqlRealm.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/exception/LogoutException.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/test/java/com/t3w/T1.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/ModuleMapper.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/Beans.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/core/TokenPoke.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/realm/JWTRealm.java" />
+        <option value="$PROJECT_DIR$/authcenter/pom.xml" />
+        <option value="$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/entity/ZzModule.java" />
+        <option value="$PROJECT_DIR$/authcenter/src/test/java/com/t3w/T2.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\project\env\maven\mvn_repo" />
+        <option name="mavenHome" value="D:/project/env/maven/apache-maven-3.2.5" />
+        <option name="userSettingsFile" value="D:\project\env\maven\apache-maven-3.2.5\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="auth-center" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="auth-center" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="auth-center" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1357" />
+    <option name="y" value="413" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="haveadinner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="haveadinner" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../svn-repo/modules-1.0.1" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\git-repo\zmj\haveadinner\authcenter\src\main\resources" />
+      <recent name="D:\dev\git-repo\zmj\haveadinner\authcenter\src\main\java\com\t3w\haveadinner" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.T2.autoDo">
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="T1.testAutowired" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="authcenter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.t3w.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.t3w" />
+      <option name="MAIN_CLASS_NAME" value="com.t3w.T1" />
+      <option name="METHOD_NAME" value="testAutowired" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="T2.auto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="authcenter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.t3w.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.t3w" />
+      <option name="MAIN_CLASS_NAME" value="com.t3w.T2" />
+      <option name="METHOD_NAME" value="auto" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="T2.autoDo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="authcenter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.t3w.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.t3w" />
+      <option name="MAIN_CLASS_NAME" value="com.t3w.T2" />
+      <option name="METHOD_NAME" value="autoDo" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="T2.testAutowired" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="authcenter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.t3w.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.t3w" />
+      <option name="MAIN_CLASS_NAME" value="com.t3w.T2" />
+      <option name="METHOD_NAME" value="testAutowired" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="HaveADinnerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="authcenter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.t3w.haveadinner.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.t3w.haveadinner.HaveADinnerApplication" />
+    </configuration>
+    <configuration name="ShiroSpringApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="authcenter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.t3w.haveadinner.ShiroSpringApplication" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.ShiroSpringApplication" />
+      <item itemvalue="Spring Boot.HaveADinnerApplication" />
+      <item itemvalue="JUnit.T1.testAutowired" />
+      <item itemvalue="JUnit.T2.testAutowired" />
+      <item itemvalue="JUnit.T2.auto" />
+      <item itemvalue="JUnit.T2.autoDo" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.T2.autoDo" />
+        <item itemvalue="JUnit.T2.auto" />
+        <item itemvalue="JUnit.T2.testAutowired" />
+        <item itemvalue="JUnit.T1.testAutowired" />
+        <item itemvalue="Spring Boot.HaveADinnerApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\kaway\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="68e99dc1-bced-4e33-9a6f-5d9603b50985" name="Default" comment="" />
+      <created>1558659160028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1558659160028</updated>
+      <workItem from="1558659161913" duration="866000" />
+      <workItem from="1558667490888" duration="103000" />
+      <workItem from="1558668746832" duration="10582000" />
+      <workItem from="1558916646175" duration="10481000" />
+      <workItem from="1559003120223" duration="3675000" />
+      <workItem from="1559016004678" duration="16587000" />
+      <workItem from="1559088526402" duration="26250000" />
+      <workItem from="1559176719533" duration="978000" />
+      <workItem from="1559177765023" duration="4274000" />
+      <workItem from="1559188708638" duration="2746000" />
+      <workItem from="1559267299898" duration="2422000" />
+      <workItem from="1559347920780" duration="633000" />
+      <workItem from="1559520430217" duration="2353000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="T2_auto - 2019.05.30 at 08h 57m 43s.xml">
+      <configuration name="T2.auto" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 08h 59m 54s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 09h 03m 50s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 09h 09m 43s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 09h 14m 51s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 09h 18m 38s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 09h 19m 49s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 09h 21m 44s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 10h 02m 18s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T2_autoDo - 2019.05.30 at 10h 03m 35s.xml">
+      <configuration name="T2.autoDo" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="81950000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1357" y="413" width="1936" height="1096" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" visible="true" weight="0.19722815" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="8" sideWeight="0.3434505" side_tool="true" weight="0.30490404" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3993576" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="5" />
+      <window_info anchor="bottom" id="Java Enterprise" order="8" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25588864" />
+      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Problems" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.6565495" visible="true" weight="0.1977612" />
+      <window_info anchor="right" id="Bean Validation" order="4" />
+      <window_info id="Web" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Alibaba Cloud View" order="8" />
+      <window_info id="Learn" order="6" />
+      <window_info id="Alibaba Cloud Explorer" order="0" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32976446" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32976446" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1-sources.jar!/com/baomidou/mybatisplus/generator/AutoGenerator.java</url>
+          <line>88</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/service/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/RoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/ResourceMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/service/A.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/filter/StatelessAuthcFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="57" column="44" lean-forward="true" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.1/shiro-core-1.4.1-sources.jar!/org/apache/shiro/subject/Subject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="331" column="9" selection-start-line="331" selection-start-column="9" selection-end-line="331" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/exception/LogoutException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/DataSourceAspect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/mapper/ModuleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/function/IntConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/DynamicDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="11" column="55" selection-start-line="11" selection-start-column="55" selection-end-line="11" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/5.1.6.RELEASE/spring-jdbc-5.1.6.RELEASE.pom">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/mapper/ZaoKuangRoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/mapper/ZaoKuangModuleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/mapper/ZaoKuangUserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/config/Beans.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="155" selection-start-line="155" selection-end-line="155" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/HaveADinnerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/realm/MysqlRealm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/exception/TokenTimeOutException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/core/Poke.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/core/TokenPoke.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1.pom">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1.jar!/com/baomidou/mybatisplus/generator/config/GlobalConfig.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/realm/JWTRealm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="66" column="31" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1-sources.jar!/com/baomidou/mybatisplus/generator/config/GlobalConfig.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/Scanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="567" column="59" selection-start-line="567" selection-start-column="59" selection-end-line="567" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/freemarker/freemarker/2.3.9/freemarker-2.3.9.jar!/freemarker/template/Configuration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="73" column="27" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1-sources.jar!/com/baomidou/mybatisplus/generator/engine/FreemarkerTemplateEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="33" column="37" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1.jar!/com/baomidou/mybatisplus/generator/InjectionConfig.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1-sources.jar!/com/baomidou/mybatisplus/generator/InjectionConfig.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-generator/3.1.1/mybatis-plus-generator-3.1.1-sources.jar!/com/baomidou/mybatisplus/generator/AutoGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/test/java/com/t3w/T1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1498">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.1.1/mybatis-plus-core-3.1.1.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/mapper/ZzUserMapper.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/mapper/ZzRoleMapper.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/controller/ZzModuleController.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/controller/ZzRoleController.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/controller/ZzUserController.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/entity/ZzModule.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/entity/ZzUser.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/entity/ZzRole.java" />
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/zaokuang/zaokuang/mapper/ZzModuleMapper.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.1.1/mybatis-plus-core-3.1.1-sources.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2250">
+          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13860">
+          <caret line="462" column="36" selection-start-line="462" selection-start-column="36" selection-end-line="462" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/test/java/com/t3w/T2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/PermissionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/src/main/java/com/t3w/haveadinner/controller/AuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authcenter/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4934">
+          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>authcenter</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.t3w.haveadinner.mapper.ResourceMapper">
+
+    <resultMap id="resource" type="com.t3w.haveadinner.pojo.Resource">
+        <association property="id" column="id" jdbcType="INTEGER"/>
+        <association property="name" column="name" jdbcType="VARCHAR"/>
+        <association property="path" column="path" jdbcType="VARCHAR"/>
+        <association property="description" column="description" jdbcType="VARCHAR"/>
+        <association property="value" column="value" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="selectResourceByName" parameterType="String" resultMap="resource">
+      select * from resource where resource.name = #{name}
+    </select>
+</mapper>
