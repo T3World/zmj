@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZWorkfaceMapper">
+
+	<sql id="Base_Column_List">
+		Id, Workface_Id, Org_Id, Workface_Name,
+		Workface_Alias,
+		Workface_Type,
+		Workface_State,
+		CreatePerson, CreateTime,
+		SortCode
+	</sql>
+
+	<resultMap id="WorkfaceConfigResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity">
+
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+		<result column="Belt_Type" property="beltType" jdbcType="VARCHAR" />
+		<result column="Font_MinPressure" property="fontMinpressure"
+			jdbcType="VARCHAR" />
+		<result column="Font_MaxPressure" property="fontMaxpressure"
+			jdbcType="VARCHAR" />
+		<result column="Back_MinPressure" property="backMinpressure"
+			jdbcType="VARCHAR" />
+		<result column="Back_MaxPressure" property="backMaxpressure"
+			jdbcType="VARCHAR" />
+		<result column="Support_Dir" property="supportDir" jdbcType="INTEGER" />
+		<result column="Support_Count" property="supportCount"
+			jdbcType="INTEGER" />
+		<result column="Conveyor_Dir" property="conveyorDir" jdbcType="INTEGER" />
+		<result column="Pressure_ChartType" property="pressureCharttype"
+			jdbcType="VARCHAR" />
+		<result column="ShearerPos_CacheTime" property="shearerposCachetime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="WorkfaceResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+		<result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+		<result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
+		<result column="Workface_Name" property="workfaceName"
+			jdbcType="VARCHAR" />
+		<result column="Workface_Alias" property="workfaceAlias"
+			jdbcType="VARCHAR" />
+		<result column="Workface_Type" property="workfaceType"
+			jdbcType="INTEGER" />
+		<result column="Workface_State" property="workfaceState"
+			jdbcType="INTEGER" />
+		<result column="CreatePerson" property="createperson" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="SortCode" property="sortcode" jdbcType="VARCHAR" />
+		<association property="zzWorkfaceconfigEntity" column="Org_Id"
+			javaType="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" resultMap="WorkfaceConfigResultMap" />
+	</resultMap>
+
+	<select id="countWorkfaceAll" resultType="Integer">
+		select count(*) from
+		ZZ_Workface as A inner join ZZ_WorkfaceConfig as B on A.Workface_Id =
+		B.Workface_Id inner join ZZ_Org as C on A.Org_Id = C.Org_Id
+		where
+		A.IsDel = 0
+	</select>
+
+	<select id="countWorkfaceByOrgId" resultType="Integer">
+		select count(*)
+		from
+		ZZ_Workface as A inner join ZZ_WorkfaceConfig as B on
+		A.Workface_Id =
+		B.Workface_Id inner join ZZ_Org as C on A.Org_Id =
+		C.Org_Id where
+		A.Org_Id = #{orgId} and A.IsDel = 0
+	</select>
+
+	<select id="countWorkfaceByOrgIdAndByKeyword" resultType="Integer">
+		select count(*)
+		from ZZ_Workface A inner join ZZ_WorkfaceConfig B on
+		A.Workface_Id =
+		B.Workface_Id
+		where A.Org_Id = #{orgId} and A.IsDel = 0
+		and (Workface_Name like
+		concat('%',#{keyword},'%') OR
+		Workface_Alias like
+		concat('%',#{keyword},'%'))
+	</select>
+	<select id="countWorkfaceByKeyword" resultType="Integer">
+		select count(*)
+		from ZZ_Workface A inner join ZZ_WorkfaceConfig B on
+		A.Workface_Id =
+		B.Workface_Id
+		where A.IsDel = 0
+		and (Workface_Name like
+		concat('%',#{keyword},'%') OR
+		Workface_Alias like
+		concat('%',#{keyword},'%'))
+	</select>
+    <select id="listWorkfaceByOrgIdAndKeyword" resultMap="WorkfaceResultMap">
+        select
+        A.Id as Id,
+        A.Workface_Id as Workface_Id,
+        A.Org_Id as Org_Id,
+        A.Workface_Name as
+        Workface_Name,
+        A.Workface_Alias as Workface_Alias,
+        A.Workface_Type as
+        Workface_Type,
+        A.Workface_State as Workface_State,
+        A.Createperson as
+        CreatePerson,
+        A.CreateTime as CreateTime,
+        A.SortCode as
+        SortCode,
+        B.Workface_Id as Workface_Id,
+        B.Belt_Type as Belt_Type,
+        B.Font_Minpressure
+        as Font_MinPressure,
+        B.Font_Maxpressure as
+        Font_MaxPressure,
+        B.Back_Minpressure as Back_MinPressure,
+        B.Back_Maxpressure as
+        Back_MaxPressure,
+        B.Support_Dir as Support_Dir,
+        B.Support_Count as
+        Support_Count,
+        B.Conveyor_Dir as Conveyor_Dir,
+        B.Pressure_Charttype as
+        Pressure_ChartType,
+        B.ShearerPos_CacheTime as
+        ShearerPos_CacheTime,
+        C.Org_Name as Org_Name
+        from
+        ZZ_Workface as A inner
+        join ZZ_WorkfaceConfig as B on A.Workface_Id =
+        B.Workface_Id inner join
+        ZZ_Org as C on A.Org_Id = C.Org_Id
+        where 
+        A.Org_Id = #{orgId}
+        and
+        A.IsDel = 0
+        and
+        (A.Workface_Name
+        like
+        concat('%',#{keyword},'%') OR
+        A.Workface_Alias like
+        concat('%',#{keyword},'%'))
+        order by A.SortCode
+        limit
+        #{rowNo},#{pageSize}
+    </select>
+	<select id="listWorkfaceAll" resultMap="WorkfaceResultMap">
+		select
+		A.Id as Id,
+		A.Workface_Id as Workface_Id,
+		A.Org_Id as Org_Id,
+		A.Workface_Name as
+		Workface_Name,
+		A.Workface_Alias as Workface_Alias,
+		A.Workface_Type as
+		Workface_Type,
+		A.Workface_State as Workface_State,
+		A.Createperson as
+		CreatePerson,
+		A.CreateTime as CreateTime,
+		A.SortCode as
+		SortCode,
+		B.Workface_Id as Workface_Id,
+		B.Belt_Type as Belt_Type,
+		B.Font_Minpressure
+		as Font_MinPressure,
+		B.Font_Maxpressure as
+		Font_MaxPressure,
+		B.Back_Minpressure as Back_MinPressure,
+		B.Back_Maxpressure as
+		Back_MaxPressure,
+		B.Support_Dir as Support_Dir,
+		B.Support_Count as
+		Support_Count,
+		B.Conveyor_Dir as Conveyor_Dir,
+		B.Pressure_Charttype as
+		Pressure_ChartType,
+		B.ShearerPos_CacheTime as
+		ShearerPos_CacheTime,
+		C.Org_Name as Org_Name
+		from
+		ZZ_Workface as A inner
+		join ZZ_WorkfaceConfig as B on A.Workface_Id =
+		B.Workface_Id inner join
+		ZZ_Org as C on A.Org_Id = C.Org_Id
+		where A.IsDel = 0
+		order by A.SortCode
+		limit
+		#{rowNo},#{pageSize}
+	</select>
+
+	<select id="listWorkfaceByOrgId" resultMap="WorkfaceResultMap">
+		select
+		A.Id as Id,
+		A.Workface_Id as Workface_Id,
+		A.Org_Id as Org_Id,
+		A.Workface_Name as
+		Workface_Name,
+		A.Workface_Alias as Workface_Alias,
+		A.Workface_Type as
+		Workface_Type,
+		A.Workface_State as Workface_State,
+		A.Createperson as
+		CreatePerson,
+		A.CreateTime as CreateTime,
+		A.SortCode as SortCode,
+		B.Workface_Id as Workface_Id,
+		B.Belt_Type as Belt_Type,
+		B.Font_Minpressure
+		as Font_MinPressure,
+		B.Font_Maxpressure as
+		Font_MaxPressure,
+		B.Back_Minpressure as Back_MinPressure,
+		B.Back_Maxpressure as
+		Back_MaxPressure,
+		B.Support_Dir as Support_Dir,
+		B.Support_Count as
+		Support_Count,
+		B.Conveyor_Dir as Conveyor_Dir,
+		B.Pressure_Charttype as
+		Pressure_ChartType,
+		B.ShearerPos_CacheTime as
+		ShearerPos_CacheTime,
+		C.Org_Name as Org_Name
+		from
+		ZZ_Workface as A inner
+		join ZZ_WorkfaceConfig as B on A.Workface_Id =
+		B.Workface_Id inner join
+		ZZ_Org as C on A.Org_Id = C.Org_Id
+		where
+		A.Org_Id = #{orgId} and A.IsDel
+		= 0
+		order by A.SortCode
+		limit #{rowNo},#{pageSize}
+	</select>
+
+	<select id="listWorkfaceByKeyword" resultMap="WorkfaceResultMap">
+		select
+		A.Id as Id,
+		A.Workface_Id as Workface_Id,
+		A.Org_Id as Org_Id,
+		A.Workface_Name as
+		Workface_Name,
+		A.Workface_Alias as Workface_Alias,
+		A.Workface_Type as
+		Workface_Type,
+		A.Workface_State as Workface_State,
+		A.Createperson as
+		CreatePerson,
+		A.CreateTime as CreateTime,
+		A.SortCode as SortCode,
+		B.Workface_Id as Workface_Id,
+		B.Belt_Type as Belt_Type,
+		B.Font_Minpressure
+		as Font_MinPressure,
+		B.Font_Maxpressure as
+		Font_MaxPressure,
+		B.Back_Minpressure as Back_MinPressure,
+		B.Back_Maxpressure as
+		Back_MaxPressure,
+		B.Support_Dir as Support_Dir,
+		B.Support_Count as
+		Support_Count,
+		B.Conveyor_Dir as Conveyor_Dir,
+		B.Pressure_Charttype as
+		Pressure_ChartType,
+		B.ShearerPos_CacheTime as
+		ShearerPos_CacheTime,
+		C.Org_Name as Org_Name
+		from
+		ZZ_Workface as A inner
+		join ZZ_WorkfaceConfig as B on A.Workface_Id =
+		B.Workface_Id inner join
+		ZZ_Org as C on A.Org_Id = C.Org_Id
+		where
+		A.IsDel = 0
+		and (A.Workface_Name
+		like
+		concat('%',#{keyword},'%') OR
+		A.Workface_Alias like
+		concat('%',#{keyword},'%'))
+		order by A.SortCode
+		limit
+		#{rowNo},#{pageSize}
+	</select>
+	<select id="listWorkfaceNoPage" resultType="map" parameterType="String">
+		select
+		Workface_Id, Org_Id, Workface_Name,
+		Workface_Alias,
+		Workface_Type,
+		CreatePerson, CreateTime,
+		SortCode
+		from
+		ZZ_Workface
+		where IsDel = 0
+		and
+		Workface_State = 1
+		and
+		Org_Id = #{orgId,jdbcType=VARCHAR}
+		order by SortCode
+	</select>
+	<update id="delWorkfaceByWorkfaceId">
+		update ZZ_Workface set IsDel = 1 where Workface_Id =
+		#{workfaceId}
+	</update>
+
+	<update id="stopWorkface">
+		update ZZ_Workface set Workface_State=#{state} where
+		Workface_Id =
+		#{workfaceId}
+	</update>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<select id="selectByExample" resultMap="WorkfaceResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZWorkfaceExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_Workface
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+	<select id="selectByExampleAndPage" resultMap="WorkfaceResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZWorkfaceExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_Workface
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+	<delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceExample">
+		delete from ZZ_Workface
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+
+	<select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceExample"
+		resultType="java.lang.Integer">
+		select count(*) from ZZ_Workface
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+	<update id="updateByExampleSelective" parameterType="map">
+		update ZZ_Workface
+		<set>
+			<if test="record.id != null">
+				Id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.workfaceId != null">
+				Workface_Id = #{record.workfaceId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgId != null">
+				Org_Id = #{record.orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.workfaceName != null">
+				Workface_Name = #{record.workfaceName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.workfaceAlias != null">
+				Workface_Alias =
+				#{record.workfaceAlias,jdbcType=VARCHAR},
+			</if>
+			<if test="record.workfaceType != null">
+				Workface_Type = #{record.workfaceType,jdbcType=INTEGER},
+			</if>
+			<if test="record.workfaceState != null">
+				Workface_State =
+				#{record.workfaceState,jdbcType=INTEGER},
+			</if>
+			<if test="record.createperson != null">
+				CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createtime != null">
+				CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.sortcode != null">
+				SortCode = #{record.sortcode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<update id="updateByExample" parameterType="map">
+		update ZZ_Workface
+		set Id = #{record.id,jdbcType=VARCHAR},
+		Workface_Id =
+		#{record.workfaceId,jdbcType=VARCHAR},
+		Org_Id =
+		#{record.orgId,jdbcType=VARCHAR},
+		Workface_Name =
+		#{record.workfaceName,jdbcType=VARCHAR},
+		Workface_Alias =
+		#{record.workfaceAlias,jdbcType=VARCHAR},
+		Workface_Type =
+		#{record.workfaceType,jdbcType=INTEGER},
+		Workface_State =
+		#{record.workfaceState,jdbcType=INTEGER},
+		CreatePerson =
+		#{record.createperson,jdbcType=VARCHAR},
+		CreateTime =
+		#{record.createtime,jdbcType=TIMESTAMP},
+		SortCode =
+		#{record.sortcode,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<select id="selectByPrimaryKey" resultMap="WorkfaceResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ZZ_Workface
+		where Id = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ZZ_Workface
+		where Id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insert" parameterType="com.zzmj.pojo.entity.ZZWorkfaceEntity">
+		insert into ZZ_Workface (Id,
+		Workface_Id, Org_Id,
+		Workface_Name, Workface_Alias, Workface_Type,
+		Workface_State, CreatePerson, CreateTime, UpdateTime,
+		SortCode,Status,IsDel)
+		values
+		(#{id,jdbcType=VARCHAR},
+		#{workfaceId,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR},
+		#{workfaceName,jdbcType=VARCHAR},
+		#{workfaceAlias,jdbcType=VARCHAR},
+		#{workfaceType,jdbcType=INTEGER},
+		#{workfaceState,jdbcType=INTEGER},
+		#{createperson,jdbcType=VARCHAR},
+		now(),now(),
+		#{sortcode,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},0)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceEntity">
+		insert into ZZ_Workface
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			Id,
+			Workface_Id,
+			Org_Id,
+			Workface_Name,
+			Workface_Alias,
+			Workface_Type,
+			Workface_State,
+			CreatePerson,
+			CreateTime,
+			SortCode,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id,jdbcType=VARCHAR},
+			#{workfaceId,jdbcType=VARCHAR},
+			#{orgId,jdbcType=VARCHAR},
+			#{workfaceName,jdbcType=VARCHAR},
+			#{workfaceAlias,jdbcType=VARCHAR},
+			#{workfaceType,jdbcType=INTEGER},
+			#{workfaceState,jdbcType=INTEGER},
+			#{createperson,jdbcType=VARCHAR},
+			#{createtime,jdbcType=TIMESTAMP},
+			#{sortcode,jdbcType=VARCHAR},
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceEntity">
+		update ZZ_Workface
+		<set>
+			<if test="orgId != null">
+				Org_Id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="workfaceName != null">
+				Workface_Name = #{workfaceName,jdbcType=VARCHAR},
+			</if>
+			<if test="workfaceAlias != null">
+				Workface_Alias = #{workfaceAlias,jdbcType=VARCHAR},
+			</if>
+			<if test="workfaceType != null">
+				Workface_Type = #{workfaceType,jdbcType=INTEGER},
+			</if>
+			<if test="workfaceState != null">
+				Workface_State = #{workfaceState,jdbcType=INTEGER},
+			</if>
+			<if test="createperson != null">
+				CreatePerson = #{createperson,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				CreateTime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sortcode != null">
+				SortCode = #{sortcode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.zzmj.pojo.entity.ZZWorkfaceEntity">
+		update ZZ_Workface
+		set = #{workfaceId,jdbcType=VARCHAR},
+		Org_Id =
+		#{orgId,jdbcType=VARCHAR},
+		Workface_Name =
+		#{workfaceName,jdbcType=VARCHAR},
+		Workface_Alias =
+		#{workfaceAlias,jdbcType=VARCHAR},
+		Workface_Type =
+		#{workfaceType,jdbcType=INTEGER},
+		Workface_State =
+		#{workfaceState,jdbcType=INTEGER},
+		CreatePerson =
+		#{createperson,jdbcType=VARCHAR},
+		CreateTime =
+		#{createtime,jdbcType=TIMESTAMP},
+		SortCode =
+		#{sortcode,jdbcType=VARCHAR}
+		where Workface_Id =
+		#{workfaceId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

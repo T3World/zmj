@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/mqttspring/pom.xml" />
         <option value="$PROJECT_DIR$/mqttdemo/pom.xml" />
+        <option value="$PROJECT_DIR$/mqttsample/pom.xml" />
       </list>
     </option>
   </component>

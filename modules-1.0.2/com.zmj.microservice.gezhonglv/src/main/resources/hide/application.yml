@@ -1,0 +1,40 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: Ratio
+  datasource:
+    url: jdbc:mysql://115.28.91.111:3306/
+    username: root
+    password: yydk@67891289
+
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://192.168.175.151:8761/eureka
+      defaultZone: http://127.0.0.1:8761/eureka
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 600000 # 第一次查询,读取取大量数据需要较长时间,后续会换成spark
+  ConnectTimeout: 3000
+#hystrix的超时时间
+hystrix:
+    command:
+        default:
+            execution:
+              timeout:
+                enabled: true
+              isolation:
+                    thread:
+                        timeoutInMilliseconds: 1000000
+feign:
+  httpclient:
+    enabled: true
+  hystrix:
+    enabled: true
+
+#       是否注册自己的信息到EurekaServer，默认是true
+#      register-with-eureka: false
+#       是否拉取其它服务的信息，默认是true
+#      fetch-registry: false
+    #配置actuator健康检查

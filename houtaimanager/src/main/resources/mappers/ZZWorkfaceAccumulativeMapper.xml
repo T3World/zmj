@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzmj.mapper.ZZWorkfaceAccumulativeMapper" >
+  <resultMap id="BaseResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceAccumulative" >
+    <id column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+    <result column="Workface_RunningTime" property="workfaceRunningTime" jdbcType="VARCHAR" />
+    <result column="Workface_AccuPropulsion" property="workfaceAccuPropulsion" jdbcType="VARCHAR" />
+    <result column="Workface_ExcessCoal" property="workfaceExcessCoal" jdbcType="VARCHAR" />
+    <result column="Workface_CycleNumber" property="workfaceCycleNumber" jdbcType="VARCHAR" />
+    <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Workface_Id, Workface_RunningTime, Workface_AccuPropulsion, Workface_ExcessCoal, 
+    Workface_CycleNumber, UpdateTime
+  </sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulativeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zz_workfaceaccumulative
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulativeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zz_workfaceaccumulative
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulativeExample" >
+    delete from zz_workfaceaccumulative
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulativeExample" resultType="java.lang.Integer" >
+    select count(*) from zz_workfaceaccumulative
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update zz_workfaceaccumulative
+    <set >
+      <if test="record.workfaceId != null" >
+        Workface_Id = #{record.workfaceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceRunningTime != null" >
+        Workface_RunningTime = #{record.workfaceRunningTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceAccuPropulsion != null" >
+        Workface_AccuPropulsion = #{record.workfaceAccuPropulsion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceExcessCoal != null" >
+        Workface_ExcessCoal = #{record.workfaceExcessCoal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceCycleNumber != null" >
+        Workface_CycleNumber = #{record.workfaceCycleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UpdateTime = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update zz_workfaceaccumulative
+    set Workface_Id = #{record.workfaceId,jdbcType=VARCHAR},
+      Workface_RunningTime = #{record.workfaceRunningTime,jdbcType=VARCHAR},
+      Workface_AccuPropulsion = #{record.workfaceAccuPropulsion,jdbcType=VARCHAR},
+      Workface_ExcessCoal = #{record.workfaceExcessCoal,jdbcType=VARCHAR},
+      Workface_CycleNumber = #{record.workfaceCycleNumber,jdbcType=VARCHAR},
+      UpdateTime = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from zz_workfaceaccumulative
+    where Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zz_workfaceaccumulative
+    where Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulative" >
+    insert into zz_workfaceaccumulative (Workface_Id, Workface_RunningTime, 
+      Workface_AccuPropulsion, Workface_ExcessCoal, 
+      Workface_CycleNumber, UpdateTime)
+    values (#{workfaceId,jdbcType=VARCHAR}, #{workfaceRunningTime,jdbcType=VARCHAR}, 
+      #{workfaceAccuPropulsion,jdbcType=VARCHAR}, #{workfaceExcessCoal,jdbcType=VARCHAR}, 
+      #{workfaceCycleNumber,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulative" >
+    insert into zz_workfaceaccumulative
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Workface_Id,
+      Workface_RunningTime,
+      Workface_AccuPropulsion,
+      Workface_ExcessCoal,
+      Workface_CycleNumber,
+      UpdateTime,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{workfaceId,jdbcType=VARCHAR},
+      #{workfaceRunningTime,jdbcType=VARCHAR},
+      #{workfaceAccuPropulsion,jdbcType=VARCHAR},
+      #{workfaceExcessCoal,jdbcType=VARCHAR},
+      #{workfaceCycleNumber,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulative" >
+    update zz_workfaceaccumulative
+    <set >
+      <if test="workfaceRunningTime != null" >
+        Workface_RunningTime = #{workfaceRunningTime,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceAccuPropulsion != null" >
+        Workface_AccuPropulsion = #{workfaceAccuPropulsion,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceExcessCoal != null" >
+        Workface_ExcessCoal = #{workfaceExcessCoal,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceCycleNumber != null" >
+        Workface_CycleNumber = #{workfaceCycleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UpdateTime = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzmj.pojo.entity.ZZWorkfaceAccumulative" >
+    update zz_workfaceaccumulative
+    set Workface_RunningTime = #{workfaceRunningTime,jdbcType=VARCHAR},
+      Workface_AccuPropulsion = #{workfaceAccuPropulsion,jdbcType=VARCHAR},
+      Workface_ExcessCoal = #{workfaceExcessCoal,jdbcType=VARCHAR},
+      Workface_CycleNumber = #{workfaceCycleNumber,jdbcType=VARCHAR},
+      UpdateTime = #{updateTime,jdbcType=VARCHAR}
+    where Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

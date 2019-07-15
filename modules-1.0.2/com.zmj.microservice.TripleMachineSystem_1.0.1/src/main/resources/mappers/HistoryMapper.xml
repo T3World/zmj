@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmj.microservice.mapper.HistoryMapper" >
+    <sql id="columns">
+        DataValue,GenerateTime
+    </sql>
+    <resultMap id="DoubleHistory" type="com.zmj.microservice.common.history.pojo.VO.CommonVO">
+        <result column="DataValue" javaType="java.lang.Double" property="value" />
+        <result column="GenerateTime" javaType="java.lang.String" property="time" />
+    </resultMap>
+
+    <resultMap id="BooleanHistory" type="com.zmj.microservice.common.history.pojo.VO.CommonVO">
+        <result column="DataValue" javaType="java.lang.Boolean" property="value" />
+        <result column="GenerateTime" javaType="java.lang.String" property="time" />
+    </resultMap>
+
+    <resultMap id="StringHistory" type="com.zmj.microservice.common.history.pojo.VO.CommonVO">
+        <result column="DataValue" javaType="java.lang.String" property="value" />
+        <result column="GenerateTime" javaType="java.lang.String" property="time" />
+    </resultMap>
+
+    <select id="selectTables" statementType="PREPARED" resultType="java.lang.String">
+        show tables
+    </select>
+
+    <select id="showTableLike" statementType="PREPARED" resultType="java.lang.String" parameterType="java.lang.String">
+        show tables like #{tableName}
+    </select>
+
+    <select id="selectDoubleHistory" statementType="STATEMENT" resultMap="DoubleHistory">
+        Select <include refid="columns" />
+        From (
+        <foreach collection="tableList" separator=" Union " item="item">
+            ${item}
+        </foreach>
+        ) as T
+        Order by T.GenerateTime
+    </select>
+    <select id="selectBooleanHistory" statementType="STATEMENT" resultMap="BooleanHistory">
+        Select <include refid="columns" />
+        From (
+        <foreach collection="tableList" separator=" Union " item="item">
+            ${item}
+        </foreach>
+        ) as T
+        Order by T.GenerateTime
+    </select>
+    <select id="selectStringHistory" statementType="STATEMENT" resultMap="StringHistory">
+        Select <include refid="columns" />
+        From (
+        <foreach collection="tableList" separator=" Union " item="item">
+            ${item}
+        </foreach>
+        ) as T
+        Order by T.GenerateTime
+    </select>
+</mapper>

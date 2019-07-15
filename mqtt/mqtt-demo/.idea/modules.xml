@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/mqtt-demo.iml" filepath="$PROJECT_DIR$/.idea/mqtt-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/mqttdemo/mqttdemo.iml" filepath="$PROJECT_DIR$/mqttdemo/mqttdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mqttsample/mqttsample.iml" filepath="$PROJECT_DIR$/mqttsample/mqttsample.iml" />
       <module fileurl="file://$PROJECT_DIR$/mqttspring/mqttspring.iml" filepath="$PROJECT_DIR$/mqttspring/mqttspring.iml" />
     </modules>
   </component>

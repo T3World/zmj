@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+	<link href="/admin_static/user/user.css" rel="stylesheet">
+	<script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+	<script src="/zTree/js/jquery.ztree.all.min.js"></script>
+	<script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	
+	<title>用户管理</title>
+</head>
+<body>
+<div class="main clearfix">
+	<div class="left_side pull-left" >
+		<span class="title">组织机构</span>
+		<ul id="orgTree" class="org_tree ztree"></ul>
+	</div>
+	<div class="right_content pull-left">
+		<div class="tool_button">
+			<button type="button" class="btn btn-primary" data-toggle="modal" id="userAddBtn">添加用户</button>
+			<span class="pull-right">
+				<input id="doSearch" type="text" class="form-control" style="display: inline-block;width:300px" />
+				<button class="btn btn-default" type="button"	onclick="doSearch()">搜索</button>
+			</span>
+		</div>
+		<div class="data" style="padding:10px;" >
+			<!-- Table -->
+			<table  class="table table-bordered table-header">
+				<thead>
+				<tr>
+					<th class="text-center" width="20px">No</th>
+					<th class="text-center w15">用户名</th>
+					<th class="text-center w15">账号</th>
+					<th class="text-center w20">职位</th>
+					<th class="text-center ">所属公司</th>
+					<th class="text-center w15">操作</th>
+				</tr>
+				</thead>
+				<tbody id="tableData">
+			
+				</tbody>
+			</table>
+		
+		</div>
+		<div class="paging">
+			<ul id="pageBtn" class="pagination">
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- 模态框 -->
+<!-- addModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+	 aria-labelledby="addModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">添加用户</h4>
+			</div>
+			<!-- 表单!!! -->
+			<div id="moduleForm" class="form-horizontal" >
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="col-lg-3 control-label" for="orgList">所属公司：</label>
+						<div class="col-lg-6">
+							<input type="text" class="form-control" id="orgName"
+								   placeholder="请选择所属公司" name="orgName"  >
+						</div>
+						<div style="padding-top:10px;" id="select">
+							<a id="menuBtn" href="#" onclick="showMenu();return false;">选择</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label" for="userName">用户姓名：</label>
+						<div class="col-lg-6">
+							<input type="text" class="form-control" id="userName"
+								   placeholder="请输入用户姓名" name="userName">
+						</div>
+						<span id="userName_msg" class="error_msg"></span>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label" for="userAccount">用户账号：</label>
+						<div class="col-lg-6">
+							<input type="text" class="form-control" id="userAccount"
+								   name="userAccount" placeholder="请输入用户账号">
+						</div>
+						<span id="userAccount_msg" class="error_msg"></span>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label" for="userAccount">用户电话：</label>
+						<div class="col-lg-6">
+							<input type="text" class="form-control" id="userTel"
+								   name="userTel" placeholder="请输入用户电话">
+						</div>
+						<span id="userTel_msg" class="error_msg"></span>
+					</div>
+					<div class="form-group" id="pass">
+						<label class="col-lg-3 control-label">用户密码:</label>
+						<div class="col-lg-6">
+							<input type="password" class="form-control" id="userPassword"
+								   name="userPassword" value="123456">
+						</div>
+						<span id="userPassword_msg" class="error_msg"></span>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label" for="moduleDes">用户职位：</label>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" id="userJob"
+								   name="userJob" placeholder="请输入用户职位">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+					<button type="submit" class="btn btn-primary"
+							onclick="addUser()">保 存</button>
+				</div>
+				<input type="hidden" value='0' id="subflag" />
+			</div>
+		</div>
+	</div>
+	
+<div id="menuContent" class="menuContent" style="display:none; position: absolute;border:1px solid #ccc;background-color:#fff">
+	<ul id="orgTree2" class="ztree" style="margin-top:0; width:260px;"></ul>
+</div>
+</div>
+
+<!-- permitDialog -->
+<div class="modal fade" id="permitModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel2">用户授权</h4>
+			</div>
+			<div class="modal-body">
+				<table  class="table table-bordered table-header">
+				<thead>
+					<tr>
+						<th class="text-center w5" >
+							<input type="checkbox" />
+						</th>
+						<th class="text-center w10" >No</th>
+						<th class="text-center w25">角色名称</th>
+						<th class="text-center w70">角色说明</th>
+					</tr>
+					</thead>
+					<tbody id="roleTable">
+					<tr>
+						<td class="text-center w5" >
+							<input class="rolecb" type="checkbox" value="1" />
+						</td>
+						<td class="text-center w10" >No</td>
+						<td class="text-center w25">角色名称</td>
+						<td class="text-center w70">角色说明</td>
+					</tr>
+					<tr>
+						<td class="text-center w5" >
+							<input class="rolecb" type="checkbox" value="2" />
+						</td>
+						<td class="text-center w10" >No</td>
+						<td class="text-center w25">角色名称</td>
+						<td class="text-center w70">角色说明</td>
+					</tr>
+					<tr>
+						<td class="text-center w5" >
+							<input class="rolecb" type="checkbox" value="3" />
+						</td>
+						<td class="text-center w10" >No</td>
+						<td class="text-center w25">角色名称</td>
+						<td class="text-center w70">角色说明</td>
+					</tr>
+					</tbody>
+				</table>
+				
+			</div>
+			<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+					<button type="submit" class="btn btn-primary"
+							onclick="permitUser()">授 权</button>
+				</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript" src="/admin_static/user/user.js"></script>
+
+</body>
+</html>

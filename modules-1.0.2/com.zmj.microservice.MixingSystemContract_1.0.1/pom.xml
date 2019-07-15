@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zmj</groupId>
+    <artifactId>microservice-MixingSystemContract</artifactId>
+    <version>1.0.2</version>
+    <packaging>jar</packaging>
+
+    <!-- 配置字符集UTF-8,JDK1.8(springboot+springcloud必须在1.8以上) -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <version>2.1.3.RELEASE</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <!-- �Ƴ�Ĭ��logging���� -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+                <!-- �Ƴ�jackson���� -->
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <!-- �Ƴ�tomcat���� -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zmj</groupId>
+            <artifactId>microservice-Common-History</artifactId>
+            <version>1.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <!-- 打包要用到的 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <!--<repository>-->
+        <!--<id>localRepository</id>-->
+        <!--<url>file:E:\project\env\maven\mvn_repo</url>-->
+        <!--</repository>-->
+        <repository>
+            <id>weilaoshidenexus</id>
+            <name>user snapshot</name>
+            <url>http://47.104.241.168:8000/repository/ZMJ_Java/</url>
+        </repository>
+    </distributionManagement>
+</project>

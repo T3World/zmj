@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZRolemoduleMapper" >
+    <resultMap id="BaseResultMap" type="com.zmj.web.microservice.zaokuangContract.entity.ZZRolemoduleEntity" >
+        <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Role_Id" property="roleId" jdbcType="VARCHAR" />
+        <result column="Module_Id" property="moduleId" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    Id, Role_Id, Module_Id
+  </sql>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZRolemoduleExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ZZ_RoleModule
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZRolemoduleExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ZZ_RoleModule
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZRolemoduleExample" >
+        delete from ZZ_RoleModule
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZRolemoduleExample" resultType="java.lang.Integer" >
+        select count(*) from ZZ_RoleModule
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update ZZ_RoleModule
+        <set >
+            <if test="record.id != null" >
+                Id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roleId != null" >
+                Role_Id = #{record.roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.moduleId != null" >
+                Module_Id = #{record.moduleId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update ZZ_RoleModule
+        set Id = #{record.id,jdbcType=VARCHAR},
+        Role_Id = #{record.roleId,jdbcType=VARCHAR},
+        Module_Id = #{record.moduleId,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ZZ_RoleModule
+        where Id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ZZ_RoleModule
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZRolemoduleEntity" >
+    insert into ZZ_RoleModule (Id, Role_Id, Module_Id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{moduleId,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZRolemoduleEntity" >
+        insert into ZZ_RoleModule
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            Id,
+            Role_Id,
+            Module_Id,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{id,jdbcType=VARCHAR},
+            #{roleId,jdbcType=VARCHAR},
+            #{moduleId,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZRolemoduleEntity" >
+        update ZZ_RoleModule
+        <set >
+            <if test="roleId != null" >
+                Role_Id = #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleId != null" >
+                Module_Id = #{moduleId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZRolemoduleEntity" >
+    update ZZ_RoleModule
+    set Role_Id = #{roleId,jdbcType=VARCHAR},
+      Module_Id = #{moduleId,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectByRoleId" parameterType="String" resultType="String">
+       select Module_Id from ZZ_RoleModule where Role_Id=#{roleId}
+  </select>
+
+    <delete id="deleteByRoleId" parameterType="String" >
+    delete from ZZ_RoleModule
+    where Role_Id=#{roleId}
+  </delete>
+
+    <delete id="deleteByMid" parameterType="String">
+    delete from ZZ_RoleModule
+    where Module_Id=#{mid}
+  </delete>
+</mapper>

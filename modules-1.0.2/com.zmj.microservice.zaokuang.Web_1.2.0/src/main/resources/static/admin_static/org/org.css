@@ -1,0 +1,87 @@
+.main{
+	padding-top:10px;
+	height:910px;
+}
+
+
+td a{
+	margin-left:5px;
+}
+
+/*宽度比例*/
+.w10 { width: 10%; }
+.w20 { width: 20%; }
+.w30 { width: 30%; }
+.w40 { width: 40%; }
+.w50 { width: 50%; }
+.w60 { width: 60%; }
+.w70 { width: 70%; }
+.w80 { width: 80%; }
+.w90 { width: 90%; }
+.w5 { width: 5%; }
+.w15 { width: 15%; }
+.w25 { width: 25%; }
+.w35 { width: 35%; }
+.w33 { width: 33.333%; }
+.w45 { width: 45%; }
+.w55 { width: 55%; }
+.w65 { width: 65%; }
+.w75 { width: 75%; }
+.w85 { width: 85%; }
+.w95 { width: 95%; }
+
+/*表格样式*/
+.table-header thead,.table-header tfoot{ background-color:#f5f6fa; color:#87898b;}
+.table-list{ margin-top:0px;}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{border-bottom: 1px solid #e1e6eb;}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{border-bottom: 1px solid #e1e6eb;}
+.table-bordered{border: 1px solid #e1e6eb;}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{border: 1px solid #e1e6eb;}
+.table-margin{ margin-top:10px;}
+tfoot .pagination{ margin:0px;}
+
+
+
+
+/*组织机构树容器*/
+.left_org{
+	width:200px;
+	margin-left:10px;
+	border:1px solid #CCC;
+	height:calc(100% - 10px);
+}
+.left_org span.title{
+	
+	display:inline-block;
+	border-bottom:1px solid #F1F1F1;
+	width:100%;
+	padding-top:3px;
+	padding-bottom:3px;
+	text-align:center;
+	background-color:#F1F1F1;
+}
+.right_content{
+	position:relative;
+	margin-left:10px;
+	width:1500px;
+	border:1px solid #CCC;
+	height:calc(100% - 10px);
+}
+
+.tool_button{
+	padding-left:10px;
+	padding-top:10px;
+	padding-right:10px;
+}
+
+.paging{
+	
+	position:absolute;
+	right:0px;
+	bottom:2px;
+	padding:0px;
+	
+}
+.paging .pagination{
+	margin:0px;
+}

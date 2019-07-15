@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link  href="/bootstrap-3.3.5-dist/css/bootstrap.min.css"	rel="stylesheet" />
+<link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<link href="/admin_static/personal/personal.css" rel="stylesheet">
+<script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+<script src="/zTree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript"	src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+<title>修改密码</title>
+</head>
+<body>
+	<div class="main">
+		<div class="title">
+			<h3>修改密码</h3>
+		</div>
+		
+		<div class="form-container">
+				<div class="form-item">
+					<label class="control-label wd180 text-right">旧密码：</label>
+					<input  class=" form-control wd180" id="Old_PassWord"  type="password"/> 
+				</div>
+				<div class="form-item">
+					<label class="control-label wd180 text-right">新密码：</label>
+					<input  class=" form-control wd260" id="New_PassWord" type="password"/> 
+				</div>
+				<div class="form-item">
+					<label class="control-label wd180 text-right">再输入一次新密码：</label>
+					<input  class=" form-control wd260" id="New_AgainPassWord"   type="password" onblur="contrast()"/> 
+				</div>
+				<div class="form-item text-right" style="margin-top:20px;padding-right:120px">
+					<button id="saveBtn" class="btn btn-primary"  onclick="submitForm();">保 存</button>
+				</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/admin_static/restpw/restpw.js"></script>
+
+</body>
+</html>

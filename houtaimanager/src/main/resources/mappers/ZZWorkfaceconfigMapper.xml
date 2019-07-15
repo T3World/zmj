@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzmj.mapper.ZZWorkfaceconfigMapper" >
+  <resultMap id="BaseResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+    <result column="Belt_Type" property="beltType" jdbcType="VARCHAR" />
+    <result column="Font_MinPressure" property="fontMinpressure" jdbcType="VARCHAR" />
+    <result column="Font_MaxPressure" property="fontMaxpressure" jdbcType="VARCHAR" />
+    <result column="Back_MinPressure" property="backMinpressure" jdbcType="VARCHAR" />
+    <result column="Back_MaxPressure" property="backMaxpressure" jdbcType="VARCHAR" />
+    <result column="Support_Dir" property="supportDir" jdbcType="INTEGER" />
+    <result column="Support_Count" property="supportCount" jdbcType="INTEGER" />
+    <result column="Conveyor_Dir" property="conveyorDir" jdbcType="INTEGER" />
+    <result column="Pressure_ChartType" property="pressureCharttype" jdbcType="VARCHAR" />
+    <result column="Workface_Length" property="workfaceLength" jdbcType="VARCHAR" />
+    <result column="ShearerPos_CacheTime" property="shearerposCachetime" jdbcType="VARCHAR" />
+    <result column="Workface_AbleLength" property="workfaceAbleLength" jdbcType="VARCHAR" />
+    <result column="Workface_CoalThickness" property="workfaceCoalThickness" jdbcType="VARCHAR" />
+    <result column="Workface_Inclination" property="workfaceInclination" jdbcType="VARCHAR" />
+    <result column="Workface_AverageHeight" property="workfaceAverageHeight" jdbcType="VARCHAR" />
+    <result column="Workface_StartTime" property="workfaceStartTime" jdbcType="VARCHAR" />
+    <result column="Morning_Shift" property="morningShift" jdbcType="VARCHAR" />
+    <result column="Afternoon_Shift" property="afternoonShift" jdbcType="VARCHAR" />
+    <result column="Night_Shift" property="nightShift" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, Workface_Id, Belt_Type, Font_MinPressure, Font_MaxPressure, Back_MinPressure, 
+    Back_MaxPressure, Support_Dir, Support_Count, Conveyor_Dir, Pressure_ChartType, Workface_Length, 
+    ShearerPos_CacheTime, Workface_AbleLength, Workface_CoalThickness, Workface_Inclination, 
+    Workface_AverageHeight, Workface_StartTime,Morning_Shift,Afternoon_Shift,Night_Shift
+  </sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigExample" >																  
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zz_workfaceconfig
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zz_workfaceconfig
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigExample" >
+    delete from zz_workfaceconfig
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigExample" resultType="java.lang.Integer" >
+    select count(*) from zz_workfaceconfig
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update zz_workfaceconfig
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceId != null" >
+        Workface_Id = #{record.workfaceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beltType != null" >
+        Belt_Type = #{record.beltType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fontMinpressure != null" >
+        Font_MinPressure = #{record.fontMinpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fontMaxpressure != null" >
+        Font_MaxPressure = #{record.fontMaxpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backMinpressure != null" >
+        Back_MinPressure = #{record.backMinpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backMaxpressure != null" >
+        Back_MaxPressure = #{record.backMaxpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportDir != null" >
+        Support_Dir = #{record.supportDir,jdbcType=INTEGER},
+      </if>
+      <if test="record.supportCount != null" >
+        Support_Count = #{record.supportCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.conveyorDir != null" >
+        Conveyor_Dir = #{record.conveyorDir,jdbcType=INTEGER},
+      </if>
+      <if test="record.pressureCharttype != null" >
+        Pressure_ChartType = #{record.pressureCharttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceLength != null" >
+        Workface_Length = #{record.workfaceLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shearerposCachetime != null" >
+        ShearerPos_CacheTime = #{record.shearerposCachetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceAbleLength != null" >
+        Workface_AbleLength = #{record.workfaceAbleLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceCoalThickness != null" >
+        Workface_CoalThickness = #{record.workfaceCoalThickness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceInclination != null" >
+        Workface_Inclination = #{record.workfaceInclination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceAverageHeight != null" >
+        Workface_AverageHeight = #{record.workfaceAverageHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceStartTime != null" >
+        Workface_StartTime = #{record.workfaceStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceStartTime != null" >
+        Morning_Shift = #{record.morningShift,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceStartTime != null" >
+        Afternoon_Shift = #{record.afternoonShift,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workfaceStartTime != null" >
+        Night_Shift = #{record.nightShift,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update zz_workfaceconfig
+    set Id = #{record.id,jdbcType=VARCHAR},
+      Workface_Id = #{record.workfaceId,jdbcType=VARCHAR},
+      Belt_Type = #{record.beltType,jdbcType=VARCHAR},
+      Font_MinPressure = #{record.fontMinpressure,jdbcType=VARCHAR},
+      Font_MaxPressure = #{record.fontMaxpressure,jdbcType=VARCHAR},
+      Back_MinPressure = #{record.backMinpressure,jdbcType=VARCHAR},
+      Back_MaxPressure = #{record.backMaxpressure,jdbcType=VARCHAR},
+      Support_Dir = #{record.supportDir,jdbcType=INTEGER},
+      Support_Count = #{record.supportCount,jdbcType=INTEGER},
+      Conveyor_Dir = #{record.conveyorDir,jdbcType=INTEGER},
+      Pressure_ChartType = #{record.pressureCharttype,jdbcType=VARCHAR},
+      Workface_Length = #{record.workfaceLength,jdbcType=VARCHAR},
+      ShearerPos_CacheTime = #{record.shearerposCachetime,jdbcType=VARCHAR},
+      Workface_AbleLength = #{record.workfaceAbleLength,jdbcType=VARCHAR},
+      Workface_CoalThickness = #{record.workfaceCoalThickness,jdbcType=VARCHAR},
+      Workface_Inclination = #{record.workfaceInclination,jdbcType=VARCHAR},
+      Workface_AverageHeight = #{record.workfaceAverageHeight,jdbcType=VARCHAR},
+      Workface_StartTime = #{record.workfaceStartTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from zz_workfaceconfig
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zz_workfaceconfig
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" >
+    insert into zz_workfaceconfig (Id, Workface_Id, Belt_Type, 
+      Font_MinPressure, Font_MaxPressure, Back_MinPressure, 
+      Back_MaxPressure, Support_Dir, Support_Count, 
+      Conveyor_Dir, Pressure_ChartType, Workface_Length, 
+      ShearerPos_CacheTime, Workface_AbleLength, 
+      Workface_CoalThickness, Workface_Inclination, 
+      Workface_AverageHeight, Workface_StartTime,Morning_Shift,Afternoon_Shift,Night_Shift
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workfaceId,jdbcType=VARCHAR}, #{beltType,jdbcType=VARCHAR}, 
+      #{fontMinpressure,jdbcType=VARCHAR}, #{fontMaxpressure,jdbcType=VARCHAR}, #{backMinpressure,jdbcType=VARCHAR}, 
+      #{backMaxpressure,jdbcType=VARCHAR}, #{supportDir,jdbcType=INTEGER}, #{supportCount,jdbcType=INTEGER}, 
+      #{conveyorDir,jdbcType=INTEGER}, #{pressureCharttype,jdbcType=VARCHAR}, #{workfaceLength,jdbcType=VARCHAR}, 
+      #{shearerposCachetime,jdbcType=VARCHAR}, #{workfaceAbleLength,jdbcType=VARCHAR}, 
+      #{workfaceCoalThickness,jdbcType=VARCHAR}, #{workfaceInclination,jdbcType=VARCHAR}, 
+      #{workfaceAverageHeight,jdbcType=VARCHAR}, #{workfaceStartTime,jdbcType=VARCHAR},
+      #{morningShift,jdbcType=VARCHAR}, #{afternoonShift,jdbcType=VARCHAR},
+      #{nightShift,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" >
+    insert into zz_workfaceconfig
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Id,
+      Workface_Id,
+      Belt_Type,
+      Font_MinPressure,
+      Font_MaxPressure,
+      Back_MinPressure,
+      Back_MaxPressure,
+      Support_Dir,
+      Support_Count,
+      Conveyor_Dir,
+      Pressure_ChartType,
+      Workface_Length,
+      ShearerPos_CacheTime,
+      Workface_AbleLength,
+      Workface_CoalThickness,
+      Workface_Inclination,
+      Workface_AverageHeight,
+      Workface_StartTime,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      #{workfaceId,jdbcType=VARCHAR},
+      #{beltType,jdbcType=VARCHAR},
+      #{fontMinpressure,jdbcType=VARCHAR},
+      #{fontMaxpressure,jdbcType=VARCHAR},
+      #{backMinpressure,jdbcType=VARCHAR},
+      #{backMaxpressure,jdbcType=VARCHAR},
+      #{supportDir,jdbcType=INTEGER},
+      #{supportCount,jdbcType=INTEGER},
+      #{conveyorDir,jdbcType=INTEGER},
+      #{pressureCharttype,jdbcType=VARCHAR},
+      #{workfaceLength,jdbcType=VARCHAR},
+      #{shearerposCachetime,jdbcType=VARCHAR},
+      #{workfaceAbleLength,jdbcType=VARCHAR},
+      #{workfaceCoalThickness,jdbcType=VARCHAR},
+      #{workfaceInclination,jdbcType=VARCHAR},
+      #{workfaceAverageHeight,jdbcType=VARCHAR},
+      #{workfaceStartTime,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" >
+    update zz_workfaceconfig
+    <set >
+      <if test="workfaceId != null" >
+        Workface_Id = #{workfaceId,jdbcType=VARCHAR},
+      </if>
+      <if test="beltType != null" >
+        Belt_Type = #{beltType,jdbcType=VARCHAR},
+      </if>
+      <if test="fontMinpressure != null" >
+        Font_MinPressure = #{fontMinpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="fontMaxpressure != null" >
+        Font_MaxPressure = #{fontMaxpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="backMinpressure != null" >
+        Back_MinPressure = #{backMinpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="backMaxpressure != null" >
+        Back_MaxPressure = #{backMaxpressure,jdbcType=VARCHAR},
+      </if>
+      <if test="supportDir != null" >
+        Support_Dir = #{supportDir,jdbcType=INTEGER},
+      </if>
+      <if test="supportCount != null" >
+        Support_Count = #{supportCount,jdbcType=INTEGER},
+      </if>
+      <if test="conveyorDir != null" >
+        Conveyor_Dir = #{conveyorDir,jdbcType=INTEGER},
+      </if>
+      <if test="pressureCharttype != null" >
+        Pressure_ChartType = #{pressureCharttype,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceLength != null" >
+        Workface_Length = #{workfaceLength,jdbcType=VARCHAR},
+      </if>
+      <if test="shearerposCachetime != null" >
+        ShearerPos_CacheTime = #{shearerposCachetime,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceAbleLength != null" >
+        Workface_AbleLength = #{workfaceAbleLength,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceCoalThickness != null" >
+        Workface_CoalThickness = #{workfaceCoalThickness,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceInclination != null" >
+        Workface_Inclination = #{workfaceInclination,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceAverageHeight != null" >
+        Workface_AverageHeight = #{workfaceAverageHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="workfaceStartTime != null" >
+        Workface_StartTime = #{workfaceStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="Morning_Shift != null" >
+        Morning_Shift = #{morningShift,jdbcType=VARCHAR},
+      </if>
+      <if test="Afternoon_Shift != null" >
+        Afternoon_Shift = #{afternoonShift,jdbcType=VARCHAR},
+      </if>
+      <if test="Night_Shift != null" >
+        Night_Shift = #{nightShift,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" >
+    update zz_workfaceconfig
+    set Workface_Id = #{workfaceId,jdbcType=VARCHAR},
+      Belt_Type = #{beltType,jdbcType=VARCHAR},
+      Font_MinPressure = #{fontMinpressure,jdbcType=VARCHAR},
+      Font_MaxPressure = #{fontMaxpressure,jdbcType=VARCHAR},
+      Back_MinPressure = #{backMinpressure,jdbcType=VARCHAR},
+      Back_MaxPressure = #{backMaxpressure,jdbcType=VARCHAR},
+      Support_Dir = #{supportDir,jdbcType=INTEGER},
+      Support_Count = #{supportCount,jdbcType=INTEGER},
+      Conveyor_Dir = #{conveyorDir,jdbcType=INTEGER},
+      Pressure_ChartType = #{pressureCharttype,jdbcType=VARCHAR},
+      Workface_Length = #{workfaceLength,jdbcType=VARCHAR},
+      ShearerPos_CacheTime = #{shearerposCachetime,jdbcType=VARCHAR},
+      Workface_AbleLength = #{workfaceAbleLength,jdbcType=VARCHAR},
+      Workface_CoalThickness = #{workfaceCoalThickness,jdbcType=VARCHAR},
+      Workface_Inclination = #{workfaceInclination,jdbcType=VARCHAR},
+      Workface_AverageHeight = #{workfaceAverageHeight,jdbcType=VARCHAR},
+      Workface_StartTime = #{workfaceStartTime,jdbcType=VARCHAR},
+      Morning_Shift=#{morningShift,jdbcType=VARCHAR},
+      Afternoon_Shift=#{afternoonShift,jdbcType=VARCHAR},
+      Night_Shift=#{nightShift,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!--  自己写的sql -->
+  <update id="deleteByWorkfaceId" parameterType="String">
+    update ZZ_WorkfaceConfig set IsDel = 1 where Workface_Id = #{workfaceId}
+  </update>
+  
+  <update id="delWorkfaceconfigByWorkfaceId" parameterType="java.lang.String">
+    update ZZ_WorkfaceConfig set IsDel=1 where Workface_Id = #{workfaceId}
+  </update>
+  
+  <select id="selectConfigByWorkfaceId" parameterType="String" resultType="map">
+    select
+    Workface_Id, Belt_Type, Font_MinPressure, Font_MaxPressure, Back_MinPressure, 
+    Back_MaxPressure, Support_Dir, Support_Count, Conveyor_Dir, Pressure_ChartType, ShearerPos_CacheTime,
+    Workface_Length,Workface_AbleLength, Workface_CoalThickness, Workface_Inclination, 
+    Workface_AverageHeight, Workface_StartTime,Morning_Shift,Afternoon_Shift,Night_Shift
+    from
+    ZZ_WorkfaceConfig
+    where
+    Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectWorkfaceConfigByWorkfaceId" resultMap="BaseResultMap">
+  select
+   <include refid="Base_Column_List" /> 
+  from zz_workfaceconfig
+  where Workface_Id =#{workfaceId,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

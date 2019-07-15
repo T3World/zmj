@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="/admin_static/dictionary/device.css" rel="stylesheet">
+    <script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/zTree/js/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <title>设备管理</title>
+</head>
+<body>
+<div class="main">
+    <div class="right_content pull-left ">
+        <div class="tool_button">
+            <button type="button" class="btn btn-danger" data-toggle="modal" onclick="delChecked()">批量删除</button>
+            <button type="button" class="btn btn-primary right_button" data-toggle="modal" onclick="addmethod()">添加设备</button>
+        </div>
+        <div class="tool_button">
+            <select class="btn btn-default" onchange="selectDeviceType()" id="deviceTypeSelect">
+            </select>
+        </div>
+        <div class="clearfix" style="height:100%">
+            <div class="data pull-left" id="roleData" style="padding:10px;width:calc(100% - 0px);margin-right:10px" >
+                <!-- Table -->
+                <table  class="table table-bordered table-header">
+                    <thead>
+                    <tr>
+                        <th class="text-center w5" ><input type="checkbox" onchange="selectAllDeviceAttribute(this)" class="deviceCheckBox" id="deviceAllCheckBox"></th>
+                        <th class="text-center" width="20px">No</th>
+                        <th class="text-center" hidden>id</th>
+                        <th class="text-center w15">设备名称</th>
+                        <th class="text-center w10">设备别名</th>
+                        <th class="text-center w10">设备型号</th>
+                        <th class="text-center w10">设备厂商</th>
+                        <th class="text-center w10">所属设备类型</th>
+                        <th class="text-center w10">更新时间</th>
+                        <th class="text-center w10">排序码</th>
+                        <th class="text-center ">操作</th>
+                        <!--<th class="text-center w10">设备图片</th>-->
+                    </tr>
+                    </thead>
+                    <tbody id="tableData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="paging">
+            <ul id="pageBtn" class="pagination">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="MyOnlyModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">设备字典</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="moduleForm" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceTypeId">所属设备类型：</label>
+                        <div class="col-lg-6">
+                            <select class="btn btn-default col-lg-6"  id="deviceTypeId" name="deviceTypeId" onchange="selectDeviceAttributeByTypeId()">
+                            </select>
+                        </div>
+                        <span id="deviceTypeId_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceName">设备名称：</label>
+                        <div class="col-lg-6">
+                            <input type="text"  id="deviceId" hidden>
+                            <input type="text" class="form-control" id="deviceName" name="deviceName" placeholder="请输入设备名称">
+                        </div>
+                        <span id="deviceName_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceAlias">设备别名：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="deviceAlias" name="deviceAlias" placeholder="请输入设备别名">
+                        </div>
+                        <span id="deviceAlias_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceModel">设备型号：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="deviceModel" name="deviceModel" placeholder="请输入设备型号">
+                        </div>
+                        <span id="deviceModel_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceFirm">设备厂商：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="deviceFirm" name="deviceFirm" placeholder="请输入设备厂商">
+                        </div>
+                        <span id="deviceFirm_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >设备属性：</label>
+                        <div class="col-lg-6">
+                            <input type="button" class="btn btn-success" value="添加属性" onclick="addAttributeSelect()">
+                        </div>
+                        <span id="deviceAttribute_msg" class="error_msg"></span>
+                    </div>
+                    <div id="deviceAttribute"></div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">设备图片：</label>
+                        <div class="col-lg-2">
+                            <img src="" id="deviceImg" class="img-preview" />
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="image" class="btn btn-default" value="上传图片" onclick="uploadImg()">
+                        </div>
+                        <span id="deviceImg_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="SortCode">排序码：</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="SortCode" name="SortCode">
+                        </div>
+                        <span id="SortCode_msg" class="text-center error_msg"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="submitModal()">保 存</button>
+                </div>
+                <input type="hidden" value='0' id="subflag" />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- deviceAccumulativeModal -->
+<div class="modal fade" id="deviceAccumulativeModal" tabindex="-1" role="dialog" aria-labelledby="accumulateInfoModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="workfaceAccumulateInfoModalTitle">设备运行累计</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="workfaceAccumulateInfo" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="deviceId_accu" hidden>
+                        <label class="col-lg-2 control-label" for="cumulativeRunTime">运行时间:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="cumulativeRunTime" name="cumulativeRunTime" onchange="changeFlag()">
+                            <label class="unit control-label">小时</label>
+                        </div>
+                        <label class="col-lg-2 control-label" for="cumulativeLoadCycles">循环数:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="cumulativeLoadCycles" name="cumulativeLoadCycles" onchange="changeFlag()">
+                            <label class="unit control-label">个</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="cumulativeCoalWeight">推进度:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="cumulativeCoalWeight" name="cumulativeCoalWeight" onchange="changeFlag()">
+                            <label class="unit  control-label" >米</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="commitWorkfaceAccumulateInfo()">保存</button>
+                </div>
+                <div hidden>
+                    <input id="workfaceAccumulateInfoFlag" type="text" name="workfaceAccumulateInfoFlag">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/admin_static/dictionary/device.js"></script>
+
+</body>
+</html>

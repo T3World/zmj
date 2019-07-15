@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZGlobalMapper">
+	<resultMap id="BaseResultMap" type="com.zmj.web.microservice.zaokuangContract.entity.ZZGlobalEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Global_Id" property="globalId" jdbcType="VARCHAR" />
+		<result column="Global_ShearerPosTime" property="globalShearerpostime"
+			jdbcType="VARCHAR" />
+		<result column="Global_CheTime" property="globalChetime"
+			jdbcType="VARCHAR" />
+		<result column="Global_DiffPressureTime" property="globalDiffpressuretime"
+			jdbcType="VARCHAR" />
+		<result column="Global_MinePressureTime" property="globalMinepressuretime"
+			jdbcType="VARCHAR" />
+		<result column="Global_SettingPressureTime" property="globalSettingpressuretime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, Global_Id, Global_ShearerPosTime, Global_CheTime,
+		Global_DiffPressureTime, Global_MinePressureTime,
+		Global_SettingPressureTime
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZGlobalExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_Global
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZGlobalExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_Global
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZGlobalExample">
+		delete from ZZ_Global
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZGlobalExample"
+		resultType="java.lang.Integer">
+		select count(*) from ZZ_Global
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update ZZ_Global
+		<set>
+			<if test="record.id != null">
+				Id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.globalId != null">
+				Global_Id = #{record.globalId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.globalShearerpostime != null">
+				Global_ShearerPosTime =
+				#{record.globalShearerpostime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.globalChetime != null">
+				Global_CheTime = #{record.globalChetime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.globalDiffpressuretime != null">
+				Global_DiffPressureTime =
+				#{record.globalDiffpressuretime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.globalMinepressuretime != null">
+				Global_MinePressureTime =
+				#{record.globalMinepressuretime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.globalSettingpressuretime != null">
+				Global_SettingPressureTime =
+				#{record.globalSettingpressuretime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update ZZ_Global
+		set Id = #{record.id,jdbcType=VARCHAR},
+		Global_Id = #{record.globalId,jdbcType=VARCHAR},
+		Global_ShearerPosTime = #{record.globalShearerpostime,jdbcType=VARCHAR},
+		Global_CheTime = #{record.globalChetime,jdbcType=VARCHAR},
+		Global_DiffPressureTime = #{record.globalDiffpressuretime,jdbcType=VARCHAR},
+		Global_MinePressureTime =
+		#{record.globalMinepressuretime,jdbcType=VARCHAR},
+		Global_SettingPressureTime =
+		#{record.globalSettingpressuretime,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		Id, Global_Id, Global_ShearerPosTime, Global_CheTime,
+        Global_DiffPressureTime, Global_MinePressureTime,
+        Global_SettingPressureTime
+		from ZZ_Global
+		where Id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByGlobalId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		Id, Global_Id, Global_ShearerPosTime, Global_CheTime,
+        Global_DiffPressureTime, Global_MinePressureTime,
+        Global_SettingPressureTime
+		from ZZ_Global
+		where Global_Id = #{globalId,jdbcType=VARCHAR}
+	</select>
+	<select id="countByGlobalId" resultType="Integer" parameterType="java.lang.String">
+		select count(*)
+		from ZZ_Global
+		where Global_Id = #{globalId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectTheFirst" resultMap="BaseResultMap">
+		select
+		Id, Global_Id, Global_ShearerPosTime, Global_CheTime,
+        Global_DiffPressureTime, Global_MinePressureTime,
+        Global_SettingPressureTime
+		from ZZ_Global
+		limit 0,1
+	</select>
+	<select id="countAll"  resultType="Integer">
+	   select count(*) from ZZ_Global
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from ZZ_Global
+		where Id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZGlobalEntity">
+		insert into ZZ_Global (Id, Global_Id, Global_ShearerPosTime,
+		Global_CheTime, Global_DiffPressureTime,
+		Global_MinePressureTime, Global_SettingPressureTime
+		)
+		values (#{id,jdbcType=VARCHAR}, #{globalId,jdbcType=VARCHAR},
+		#{globalShearerpostime,jdbcType=VARCHAR},
+		#{globalChetime,jdbcType=VARCHAR},
+		#{globalDiffpressuretime,jdbcType=VARCHAR},
+		#{globalMinepressuretime,jdbcType=VARCHAR},
+		#{globalSettingpressuretime,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZGlobalEntity">
+		insert into ZZ_Global
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			Id,
+			Global_Id,
+			Global_ShearerPosTime,
+			Global_CheTime,
+			Global_DiffPressureTime,
+			Global_MinePressureTime,
+			Global_SettingPressureTime,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id,jdbcType=VARCHAR},
+			#{globalId,jdbcType=VARCHAR},
+			#{globalShearerpostime,jdbcType=VARCHAR},
+			#{globalChetime,jdbcType=VARCHAR},
+			#{globalDiffpressuretime,jdbcType=VARCHAR},
+			#{globalMinepressuretime,jdbcType=VARCHAR},
+			#{globalSettingpressuretime,jdbcType=VARCHAR},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZGlobalEntity">
+		update ZZ_Global
+		<set>
+			<if test="globalId != null">
+				Global_Id = #{globalId,jdbcType=VARCHAR},
+			</if>
+			<if test="globalShearerpostime != null">
+				Global_ShearerPosTime = #{globalShearerpostime,jdbcType=VARCHAR},
+			</if>
+			<if test="globalChetime != null">
+				Global_CheTime = #{globalChetime,jdbcType=VARCHAR},
+			</if>
+			<if test="globalDiffpressuretime != null">
+				Global_DiffPressureTime = #{globalDiffpressuretime,jdbcType=VARCHAR},
+			</if>
+			<if test="globalMinepressuretime != null">
+				Global_MinePressureTime = #{globalMinepressuretime,jdbcType=VARCHAR},
+			</if>
+			<if test="globalSettingpressuretime != null">
+				Global_SettingPressureTime =
+				#{globalSettingpressuretime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZGlobalEntity">
+		update ZZ_Global
+		set Global_Id = #{globalId,jdbcType=VARCHAR},
+		Global_ShearerPosTime = #{globalShearerpostime,jdbcType=VARCHAR},
+		Global_CheTime = #{globalChetime,jdbcType=VARCHAR},
+		Global_DiffPressureTime = #{globalDiffpressuretime,jdbcType=VARCHAR},
+		Global_MinePressureTime = #{globalMinepressuretime,jdbcType=VARCHAR},
+		Global_SettingPressureTime =
+		#{globalSettingpressuretime,jdbcType=VARCHAR}
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>

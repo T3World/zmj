@@ -1,0 +1,1 @@
+1.0.1 修改对common-model的引用为1.0.1,抽象出通用service,将常用spring配置bean使用工厂模式提供

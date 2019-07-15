@@ -1,0 +1,128 @@
+
+
+.main{
+	padding-top:10px;
+	height:910px;
+	
+}
+
+/*组织机构树容器*/
+.left_org{
+	border:1px solid #CCC;
+	width:200px;
+	margin-left:10px;
+	text-align:center;
+	height:calc(100% - 10px);
+}
+
+.left_org span.title{
+
+	display:inline-block;
+	border-bottom:1px solid #CCC;
+	width:100%;
+	padding-top:3px;
+	padding-bottom:3px;
+}
+.right_content{
+	position:relative;
+	margin-left:10px;
+	width:1500px;
+	border:1px solid #CCC;
+	height:calc(100% - 10px);
+	
+}
+.tool_button{
+	padding-left:10px;
+	padding-top:10px;
+	padding-right:10px;
+}
+
+.paging{
+	
+	position:absolute;
+	right:0px;
+	bottom:2px;
+	padding:0px;
+	
+}
+.paging .pagination{
+	margin:0px;
+}
+
+.title{
+	padding-left:30px;
+	margin-bottom:20px;
+}
+
+.form-container{
+	padding-left:30px;
+	position:relative;
+	width:600px;
+}
+.form-item{
+	margin-top:10px;
+}
+.form-item span{
+	padding-left:10px;
+}
+.form-item input,.form-item textarea{
+	display:inline-block;
+}
+.control-label{
+	padding-right:5px;
+}
+.submit{
+	position:absolute;
+	right:0px;
+	bottom:5px;
+	margin-top:10px;
+}
+.wd10 {width:10px}
+.wd20 {width:20px}
+.wd30 {width:30px}
+.wd40 {width:40px}
+.wd50 {width:50px}
+.wd60 {width:60px}
+.wd70 {width:70px}
+.wd80 {width:80px}
+.wd90 {width:90px}
+.wd100 {width:100px}
+.wd110 {width:110px}
+.wd120 {width:120px}
+.wd130 {width:130px}
+.wd140 {width:140px}
+.wd150 {width:150px}
+.wd160 {width:160px}
+.wd170 {width:170px}
+.wd180 {width:180px}
+.wd190 {width:190px}
+.wd200 {width:200px}
+.wd210 {width:210px}
+.wd220 {width:220px}
+.wd230 {width:230px}
+.wd240 {width:240px}
+.wd250 {width:250px}
+.wd260 {width:260px}
+.wd270 {width:270px}
+
+/*宽度比例*/
+.w10 { width: 10%; }
+.w20 { width: 20%; }
+.w30 { width: 30%; }
+.w40 { width: 40%; }
+.w50 { width: 50%; }
+.w60 { width: 60%; }
+.w70 { width: 70%; }
+.w80 { width: 80%; }
+.w90 { width: 90%; }
+.w5 { width: 5%; }
+.w15 { width: 15%; }
+.w25 { width: 25%; }
+.w35 { width: 35%; }
+.w33 { width: 33.333%; }
+.w45 { width: 45%; }
+.w55 { width: 55%; }
+.w65 { width: 65%; }
+.w75 { width: 75%; }
+.w85 { width: 85%; }
+.w95 { width: 95%; }

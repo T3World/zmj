@@ -1,0 +1,40 @@
+server:
+  port: 8070
+mybatis:
+  typeAliasesPackage: com.zzmj.pojo
+  mapperLocations: classpath:mappers/*.xml
+  settings:
+       setting:
+            lazyLoadingEnabled: true
+            aggressiveLazyLoading: false
+            cacheEnabled: true
+            logImpl: LOG4J
+#logging:
+#  level: 
+#    com.zzmj.mapper: info
+spring:
+    application:
+      name: zaokuang
+#    resources:
+#        static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: "jdbc:mysql://115.28.91.111:3306/ZaoKuang?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
+        username: yydk
+        password: zmj.yydk
+        maxActive: 10
+        initialSize: 5
+        minIdle: 5
+logging:
+  config: ../Conf/log4j.properties
+zmj:
+  cacheip: http\://115.28.91.111\:8020
+  historyip: http\://115.28.91.111\:8021/automation/business
+  loginUrl: http\://47.104.241.168\:80/login.html
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka
+#      defaultZone: http://47.104.241.168:8761/eureka

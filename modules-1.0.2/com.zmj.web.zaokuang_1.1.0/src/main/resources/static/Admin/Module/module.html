@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link  href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<link href="/admin_static/module/module.css" rel="stylesheet">
+<script type="text/javascript" src="/script/jquery-1.11.1.min.js"></script>
+<script src="/zTree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript"	src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+<title>系统资源管理</title>
+</head>
+<body>
+	<div class="main clearfix">
+		<div class="left_side pull-left">
+			<span class="title">系统资源结构</span>
+			<ul id="moduleTree" class="module_tree ztree"></ul>
+		</div>
+		<div class="right_content pull-left">
+			<div class="tool_button">
+				<button type="button" class="btn btn-primary"
+					onclick="addModule()">添加系统资源</button>
+			</div>
+			<div class="data" style="padding: 10px;">
+				<!-- Table -->
+				<table class="table table-bordered table-header">
+					<thead>
+						<tr>
+							<th class="text-center" width="20px">No</th>
+							<th class="text-center w15">模块名称</th>
+							<th class="text-center w15">模块值</th>
+							<th class="text-center">模块路径</th>
+							<th class="text-center w10">排序码</th>
+							<th class="text-center w25">操作</th>
+						</tr>
+					</thead>
+					<tbody id="tableData">
+					</tbody>
+				</table>
+
+			</div>
+			<div class="paging">
+				<ul id="pageBtn" class="pagination">
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- 模态框 -->
+	<!-- addModal -->
+	<div class="modal fade" id="ModuleModal" tabindex="-1" role="dialog"
+		aria-labelledby="addModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">添加系统资源</h4>
+				</div>
+				<!-- 表单!!! -->
+				<div id="moduleForm" class="form-horizontal">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="col-lg-3 control-label" for="orgList">父模块：</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" id="modulePName"
+									placeholder="请选择父级模块" name="modulePName">
+							</div>
+							<div style="padding-top: 10px;">
+								<a id="menuBtn" href="#" onclick="showMenu();">选择</a>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label" for="moduleName">模块名称：</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" id="moduleName"
+									placeholder="请输入模块名称" name="moduleName">
+							</div>
+							<span id="moduleName_msg" class="error_msg"></span>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label" for="moduleValue">模块值：</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" id="moduleValue"
+									name="moduleValue" placeholder="请输入模块值">
+							</div>
+							<span id="moduleValue_msg" class="error_msg"></span>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label">模块URL:</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" id="moduleURL"
+									name="moduleURL" placeholder="请输入模块值">
+							</div>
+							<span id="moduleURL_msg" class="error_msg"></span>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label" for="moduleDes">模块描述：</label>
+							<div class="col-lg-8">
+								<textarea type="text" class="form-control" rows="5"
+									id="moduleDes" name="moduleDes"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-lg-3 control-label" for="SortCode">排序码：</label>
+							<div class="col-lg-3">
+								<input type="text" class="form-control" id="SortCode"
+									name="SortCode">
+							</div>
+							<span id="SortCode_msg" class="text-center error_msg"></span>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关
+							闭</button>
+						<button type="submit" class="btn btn-primary"
+							onclick="submitModule()">保 存</button>
+					</div>
+					<input type="hidden" value='0' id="subflag" />
+				</div>
+			</div>
+		</div>
+
+		<div id="menuContent" class="menuContent"
+			style="display: none; position: absolute; border: 1px solid #000; background-color: #fff">
+			<ul id="moduleTree2" class="ztree"
+				style="margin-top: 0; width: 200px;"></ul>
+		</div>
+
+	</div>
+	<script type="text/javascript" src="/admin_static/module/module.js"></script>
+
+</body>
+</html>

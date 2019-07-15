@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZOrgMapper">
+	<resultMap id="BaseResultMap" type="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+		<result column="Org_PId" property="orgPid" jdbcType="VARCHAR" />
+		<result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
+		<result column="Org_Alias" property="orgAlias" jdbcType="VARCHAR" />
+		<result column="Org_Info" property="orgInfo" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+		<result column="SortCode" property="sortcode" jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="VARCHAR" />
+		<result column="IsDel" property="isdel" jdbcType="INTEGER" />
+		<result column="Org_PIds" property="orgPids" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="WorkfaceConfigResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+		<result column="Belt_Type" property="beltType" jdbcType="VARCHAR" />
+		<result column="Font_MinPressure" property="fontMinpressure"
+			jdbcType="VARCHAR" />
+		<result column="Font_MaxPressure" property="fontMaxpressure"
+			jdbcType="VARCHAR" />
+		<result column="Back_MinPressure" property="backMinpressure"
+			jdbcType="VARCHAR" />
+		<result column="Back_MaxPressure" property="backMaxpressure"
+			jdbcType="VARCHAR" />
+		<result column="Support_Dir" property="supportDir" jdbcType="INTEGER" />
+		<result column="Support_Count" property="supportCount"
+			jdbcType="INTEGER" />
+		<result column="Conveyor_Dir" property="conveyorDir" jdbcType="INTEGER" />
+		<result column="Pressure_ChartType" property="pressureCharttype"
+			jdbcType="VARCHAR" />
+		<result column="ShearerPos_CacheTime" property="shearerposCachetime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="WorkfaceResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+		<result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+		<result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
+		<result column="Workface_Name" property="workfaceName"
+			jdbcType="VARCHAR" />
+		<result column="Workface_Alias" property="workfaceAlias"
+			jdbcType="VARCHAR" />
+		<result column="Workface_Type" property="workfaceType"
+			jdbcType="INTEGER" />
+		<result column="Workface_State" property="workfaceState"
+			jdbcType="INTEGER" />
+		<result column="CreatePerson" property="createperson" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="SortCode" property="sortcode" jdbcType="VARCHAR" />
+		<association property="zzWorkfaceconfigEntity" column="Org_Id"
+			javaType="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" resultMap="WorkfaceConfigResultMap" />
+	</resultMap>
+	<resultMap id="WorkfaceInOrgMap" type="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+		<result column="Org_PId" property="orgPid" jdbcType="VARCHAR" />
+		<result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
+		<result column="Org_Alias" property="orgAlias" jdbcType="VARCHAR" />
+		<result column="Org_Info" property="orgInfo" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+		<result column="SortCode" property="sortcode" jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="VARCHAR" />
+		<result column="IsDel" property="isdel" jdbcType="INTEGER" />
+		<result column="Org_PIds" property="orgPids" jdbcType="VARCHAR" />
+		<association property="workfaces" column="Org_Id"
+			javaType="com.zzmj.pojo.entity.ZZWorkfaceEntity" resultMap="WorkfaceResultMap" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, Org_Id, Org_PId, Org_Name, Org_Alias, Org_Info, CreateTime,
+		UpdateTime, SortCode, Org_PIds,
+		`Status`, IsDel
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZOrgExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_Org
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZOrgExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_Org
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZOrgExample">
+		delete from ZZ_Org
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZOrgExample"
+		resultType="java.lang.Integer">
+		select count(*) from ZZ_Org
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update ZZ_Org
+		<set>
+			<if test="record.id != null">
+				Id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgId != null">
+				Org_Id = #{record.orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgPid != null">
+				Org_PId = #{record.orgPid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgName != null">
+				Org_Name = #{record.orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgAlias != null">
+				Org_Alias = #{record.orgAlias,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgInfo != null">
+				Org_Info = #{record.orgInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createtime != null">
+				CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updatetime != null">
+				UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.sortcode != null">
+				SortCode = #{record.sortcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgPids != null">
+				Org_PIds = #{record.orgPids,jdbcType=VARCHAR},
+			</if>
+			<if test="record.status != null">
+				`Status` = #{record.status,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isdel != null">
+				IsDel = #{record.isdel,jdbcType=INTEGER},
+			</if>
+			<if test="record.orgPids != null">
+				Org_PIds = #{record.orgPids,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update ZZ_Org
+		set Id = #{record.id,jdbcType=VARCHAR},
+		Org_Id = #{record.orgId,jdbcType=VARCHAR},
+		Org_PId = #{record.orgPid,jdbcType=VARCHAR},
+		Org_Name = #{record.orgName,jdbcType=VARCHAR},
+		Org_Alias = #{record.orgAlias,jdbcType=VARCHAR},
+		Org_Info = #{record.orgInfo,jdbcType=VARCHAR},
+		CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+		UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+		SortCode = #{record.sortcode,jdbcType=VARCHAR},
+		Org_PIds = #{record.orgPids,jdbcType=VARCHAR},
+		`Status` = #{record.status,jdbcType=VARCHAR},
+		IsDel = #{record.isdel,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from ZZ_Org
+		where Id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		insert into ZZ_Org (Id, Org_Id, Org_PId,
+		Org_Name, Org_Alias, Org_Info,
+		CreateTime, UpdateTime, SortCode,
+		`Status`, IsDel, Org_PIds
+		)
+		values (#{id,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR},
+		#{orgPid,jdbcType=VARCHAR},
+		#{orgName,jdbcType=VARCHAR}, #{orgAlias,jdbcType=VARCHAR}, #{orgInfo,jdbcType=VARCHAR},
+		#{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP},
+		#{sortcode,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}, #{orgPids,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		insert into ZZ_Org
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			Id,
+			Org_Id,
+			Org_PId,
+			Org_Name,
+			Org_Alias,
+			Org_Info,
+			CreateTime,
+			UpdateTime,
+			SortCode,
+			`Status`,
+			IsDel,
+			Org_PIds,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id,jdbcType=VARCHAR},
+			#{orgId,jdbcType=VARCHAR},
+			#{orgPid,jdbcType=VARCHAR},
+			#{orgName,jdbcType=VARCHAR},
+			#{orgAlias,jdbcType=VARCHAR},
+			#{orgInfo,jdbcType=VARCHAR},
+			#{createtime,jdbcType=TIMESTAMP},
+			#{updatetime,jdbcType=TIMESTAMP},
+			#{sortcode,jdbcType=VARCHAR},
+			#{status,jdbcType=VARCHAR},
+			#{isdel,jdbcType=INTEGER},
+			#{orgPids,jdbcType=VARCHAR},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		update ZZ_Org
+		<set>
+			<if test="orgId != null">
+				Org_Id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgPid != null">
+				Org_PId = #{orgPid,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				Org_Name = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="orgAlias != null">
+				Org_Alias = #{orgAlias,jdbcType=VARCHAR},
+			</if>
+			<if test="orgInfo != null">
+				Org_Info = #{orgInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				CreateTime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatetime != null">
+				UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sortcode != null">
+				SortCode = #{sortcode,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				`Status` = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="isdel != null">
+				IsDel = #{isdel,jdbcType=INTEGER},
+			</if>
+			<if test="orgPids != null">
+				Org_PIds = #{orgPids,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		update ZZ_Org
+		set Org_Id = #{orgId,jdbcType=VARCHAR},
+		Org_PId = #{orgPid,jdbcType=VARCHAR},
+		Org_Name = #{orgName,jdbcType=VARCHAR},
+		Org_Alias = #{orgAlias,jdbcType=VARCHAR},
+		Org_Info = #{orgInfo,jdbcType=VARCHAR},
+		CreateTime = #{createtime,jdbcType=TIMESTAMP},
+		UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+		SortCode = #{sortcode,jdbcType=VARCHAR},
+		`Status` = #{status,jdbcType=VARCHAR},
+		IsDel = #{isdel,jdbcType=INTEGER},
+		Org_PIds = #{orgPids,jdbcType=VARCHAR}
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		update ZZ_Org
+		set Org_Id = #{orgId,jdbcType=VARCHAR},
+		Org_PId = #{orgPid,jdbcType=VARCHAR},
+		Org_Name = #{orgName,jdbcType=VARCHAR},
+		Org_Alias = #{orgAlias,jdbcType=VARCHAR},
+		Org_Info = #{orgInfo,jdbcType=VARCHAR},
+		CreateTime = #{createtime,jdbcType=TIMESTAMP},
+		UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+		SortCode = #{sortcode,jdbcType=VARCHAR},
+		Org_PIds = #{orgPids,jdbcType=VARCHAR},
+		`Status` = #{status,jdbcType=VARCHAR},
+		IsDel = #{isdel,jdbcType=INTEGER}
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="getCount" parameterType="com.zzmj.pojo.entity.ZZOrgExample"
+		resultType="java.lang.Integer">
+		<!-- 此orgId 就相当于 数据库列中的Org_PId -->
+		SELECT COUNT(Org_PId) FROM ZZ_Org WHERE Org_PId=
+		#{orgId,jdbcType=VARCHAR} AND IsDel=0;
+	</select>
+	<!-- 模糊查询，根据关键字，first是从那条数据开始，pageNo当前页面显示多少条数据 -->
+	<select id="getlikeKeyWord" resultMap="BaseResultMap">
+		SELECT * FROM ZZ_Org WHERE IsDel = 0 AND (Org_Name
+		LIKE #{keyWord,jdbcType=VARCHAR} OR
+		Org_Alias LIKE #{keyWord,jdbcType=VARCHAR}) ORDER BY ZZ_Org.SortCode
+		limit #{pageNo,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</select>
+
+	<select id="allCount" parameterType="com.zzmj.pojo.entity.ZZOrgExample"
+		resultType="java.lang.Integer">
+		<!-- 查询总条数 -->
+		SELECT COUNT(*) FROM ZZ_Org WHERE IsDel=0;
+	</select>
+
+	<select id="listOrgByPId" parameterType="String" resultType="map">
+		select
+		Org_Id, Org_PId, Org_Name, Org_Alias, Org_Info, CreateTime, UpdateTime,
+		SortCode,
+		`Status`
+		from
+		ZZ_Org
+		where IsDel = 0
+		and
+		Org_PId = #{orgId,jdbcType=VARCHAR}
+		order by SortCode ASC
+	</select>
+
+	<select id="getOrgByOrgId" resultType="map" parameterType="String">
+		select
+		Org_Id, Org_PId, Org_Name, Org_Alias, Org_Info, CreateTime, UpdateTime,
+		SortCode, Org_PIds,
+		`Status`
+		from
+		ZZ_Org
+		where
+		Org_Id=#{orgId,jdbcType=VARCHAR}
+		and
+		IsDel=0
+	</select>
+	
+	<select id="getOrgIdByPId" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZOrgExample">
+		select * from ZZ_Org where Org_Id = #{orgId,jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,34 @@
+﻿server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    prefer-ip-address: true # 当调用getHostname获取实例的hostname时，返回ip而不是host名称
+#    ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
+#    lease-expiration-duration-in-seconds: 10 #服务失效时间，默认值90秒
+#    lease-renewal-interval-in-seconds: 5 # 服务续约(renew)的间隔，默认为30秒
+  client:
+    # 是否注册自己的信息到EurekaServer，默认是true
+    register-with-eureka: false
+    # 是否拉取其它服务的信息，默认是true
+    fetch-registry: false
+    # EurekaServer的地址，现在是自己的地址，如果是集群，需要加上其它Server的地址。
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+  server:
+    enable-self-preservation: false
+logging:
+  level:
+    root: INFO
+  path: ../Log
+#配置actuator健康检查
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always

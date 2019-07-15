@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZUserMapper">
+	<resultMap id="orgResultMap" type="com.zmj.web.microservice.zaokuangContract.entity.ZZOrgEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+		<result column="Org_PId" property="orgPid" jdbcType="VARCHAR" />
+		<result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
+		<result column="Org_Alias" property="orgAlias" jdbcType="VARCHAR" />
+		<result column="Org_Info" property="orgInfo" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+		<result column="SortCode" property="sortcode" jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="VARCHAR" />
+		<result column="IsDel" property="isdel" jdbcType="INTEGER" />
+		<result column="Org_PIds" property="orgPids" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="BaseResultMap" type="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="User_Id" property="userId" jdbcType="VARCHAR" />
+		<result column="User_Name" property="userName" jdbcType="VARCHAR" />
+		<result column="User_Account" property="userAccount" jdbcType="VARCHAR" />
+		<result column="User_Password" property="userPassword"
+			jdbcType="VARCHAR" />
+		<result column="User_Job" property="userJob" jdbcType="VARCHAR" />
+		<result column="User_Tel" property="userTel" jdbcType="VARCHAR" />
+		<result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+		<result column="Status" property="status" jdbcType="VARCHAR" />
+		<result column="IsDel" property="isdel" jdbcType="INTEGER" />
+		<result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
+		<association property="zzOrgEntity" column="Org_Id"
+			javaType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity" resultMap="orgResultMap" />
+	</resultMap>
+
+	<resultMap id="LoginResultMap" type="com.zzmj.pojo.vo.LoginResult">
+		<result column="User_Id" property="userId" jdbcType="VARCHAR" />
+		<result column="User_Name" property="userName" jdbcType="VARCHAR" />
+		<result column="User_Account" property="userAccount" jdbcType="VARCHAR" />
+		<result column="User_Job" property="userJob" jdbcType="VARCHAR" />
+		<result column="User_Tel" property="userTel" jdbcType="VARCHAR" />
+		<result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+		Id, User_Id, User_Name, User_Account, User_Password,
+		User_Job,
+		User_Tel,Org_Id, CreateTime,
+		UpdateTime, `Status`, IsDel
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZUserExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_User
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap"
+		parameterType="com.zzmj.pojo.entity.ZZUserExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from ZZ_User
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZUserExample">
+		delete from ZZ_User
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZUserExample"
+		resultType="java.lang.Integer">
+		select count(*) from ZZ_User
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update ZZ_User
+		<set>
+			<if test="record.id != null">
+				Id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userId != null">
+				User_Id = #{record.userId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userName != null">
+				User_Name = #{record.userName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userAccount != null">
+				User_Account = #{record.userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userPassword != null">
+				User_Password = #{record.userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userJob != null">
+				User_Job = #{record.userJob,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userTel != null">
+				User_Tel = #{record.userTel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgId != null">
+				Org_Id = #{record.orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createtime != null">
+				CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updatetime != null">
+				UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.status != null">
+				`Status` = #{record.status,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isdel != null">
+				IsDel = #{record.isdel,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update ZZ_User
+		set Id = #{record.id,jdbcType=VARCHAR},
+		User_Id =
+		#{record.userId,jdbcType=VARCHAR},
+		User_Name =
+		#{record.userName,jdbcType=VARCHAR},
+		User_Account =
+		#{record.userAccount,jdbcType=VARCHAR},
+		User_Password =
+		#{record.userPassword,jdbcType=VARCHAR},
+		User_Job =
+		#{record.userJob,jdbcType=VARCHAR},
+		User_Tel =
+		#{record.userTel,jdbcType=VARCHAR},
+		Org_Id =
+		#{record.orgId,jdbcType=VARCHAR},
+		CreateTime =
+		#{record.createtime,jdbcType=TIMESTAMP},
+		UpdateTime =
+		#{record.updatetime,jdbcType=TIMESTAMP},
+		`Status` =
+		#{record.status,jdbcType=VARCHAR},
+		IsDel =
+		#{record.isdel,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ZZ_User
+		where Id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ZZ_User
+		where Id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		insert into ZZ_User (Id,
+		User_Id, User_Name,
+		User_Account, User_Password, User_Job, User_Tel,
+		Org_Id, CreateTime, UpdateTime,
+		`Status`, IsDel)
+		values
+		(#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{userAccount,jdbcType=VARCHAR},
+		#{userPassword,jdbcType=VARCHAR}, #{userJob,jdbcType=VARCHAR},
+		#{userTel,jdbcType=VARCHAR},#{orgId,jdbcType=VARCHAR},
+		#{createtime,jdbcType=TIMESTAMP},
+		#{updatetime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		insert into ZZ_User
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			Id,
+			User_Id,
+			User_Name,
+			User_Account,
+			User_Password,
+			User_Job,
+			User_Tel,
+			Org_Id,
+			CreateTime,
+			UpdateTime,
+			`Status`,
+			IsDel,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id,jdbcType=VARCHAR},
+			#{userId,jdbcType=VARCHAR},
+			#{userName,jdbcType=VARCHAR},
+			#{userAccount,jdbcType=VARCHAR},
+			#{userPassword,jdbcType=VARCHAR},
+			#{userJob,jdbcType=VARCHAR},
+			#{orgId,jdbcType=VARCHAR},
+			#{createtime,jdbcType=TIMESTAMP},
+			#{updatetime,jdbcType=TIMESTAMP},
+			#{status,jdbcType=VARCHAR},
+			#{isdel,jdbcType=INTEGER},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		update ZZ_User
+		<set>
+			<if test="userId != null">
+				User_Id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				User_Name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userAccount != null">
+				User_Account = #{userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="userPassword != null">
+				User_Password = #{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userJob != null">
+				User_Job = #{userJob,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userTel != null">
+				User_Tel = #{userTel,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				Org_Id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				CreateTime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatetime != null">
+				UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				`Status` = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="isdel != null">
+				IsDel = #{isdel,jdbcType=INTEGER},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		update ZZ_User
+		set
+		User_Id = #{userId,jdbcType=VARCHAR},
+		User_Name =
+		#{userName,jdbcType=VARCHAR},
+		User_Account =
+		#{userAccount,jdbcType=VARCHAR},
+		User_Password =
+		#{userPassword,jdbcType=VARCHAR},
+		User_Job =
+		#{userJob,jdbcType=VARCHAR},
+		User_Tel = #{userTel,jdbcType=VARCHAR},
+		Org_Id = #{orgId,jdbcType=VARCHAR},
+		CreateTime =
+		#{createtime,jdbcType=TIMESTAMP},
+		UpdateTime =
+		#{updatetime,jdbcType=TIMESTAMP},
+		`Status` =
+		#{status,jdbcType=VARCHAR},
+		IsDel = #{isdel,jdbcType=INTEGER}
+		where Id =
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 新增自己写的方法开始 -->
+
+	<select id="selectByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		a.User_Id, a.User_Name, a.User_Account,
+        a.User_Job,
+        a.User_Tel,a.Org_Id, a.`Status`,
+        b.Org_Name
+		from ZZ_User as a inner join ZZ_Org as b
+		on a.Org_Id = b.Org_Id
+		where User_Id = #{userId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 模糊查询，根据关键字，first是从那条数据开始，pageNo当前页面显示多少条数据 -->
+	<select id="getlikeKeyWord" resultMap="BaseResultMap"
+		parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		<!-- SELECT * FROM ZZ_User WHERE IsDel = 0 AND Org_Id = #{orgId,jdbcType=VARCHAR} 
+			AND (User_Name LIKE #{keyWord,jdbcType=VARCHAR} OR User_Account LIKE #{keyWord,jdbcType=VARCHAR}) 
+			limit #{pageNo,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} -->
+		SELECT u.*,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on
+		u.Org_Id = o.Org_Id
+		where u.IsDel = 0 AND (u.User_Name LIKE
+		#{keyWord,jdbcType=VARCHAR} OR
+		u.User_Account LIKE
+		#{keyWord,jdbcType=VARCHAR})
+		limit #{pageNo,jdbcType=INTEGER},
+		#{pageSize,jdbcType=INTEGER}
+	</select>
+
+	<select id="allCount" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity"
+		resultType="java.lang.Integer">
+		<!-- 查询总条数 -->
+		SELECT COUNT(*) FROM ZZ_User WHERE IsDel=0;
+	</select>
+	<!-- 查询出所有的列表并分页 -->
+	<select id="listUserAll" resultMap="BaseResultMap"
+		parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		<!-- SELECT * FROM ZZ_User WHERE IsDel = 0 limit #{rowNo,jdbcType=INTEGER}, 
+			#{pageSize,jdbcType=INTEGER} -->
+		<!-- SELECT u.*,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on 
+			u.Org_Id = o.Org_Id where u.IsDel = 0 AND u.Org_Id = #{orgId,jdbcType=VARCHAR} 
+			limit #{rowNo,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} -->
+		SELECT u.* ,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on
+		u.Org_Id = o.Org_Id
+		WHERE u.IsDel = 0 limit #{rowNo,jdbcType=INTEGER},
+		#{pageSize,jdbcType=INTEGER}
+	</select>
+	<!-- 根据orgId分页查询 -->
+	<select id="listUserByOrgId" resultMap="BaseResultMap"
+		parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity">
+		<!-- SELECT * FROM ZZ_User WHERE Org_Id = #{orgId,jdbcType=VARCHAR} AND 
+			IsDel = 0 limit #{rowNo,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} -->
+		SELECT u.*,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on
+		u.Org_Id = o.Org_Id
+		where u.IsDel = 0 AND u.Org_Id =
+		#{orgId,jdbcType=VARCHAR}
+		limit #{rowNo,jdbcType=INTEGER},
+		#{pageSize,jdbcType=INTEGER}
+	</select>
+
+
+	<select id="selectForLogin" resultMap="LoginResultMap"
+		parameterType="String">
+		select
+		User_Id, User_Name, User_Account, User_Job,
+		User_Tel,Org_Id, `Status`
+		from
+		ZZ_User
+		where
+		User_Account =
+		#{userAccount,jdbcType=VARCHAR}
+		and
+		User_Password
+		=#{userPassword,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectOrgIdByUserId" resultType="String">
+		select
+		Org_Id
+		from
+		ZZ_User
+		where
+		User_Id = #{userId,jdbcType=VARCHAR}
+		and
+		IsDel = 0
+	</select>
+	<!-- 当有org和关键字的时候，用到该方法 -->
+	<select id="getCountByOrgIdANDKeyword" parameterType="com.zmj.web.microservice.zaokuangContract.entity.ZZUserEntity"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM ZZ_User as u WHERE u.IsDel=0 AND
+		u.Org_Id = #{orgId,jdbcType=VARCHAR} AND
+		(u.User_Name LIKE #{keyword,jdbcType=VARCHAR} OR u.User_Account Like
+		#{keyword,jdbcType=VARCHAR})
+	</select>
+
+	<!-- 新增自己写的方法结束 -->
+</mapper>

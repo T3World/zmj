@@ -1,0 +1,3 @@
+logging:
+  config: ../Conf/log4j.properties
+      

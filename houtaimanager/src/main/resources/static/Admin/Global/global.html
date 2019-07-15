@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+	<link href="/admin_static/global/global.css" rel="stylesheet">
+	<title>全局参数</title>
+</head>
+<body>
+	<div class="main clearfix">
+		<div class="title">
+			<h3>全局参数设置</h3>
+		</div>
+		
+		<div  class="form-container">
+				<div class="form-item">
+					<label class="control-label wd180 text-right">矿压查询时间：</label>
+					<input  class=" form-control wd180" name="Global_MinePressureTime" id="Global_MinePressureTime" type="text"/> 
+					<span>天</span>
+				</div>
+				<div class="form-item">
+					<label class="control-label wd180 text-right">初撑力查询时间：</label>
+					<input  class=" form-control wd180" name="Global_SettingPressureTime" id="Global_SettingPressureTime" type="text"/> 
+					<span>天</span>
+				</div>
+				<div class="form-item">
+					<label class="control-label wd180 text-right" >煤机轨迹查询时间：</label> 
+					<input class="form-control wd180 " name="Global_ShearerPosTime" id="Global_ShearerPosTime" type="text"/> 
+					<span>天</span>
+				</div>
+				<div class="form-item" >
+					<label class="control-label wd180 text-right">乳化液浓度查询时间：</label> 
+					<input  class="form-control wd180" name="Global_CheTime" id="Global_CheTime" type="text"/>
+					<span>天</span> 
+				</div>
+				<div class="form-item">
+					<label class="control-label wd180 text-right">高压反冲洗压差查询时间：</label>
+					<input  class=" form-control wd180" name="Global_DiffPressureTime" id="Global_DiffPressureTime" type="text"/> 
+					<span>天</span>
+				</div>
+				<div class="form-item text-right" style="margin-top:20px;padding-right:180px">
+					<button id="saveBtn" class="btn btn-success" >保 存</button>
+				</div>
+				<input type="hidden" id="Global_Id"/>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/admin_static/global/global.js"></script>
+
+</body>
+</html>

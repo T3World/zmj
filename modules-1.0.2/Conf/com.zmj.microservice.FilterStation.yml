@@ -1,0 +1,20 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: FilterStation
+  datasource:
+    url: jdbc:mysql://115.28.91.111:3306/
+    username: root
+    password: yydk@67891289
+    driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  config: ../Conf/log4j.properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka
+#      defaultZone: http://47.104.241.168:8761/eureka
+
+#  logging.level.sql=debug
+#  logging.level.com.zmj.controller = debug

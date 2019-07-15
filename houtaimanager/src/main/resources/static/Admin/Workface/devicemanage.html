@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="/admin_static/workface/devicemanage.css" rel="stylesheet">
+    <script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/zTree/js/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <title>设备管理</title>
+</head>
+<body>
+<div class="main">
+    <div class="right_content pull-left ">
+		<div class="zmj-headDiv" hidden>
+			<!-- 标题div -->
+			<div class="zmj-headTitleDiv">
+				3上1008工作面-设备信息
+			</div>
+			<!-- 1行指示 -->
+			<div class="zmj-informationIndicating">
+				<!-- 支架div -->
+				<div class="zmj-commonDiv">
+					支架：<span id="zmjSupportName" class="zmj-commonSpan">ZY7200/26/54</span> <span id="zmjSupportNum">138架</span>
+				</div>
+				<!-- 皮带div -->
+				<div class="zmj-commonDiv divRight">
+					皮带：<span id="zmjBeltName" class="zmj-commonSpan">ZY7200/26/54</span> <span id="zmjBeltNum">1套</span>
+				</div>
+			</div>
+			<!-- 2行指示 -->
+			<div class="zmj-informationIndicating">
+				<!-- 采煤机div -->
+				<div class="zmj-commonDiv">
+					采煤机：<span id="zmjCoalMachineName" class="zmj-commonSpan">ZY7200/26/54</span> <span id="zmjCoalMachineNum">1台</span>
+				</div>
+				<!-- 乳化液div -->
+				<div class="zmj-commonDiv divRight">
+					乳化液：<span id="zmjEmulsionName" class="zmj-commonSpan">ZY7200/26/54</span> <span id="zmjEmulsionNum">1套</span>
+				</div>
+			</div>
+			<!-- 3行指示 -->
+			<div class="zmj-informationIndicating">
+				<!-- 支架div -->
+				<div class="zmj-commonDiv">
+					刮板机：<span id="zmjBlowingMachineName" class="zmj-commonSpan">ZY7200/26/54</span> <span id="zmjBlowingMachineNum">1台</span>
+				</div>
+				<!-- 皮带div -->
+				<div class="zmj-commonDiv divRight">
+					泵站：<span id="zmjPumpStationName" class="zmj-commonSpan">ZY7200/26/54</span> <span id="zmjPumpStationNum">4台</span>
+				</div>
+			</div>
+		</div>
+        <div class="tool_button">
+			<select class="btn btn-default" onchange="selectDeviceType()" id="deviceTypeSelect">
+			    <option value="">支架类</option>
+			    <option value="">采煤机类</option>
+			    <option value="">刮板机类</option>
+			</select>
+            <button type="button" class="btn btn-danger" style="margin-left: 20px;" data-toggle="modal" onclick="delChecked()">批量删除</button>
+            <button type="button" class="btn btn-primary right_button" data-toggle="modal" onclick="addmethod()">添加设备</button>
+        </div>
+        <!-- <div class="tool_button">
+            
+        </div> -->
+        <div class="clearfix" style="height:calc(100% - 300px); background-color: transparent;">
+            <div class="data pull-left" id="roleData" style="padding:10px;width:calc(100% - 0px);margin-right:10px" >
+                <!-- Table -->
+                <table  class="table table-bordered table-header">
+                    <thead>
+                    <tr>
+                        <th class="text-center w5" ><input type="checkbox" onchange="selectAllWorkfaceDevice(this)" class="workfaceDeviceCheckBox" id="workfaceDeviceAllCheckBox"></th>
+                        <th class="text-center" width="20px">No</th>
+                        <!-- <th class="text-center" hidden>id</th> -->
+                        <th class="text-center w10">设备类型</th>
+                        <th class="text-center w10">设备</th>
+                        <th class="text-center w10">型号</th>
+                        <th class="text-center w10">数量</th>
+                        <th class="text-center w10">设备编码</th>
+                        <th class="text-center w10">排序码</th>
+                        <th class="text-center w10">更新时间</th>
+                        <th class="text-center ">操作</th>
+                        <!--<th class="text-center w10">设备图片</th>-->
+                    </tr>
+                    </thead>
+                    <tbody id="tableData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="paging">
+            <ul id="pageBtn" class="pagination">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 底部分页 -->
+<div>
+	
+</div>
+
+
+<!-- 模态框 -->
+<div class="modal fade" id="MyOnlyModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content zmj-modal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title zmj-moTitle" id="myModalLabel">添加工作面设备</h3>
+            </div>
+            <!-- 表单!!! -->
+            <form id="moduleForm" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceTypeId">设备类型：</label>
+                        <div class="col-lg-6">
+                            <select class="btn btn-default zmj-select"  id="deviceTypeId" name="deviceTypeId" onchange="listDeviceNameSelect()">
+                            </select>
+                        </div>
+                        <span id="deviceTypeId_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceId">设备名称：</label>
+                        <div class="col-lg-6">
+                            <select class="btn btn-default zmj-select"  id="deviceId" name="deviceId" >
+                            </select>
+                        </div>
+                        <span id="deviceName_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceCount">设备数量：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control zmj-deviceNum" id="deviceCount" name="deviceCount" placeholder="请输入数量">
+                        </div>
+                        <span id="deviceCount_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceCodes">设备编码：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control zmj-deviceNum" id="deviceCodes" name="deviceCodes" placeholder="请输入数量">
+                        </div>
+                        <span id="deviceCodes_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="SortCode">排序码：</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control zmj-deviceNum" id="SortCode" name="SortCode" placeholder="请输入排序码">
+                        </div>
+                        <span id="SortCode_msg" class="text-center error_msg"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button type="submit" class="btn btn-primary" onclick="submitModal()">确 定</button>
+                </div>
+                 <input type="hidden" value='0' id="subflag" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- deviceAccumulativeModal -->
+<div class="modal fade" id="deviceAccumulativeModal" tabindex="-1" role="dialog" aria-labelledby="accumulateInfoModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="workfaceAccumulateInfoModalTitle">设备运行累计</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="workfaceAccumulateInfo" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="deviceId_accu" hidden>
+                        <label class="col-lg-2 control-label" for="cumulativeRunTime">运行时间:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="cumulativeRunTime" name="cumulativeRunTime" onchange="changeFlag()">
+                            <label class="unit control-label">小时</label>
+                        </div>
+                        <label class="col-lg-2 control-label" for="cumulativeLoadCycles">循环数:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="cumulativeLoadCycles" name="cumulativeLoadCycles" onchange="changeFlag()">
+                            <label class="unit control-label">个</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="cumulativeCoalWeight">推进度:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="cumulativeCoalWeight" name="cumulativeCoalWeight" onchange="changeFlag()">
+                            <label class="unit  control-label" >米</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="commitWorkfaceAccumulateInfo()">保存</button>
+                </div>
+                <div hidden>
+                    <input id="workfaceAccumulateInfoFlag" type="text" name="workfaceAccumulateInfoFlag">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin_static/workface/devicemanage.js"></script>
+
+</body>
+</html>

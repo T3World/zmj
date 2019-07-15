@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mqttdemo" />
+        <module name="mqttsample" />
         <module name="mqttspring" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mqttdemo" target="1.8" />
+      <module name="mqttsample" target="1.8" />
       <module name="mqttspring" target="1.8" />
     </bytecodeTargetLevel>
   </component>

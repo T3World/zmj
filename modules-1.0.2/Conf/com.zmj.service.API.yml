@@ -1,0 +1,108 @@
+﻿server:
+  port: 8080
+#  connection-timeout: 50000
+spring:
+  application:
+    name: zmj-apigateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations: 
+          '[/**]': 
+            allowedOrigins:
+            - "*"
+            allowedMethods: 
+            - GET
+            - POST
+            allowed-headers:
+            - "x-requested-with"
+            - "authorization"
+            - "Content-Type"
+            - "Authorization"
+            - "credential"
+            - "X-XSRF-TOKEN"
+            - "token"
+            - "username"
+            - "client"
+            - "application/json"
+      discovery:
+        locator:
+          enabled: false
+      enabled: true
+      routes:
+       #原子级服务路由
+       #电控系统路由
+      - id: ElectronicControlSystem_route
+        uri: lb://ElectronicControlSystem
+        predicates:
+        - Path=/History/ElectronicControlSystem/{elecs}
+        filters:
+        - SetPath=/ElectronicControlSystem/{elecs}
+       #高压反冲洗系统路由
+      - id: FilterStation_route
+        uri: lb://FilterStation
+        predicates:
+        - Path=/History/FilterStation/{fs}
+        filters:
+        - SetPath=/FilterStation/{fs}
+       #采煤机系统路由
+      - id: ShearerSystem_route
+        uri: lb://ShearerSystem
+        predicates:
+        - Path=/History/ShearerSystem/{ss}
+        filters:
+        - SetPath=/ShearerSystem/{ss}
+       #乳化液自动配比系统路由
+      - id: MixingSystem_route
+        uri: lb://MixingSystem
+        predicates:
+        - Path=/History/MixingSystem/{ms}
+        filters:
+        - SetPath=/MixingSystem/{ms}
+       #乳化液业务系统路由
+      - id: MixingSystemBusiness_route
+        uri: lb://MixingSystemBusiness
+        predicates:
+        - Path=/History/MixingSystemBusiness/{mbs}
+        filters:
+        - SetPath=/MixingSystemBusiness/{mbs}
+       #针对ShearerPosTrail微服务提供的路由
+      - id: ShearerPosTrail_route
+        uri: lb://ShearerPosTrail
+        predicates:
+        - Path=/History/ShearerPosTrail/{spt}
+        filters:
+        - SetPath=/ShearerPosTrail/{spt}
+       #高压反冲洗系统业务
+      - id: FilterStationBusiness_route
+        uri: lb://FilterStationBusiness
+        predicates:
+        - Path=/History/FilterStationBusiness/{ssb}
+        filters:
+        - SetPath=/FilterStationBusiness/{ssb}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka
+logging:
+  path: ../Log
+#hystrix的超时时间
+hystrix:
+    command:
+        default:
+            execution:
+              timeout:
+                enabled: false
+              isolation:
+                    thread:
+                        timeoutInMilliseconds: 1000000
+
+ribbon:
+  ReadTimeout: 600000
+  ConnectTimeout: 5000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+#ShearerSystem:
+#  ribbon:
+#    ReadTimeout:
+#    ConnectTimeout:
