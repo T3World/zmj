@@ -1,12 +1,9 @@
 package com.zmj.microservice.history.consumer.service.impl;
 
-import com.zmj.microservice.common.history.cenum.ResponseCodeEnum;
-import com.zmj.microservice.common.history.exception.EmptyResultException;
 import com.zmj.microservice.common.history.pojo.DTO.BaseUNDTO;
 import com.zmj.microservice.common.history.pojo.VO.CommonVO;
 import com.zmj.microservice.common.history.pojo.VO.SysResult;
 import com.zmj.microservice.common.history.util.CommonUtil;
-import com.zmj.microservice.common.redis.util.RedisUtil;
 import com.zmj.microservice.history.consumer.service.MixingSystemBusinessService;
 import com.zmj.microservice.history.consumer.service.feign.MixingSystemContractFeignService;
 import org.springframework.beans.factory.annotation.Autowired;

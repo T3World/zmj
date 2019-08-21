@@ -20,7 +20,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 * @date:           2019/4/28
 */
 @Configuration
-public class RedisConfig {
+public class
+RedisConfig {
 
     @Bean(name = "stringRedisTemplate0")
     public StringRedisTemplate stringRedisTemplate0(){

@@ -20,12 +20,12 @@ import org.springframework.core.io.FileSystemResource;
 public class HistoryConsumerApplication {
 
     public static void main(String... args){
-        YamlPropertiesFactoryBean yamlPropertiesFactoryBean = new YamlPropertiesFactoryBean();
-        yamlPropertiesFactoryBean.setResources(new FileSystemResource("../Conf/com.zmj.microservice.HistoryConsumer.yml"));
-        SpringApplication app = new SpringApplication(HistoryConsumerApplication.class);
-        app.setDefaultProperties(yamlPropertiesFactoryBean.getObject());
-        app.run(args);
-//        SpringApplication.run(HistoryConsumerApplication.class,args);
+//        YamlPropertiesFactoryBean yamlPropertiesFactoryBean = new YamlPropertiesFactoryBean();
+//        yamlPropertiesFactoryBean.setResources(new FileSystemResource("../Conf/com.zmj.microservice.HistoryConsumer.yml"));
+//        SpringApplication app = new SpringApplication(HistoryConsumerApplication.class);
+//        app.setDefaultProperties(yamlPropertiesFactoryBean.getObject());
+//        app.run(args);
+        SpringApplication.run(HistoryConsumerApplication.class,args);
     }
     
 }

@@ -1,3 +1,10 @@
 logging:
   config: ../Conf/log4j.properties
       
+mybatis:
+  settings:
+       setting:
+            lazyLoadingEnabled: true
+            aggressiveLazyLoading: false
+            cacheEnabled: true
+            logImpl: LOG4J

@@ -24,6 +24,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @description 采煤机相关
+ * @author umr
+ * @date 2019/7/24
+ */
 @Service
 public  class ShearerPosTrailServiceImpl implements ShearerPosTrailService {
 
@@ -222,9 +227,19 @@ public  class ShearerPosTrailServiceImpl implements ShearerPosTrailService {
         return tractionSpeedData;
     }
 
+    @Override
+    public SysResult<RunningState<CommonVO<Boolean>>> getRunningStateList(RunningStateDataDTO dto) {
+        SysResult<CommonVO> runningStateData = this.ssservice.getRunningStateData(dto);
+        if (runningStateData.getErrcode() !=200)
+            return new SysResult<>(ResponseCodeEnum.RPC_FAILED,runningStateData.getErrmsg(),null);
+        List<RunningState<CommonVO<Boolean>>> runningStates = parseStateToBoolean(dto.getStateIds(), runningStateData.getData(),dto.getStartTime());
+        return new SysResult<>(runningStates);
+    }
+
     /**
      * 解析采煤机状态,将状态转换成boolean值,
      * 如果list.size为空或为nul了,返回null
+     * @param stateIds 格式0102030A0B
      * */
     private List<RunningState<CommonVO<Boolean>>> parseStateToBoolean(String stateIds, List<CommonVO> list,Long startTime){
 

@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zmj</groupId>
-    <artifactId>microservice-Common-Redis</artifactId>
-    <version>1.0.2</version>
+    <artifactId>microservice-common-redis</artifactId>
+    <version>1.1.0</version>
 
     <dependencies>
         <dependency>
             <groupId>com.zmj</groupId>
-            <artifactId>microservice-Common-History</artifactId>
-            <version>1.0.2</version>
+            <artifactId>microservice-common-model</artifactId>
+            <version>1.1.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -60,14 +60,14 @@
         </plugins>
     </build>
     <distributionManagement>
-        <!--<repository>-->
-            <!--<id>localRepository</id>-->
-            <!--<url>file:D:\project\env\maven\mvn_repo</url>-->
-        <!--</repository>-->
         <repository>
-        <id>weilaoshidenexus</id>
-        <name>user snapshot</name>
-        <url>http://47.104.241.168:8000/repository/ZMJ_Java/</url>
-        </repository>
+        <id>localRepository</id>
+        <url>file:D:\project\env\maven\mvn_repo</url>
+    </repository>
+        <!--<repository>-->
+        <!--<id>weilaoshidenexus</id>-->
+        <!--<name>user snapshot</name>-->
+        <!--<url>http://47.104.241.168:8000/repository/ZMJ_Java/</url>-->
+        <!--</repository>-->
     </distributionManagement>
 </project>

@@ -14,6 +14,11 @@ public class RunningStateDataDTO extends BaseUNDTO{
     public RunningStateDataDTO() {
     }
 
+    public RunningStateDataDTO(BaseUNDTO dto,String stateIds) {
+        super(dto.getDataSourceName(),dto.getStartTime(),dto.getEndTime());
+        this.stateIds = stateIds;
+    }
+
     public RunningStateDataDTO(String dataSourceName, Long startTime, Long endTime) {
         super(dataSourceName, startTime, endTime);
     }

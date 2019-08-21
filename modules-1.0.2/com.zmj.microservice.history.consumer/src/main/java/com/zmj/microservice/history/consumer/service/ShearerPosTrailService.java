@@ -3,9 +3,11 @@ package com.zmj.microservice.history.consumer.service;
 
 import com.zmj.microservice.common.history.exception.IllegalParamException;
 import com.zmj.microservice.common.history.pojo.DTO.BaseUNDTO;
+import com.zmj.microservice.common.history.pojo.DTO.RunningStateDataDTO;
 import com.zmj.microservice.common.history.pojo.DTO.ShearerPositionDTO;
 import com.zmj.microservice.common.history.pojo.DTO.TractionSpeedDataDTO;
 import com.zmj.microservice.common.history.pojo.VO.CommonVO;
+import com.zmj.microservice.common.history.pojo.VO.RunningState;
 import com.zmj.microservice.common.history.pojo.VO.SysResult;
 
 /**
@@ -63,4 +65,8 @@ public interface ShearerPosTrailService {
      * */
     SysResult getTractionSpeedData(TractionSpeedDataDTO fs) ;
 
+    /**
+     * 查询采煤机包含指定状态的信息
+     * */
+    SysResult<RunningState<CommonVO<Boolean>>> getRunningStateList(RunningStateDataDTO dto);
 }

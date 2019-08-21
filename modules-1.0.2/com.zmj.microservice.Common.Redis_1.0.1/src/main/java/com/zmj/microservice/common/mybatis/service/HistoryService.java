@@ -55,6 +55,7 @@ public interface HistoryService {
     }
 
 
+
     /**
      * 查询当天的第一条数据
      */

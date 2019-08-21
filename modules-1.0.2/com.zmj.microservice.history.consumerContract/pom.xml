@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zmj</groupId>
-    <artifactId>history-consumer-contract</artifactId>
-    <version>1.0.0</version>
+    <artifactId>microservice-history-service-contract</artifactId>
+    <version>1.1.0</version>
 
     <dependencies>
         <dependency>
             <groupId>com.zmj</groupId>
-            <artifactId>microservice-Common-History</artifactId>
-            <version>1.0.2</version>
+            <artifactId>microservice-common-model</artifactId>
+            <version>1.1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

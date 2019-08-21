@@ -53,6 +53,9 @@ public class ElectronicControlServiceImpl implements ElectronicControlService {
         ArrayList<PressureData> result = new ArrayList<>();
 
         for (String n:number){
+            if ("".equals(n)){
+                continue;
+            }
             String dateName = DbUtil.parseDateName(dataNameFix, Integer.valueOf(n));
             List<CommonVO> list = historyService.listHistory(session, sp, dateName, DataValueTypeEnum.DOUBLE, SqlFragmentConstant.SQL_SELECT_COAL_CUTTER_TRACK_HISTORY_FRAGMENT);
             result.add(new PressureData(n,list));

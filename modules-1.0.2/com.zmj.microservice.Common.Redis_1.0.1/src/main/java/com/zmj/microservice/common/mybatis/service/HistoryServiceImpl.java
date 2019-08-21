@@ -187,7 +187,7 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<CommonVO> selectHistory(SqlSession sqlSession,String dbName,String dataName,Long startTime,Long endTime,DataValueTypeEnum ee ,String sql,String[] tables) throws MysqlAccessDeniedException, ParseException {
 
-        List<CommonVO> result = null;
+        List<CommonVO> result;
         HistoryMapper mapper = sqlSession.getMapper(HistoryMapper.class);
         List<String> list = new ArrayList<>();
         boolean selectTable;
@@ -242,6 +242,8 @@ public class HistoryServiceImpl implements HistoryService {
                 break;
         }
 
+        if(result == null)
+            return new LinkedList<>();
         return result;
     }
 
@@ -290,6 +292,8 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public String getDbName(String dataSourceName) throws IllegalParamException {
+        if (dataSourceName == null)
+            throw new IllegalParamException("dataSourceName 不能为空!");
         //解析主题
         String  dbName = DbUtil.parseTheme(dataSourceName);
         //验证主题解析成果

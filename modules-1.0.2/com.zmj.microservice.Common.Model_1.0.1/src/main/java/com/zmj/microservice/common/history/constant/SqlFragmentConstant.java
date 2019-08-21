@@ -49,12 +49,12 @@ public final class SqlFragmentConstant {
     public static final String SQL_SELECT_THE_LAST_ONE = "Select DataValue,GenerateTime From (" +
             "select DataValue,DATE_FORMAT(GenerateTime,'%Y-%m-%d %H:%i:%S') as GenerateTime from TableNameParam where DataName = 'DataNameParam' and GenerateTime between StartTimeParam and EndTimeParam ORDER BY GenerateTime ASC limit 0,1) Alias";
     /**
-     * select the first one
+     * select the first one like
      */
     public static final String SQL_SELECT_THE_FIRST_ONE_LIKE = "Select DataValue,GenerateTime From (" +
             "select DataValue,DATE_FORMAT(GenerateTime,'%Y-%m-%d %H:%i:%S') as GenerateTime from TableNameParam where DataName like 'DataNameParam' and GenerateTime between StartTimeParam and EndTimeParam ORDER BY GenerateTime DESC limit 0,1) Alias";
     /**
-     * select the last one
+     * select the last one like
      */
     public static final String SQL_SELECT_THE_LAST_ONE_LIKE = "Select DataValue,GenerateTime From (" +
             "select DataValue,DATE_FORMAT(GenerateTime,'%Y-%m-%d %H:%i:%S') as GenerateTime from TableNameParam where DataName like 'DataNameParam' and GenerateTime between StartTimeParam and EndTimeParam ORDER BY GenerateTime ASC limit 0,1) Alias";

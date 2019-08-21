@@ -1,8 +1,11 @@
 package com.zmj.microservice.history.consumer.contract;
 
 import com.zmj.microservice.common.history.pojo.DTO.BaseUNDTO;
+import com.zmj.microservice.common.history.pojo.DTO.RunningStateDataDTO;
 import com.zmj.microservice.common.history.pojo.DTO.ShearerPositionDTO;
 import com.zmj.microservice.common.history.pojo.DTO.TractionSpeedDataDTO;
+import com.zmj.microservice.common.history.pojo.VO.CommonVO;
+import com.zmj.microservice.common.history.pojo.VO.RunningState;
 import com.zmj.microservice.common.history.pojo.VO.SysResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,7 @@ import java.text.ParseException;
 
 /**
  * Created by umr on 2019/3/7.
+ * update by umr on 2019年7月24日
  */
 public interface ShearerPosTrailContractInterface {
     /**
@@ -49,4 +53,11 @@ public interface ShearerPosTrailContractInterface {
      * */
     @RequestMapping(value = "/ShearerPosTrail/getTractionSpeedData",method = RequestMethod.POST,consumes = "application/json;charset=utf-8")
     SysResult getTractionSpeedData(@RequestBody TractionSpeedDataDTO dto) throws ParseException;
+
+    /**
+     * 自动跟机一手数据
+     */
+    @RequestMapping(value = "/ShearerPosTrail/getRunningStateList",method =RequestMethod.POST,consumes = "application/json;charset=utf-8")
+    SysResult<RunningState<CommonVO<Boolean>>> getRunningStateList(@RequestBody RunningStateDataDTO dto);
+
 }

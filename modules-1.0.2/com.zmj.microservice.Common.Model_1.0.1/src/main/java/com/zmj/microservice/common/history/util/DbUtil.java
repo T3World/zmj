@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 */
 public class DbUtil {
     private static final Logger logger = Logger.getLogger("DBUtil");
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /** 解析theme 返回map中,key-value:"dbName"-数据库名;"dataValue"-查询条件(表中DataName的取值)*/
     public static String parseTheme(String theme){
@@ -67,8 +68,21 @@ public class DbUtil {
      * */
     public static String formatTime(long time){
         Date date = new Date(time);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.format(date);
+        return SIMPLE_DATE_FORMAT.format(date);
+    }
+
+    /**
+     * 将字符串转时间戳 yyyy-MM-dd HH:mm:ss,
+     * */
+    public static long parseTimeToLong(String str){
+        Date parse = null;
+        try {
+            parse = SIMPLE_DATE_FORMAT.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0L;
+        }
+        return parse.getTime();
     }
     /**
      * 将时间格式化为yyyy-MM-dd HH:mm:ss SSS ,
@@ -141,7 +155,9 @@ public class DbUtil {
         return xuyimiao(endTime,true);
     }
 
-    /* 检查theme长度,防止参数越界 */
+    /**
+     *  检查theme长度,防止参数越界
+     **/
     private static String[] checkTheme(String theme){
         String[] split = theme.split("/");
         if (split.length<DatabaseConstant.THEME_MIN_LENGTH)

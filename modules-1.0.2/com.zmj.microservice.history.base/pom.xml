@@ -10,8 +10,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zmj</groupId>
-    <artifactId>history-base</artifactId>
-    <version>1.0.0</version>
+    <artifactId>microservice-history-data</artifactId>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -116,14 +116,14 @@
 
         <dependency>
             <groupId>com.zmj</groupId>
-            <artifactId>microservice-Common-Redis</artifactId>
-            <version>1.0.2</version>
+            <artifactId>microservice-common-redis</artifactId>
+            <version>1.1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.zmj</groupId>
             <artifactId>history-base-contract</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

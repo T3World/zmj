@@ -24,7 +24,7 @@ import java.util.List;
 public class ConveyorSystemServiceImpl implements ConveyorSystemService {
     private static final Logger LOGGER = Logger.getLogger(ConveyorSystemServiceImpl.class);
     //刮板机机头高速电机电流
-    private static final String CONVEYOER_HHS = "Conveyor/Head/HighSpeadMotor/Current";
+    private static final String CONVEYOER_HHS = "Conveyor.Head.HighSpeadMotor.Current";
     //刮板机机头低速电机电流
     private static final String CONVEYOER_HLS = "Conveyor/Head/HighSpeadMotor/Current";
     //刮板机机尾高速电机电流
