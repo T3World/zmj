@@ -1,15 +1,5 @@
 package com.zzmj.controller.API;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.zzmj.pojo.entity.ZZWorkfaceconfigEntity;
 import com.zzmj.pojo.vo.SysResult;
 import com.zzmj.service.ZZOrgService;
@@ -18,6 +8,13 @@ import com.zzmj.service.ZZWorkfaceService;
 import com.zzmj.service.ZZWorkfaceconfigService;
 import com.zzmj.util.ErrorUtil;
 import com.zzmj.util.exception.DoSqlFailedException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("/API/BaseData")
@@ -85,40 +82,131 @@ public class BaseDataController {
 	 * @return: SysResult
 	 */
 	@RequestMapping("/getCompanyWithWorkfaceList")
-	public SysResult getCompanyWithWorkfaceList(@RequestParam("User_Id") String userId) {
-		if (null == userId || userId.equals(""))
-			return new SysResult(ErrorUtil.CODE2001, "参数不能为空!", null);
-		// 1.根据用户ID在用户表中查询OrgID
-		String orgId = null;
-		Map<String, Object> org = null;
-		orgId = this.userService.getOrgIdByUserId(userId);
-		if (null == orgId)
-			return new SysResult(ErrorUtil.CODE5000, "SQL执行异常", null);
-		// 2.根据orgId判断是否为集团
-		org = this.orgServiceImpl.getOrgByOrgId(orgId);
-		if (null == org)
-			return new SysResult(ErrorUtil.CODE2001, "无组织机构信息!", null);
-		if (org.get("Org_PId").equals("0")) {
-			// 3.根据OrgID在org表中查询所有父ID为orgID的org
-			List<Map<String, Object>> orgchildren = this.orgServiceImpl.listOrgByPid(orgId);
-			if (null == orgchildren)
-				return new SysResult(ErrorUtil.CODE2001, "无组织机构信息!", null);
-			// 4.根据list中的OrgIDfor each查询工作面信息,封装到workfaceList属性中
-			orgchildren = this.selectAndSetWorkfaceList(orgchildren);
+	public SysResult getCompanyWithWorkfaceList(@RequestParam(value = "User_Id",required = false) String userId) {
+		if (null == userId || "".equals(userId)){
+			//声明方法中变量
+			List<Map<String, Object>> orgchildren=new ArrayList<>();
+			//这个时候 返回所有的集团下面的矿井公司 及其下面的工作面(不包括集团)
+			//先查询出来所有集团
+			List<Map<String, Object>> orgList=orgServiceImpl.selectByPid();
+			
+			Iterator<Map<String, Object>> iterator = orgList.iterator();
+			
+			while (iterator.hasNext()) {
+				Map<String, Object> org = iterator.next();
+				String orgId = (String) org.get("Org_Id");
+				// 3.根据OrgID在org表中查询所有父ID为orgID的org
+				orgchildren.addAll(this.orgServiceImpl.listOrgByPid(orgId));
+				if (null == orgchildren)
+				return new SysResult(ErrorUtil.CODE2001, "无矿井公司信息!", null);
+				// 4.根据list中的OrgIDfor each查询工作面信息,封装到workfaceList属性中
+				orgchildren = this.selectAndSetWorkfaceList(orgchildren);
+//				return new SysResult(ErrorUtil.CODE2000, "集团信息", orgchildren);
+			}
 			return new SysResult(ErrorUtil.CODE2000, "集团信息", orgchildren);
-		} else {
-			// 返回自己
-			List<Map<String, Object>> orgList = new ArrayList<Map<String, Object>>();
-			orgList.add(org);
-			orgList = this.selectAndSetWorkfaceList(orgList);
-			return new SysResult(ErrorUtil.CODE2000, "非集团信息", orgList);
+		}else{
+			// 1.根据用户ID在用户表中查询OrgID
+			String orgId = null;
+			Map<String, Object> org = null;
+			orgId = this.userService.getOrgIdByUserId(userId);
+			if (null == orgId)
+				return new SysResult(ErrorUtil.CODE5000, "SQL执行异常", null);
+			// 2.根据orgId判断是否为集团
+			org = this.orgServiceImpl.getOrgByOrgId(orgId);
+			if (null == org)
+				return new SysResult(ErrorUtil.CODE2001, "无组织机构信息!", null);
+			if ("0".equals(org.get("Org_PId"))) {
+				// 3.根据OrgID在org表中查询所有父ID为orgID的org
+				List<Map<String, Object>> orgchildren = this.orgServiceImpl.listOrgByPid(orgId);
+				if (null == orgchildren)
+					return new SysResult(ErrorUtil.CODE2001, "无组织机构信息!", null);
+				// 4.根据list中的OrgIDfor each查询工作面信息,封装到workfaceList属性中
+				orgchildren = this.selectAndSetWorkfaceList(orgchildren);
+				return new SysResult(ErrorUtil.CODE2000, "集团信息", orgchildren);
+			} else {
+				// 返回自己
+				List<Map<String, Object>> orgList = new ArrayList<Map<String, Object>>();
+				orgList.add(org);
+				orgList = this.selectAndSetWorkfaceList(orgList);
+				return new SysResult(ErrorUtil.CODE2000, "非集团信息", orgList);
+			}
 		}
 	}
-
+    /**
+     * @Title: /getCompanyWithWorkfaceList
+     * @Description: 根据userId获取打包的数据
+     * @param: @param userId
+     * @param: @return
+     * @return: SysResult
+     */
+    @RequestMapping("/getCompanyWithWorkfaceListNew")
+    public SysResult getCompanyWithWorkfaceListNew(@RequestParam(value="User_Id",required=false) String userId) {
+        if (null == userId || "".equals(userId)){
+        	
+        	//在方法中声明变量
+//			List<Map<String, Object>> orgchildren=new ArrayList<>();
+	     	LinkedList<Map<String, Object>> maps = new LinkedList<>();
+			//这个时候 返回所有的集团 及其下面的矿井公司 及其下面的工作面(包含集团 矿井公司 工作面)
+			//先查询出来所有集团
+			List<Map<String, Object>> orgList=orgServiceImpl.selectByPid();
+			//对所有集团进行遍历
+			Iterator<Map<String, Object>> iterator = orgList.iterator();
+			
+			while (iterator.hasNext()) {
+				Map<String, Object> org = iterator.next();
+				String orgId = (String) org.get("Org_Id");
+				
+                maps.addAll(this.select(orgId));
+//                return new SysResult(ErrorUtil.CODE2000, "集团信息", maps);
+			}
+			return new SysResult(ErrorUtil.CODE2000, "集团信息", maps);
+        }else{
+        	// 1.根据用户ID在用户表中查询OrgID
+            String orgId = null;
+            Map<String, Object> org = null;
+            orgId = this.userService.getOrgIdByUserId(userId);
+            if (null == orgId)
+                return new SysResult(ErrorUtil.CODE5000, "SQL执行异常", null);
+            // 2.根据orgId判断是否为集团
+            org = this.orgServiceImpl.getOrgByOrgId(orgId);
+            if (null == org)
+                return new SysResult(ErrorUtil.CODE2001, "无组织机构信息!", null);
+            if ("0".equals(org.get("Org_PId"))) {
+                // 3.根据OrgID在org表中查询所有父ID为orgID的org
+                List<Map<String, Object>> orgchildren = this.orgServiceImpl.listOrgByPid(orgId);
+                if (null == orgchildren)
+                    return new SysResult(ErrorUtil.CODE2001, "无组织机构信息!", null);
+                // 4.根据list中的OrgIDfor each查询工作面信息,封装到workfaceList属性中
+                orgchildren = this.selectAndSetWorkfaceList(orgchildren);
+                org.put("Company_List",orgchildren);
+                LinkedList<Map<String, Object>> maps = new LinkedList<>();
+                maps.add(org);
+                return new SysResult(ErrorUtil.CODE2000, "集团信息", maps);
+            } else {
+                //查询父级集团
+                Map<String, Object> pOrg = orgServiceImpl.getOrgByOrgId((String) org.get("Org_PId"));
+                // 返回自己
+                List<Map<String, Object>> orgList = new ArrayList<Map<String, Object>>();
+                orgList.add(org);
+                orgList = this.selectAndSetWorkfaceList(orgList);
+                pOrg.put("Company_List",orgList);
+                LinkedList<Map<String, Object>> maps = new LinkedList<>();
+                maps.add(pOrg);
+                return new SysResult(ErrorUtil.CODE2000, "公司级别", maps);
+            }
+        }
+    }
+    
+    
 	private List<Map<String, Object>> selectAndSetWorkfaceList(List<Map<String, Object>> orgList) {
 		Iterator<Map<String, Object>> iterator = orgList.iterator();
 		while (iterator.hasNext()) {
 			Map<String, Object> org = iterator.next();
+			//输出map集合中的key和value
+//			for(String key:org.keySet()){
+//				Object value=  org.get(key);
+//				System.out.println(key+"   "+value);
+//			}
 			String orgId = (String) org.get("Org_Id");
 			List<Map<String, Object>> workfaceList = zzWorkfaceServiceImpl.listWorkfaceNoPage(orgId);
 			if (null != workfaceList) {
@@ -129,5 +217,21 @@ public class BaseDataController {
 		}
 		return orgList;
 	}
+	
+	
+	//重写(自己)  -->返回一个集团及其该集团下所有矿井公司及其工作面(包含集团 矿井公司 工作面)
+	public LinkedList<Map<String, Object>> select(String orgId){
+		Map<String, Object> org =  this.orgServiceImpl.getOrgByOrgId(orgId);
+		List<Map<String, Object>> orgchildren = this.orgServiceImpl.listOrgByPid(orgId);
+         if (null == orgchildren)
+             return null;
+         // 4.根据list中的OrgIDfor each查询工作面信息,封装到workfaceList属性中
+         orgchildren = this.selectAndSetWorkfaceList(orgchildren);
+         org.put("Company_List",orgchildren);
+         LinkedList<Map<String, Object>> maps = new LinkedList<>();
+         maps.add(org);
+         return maps;
+	}
+	
 
-}
+} 

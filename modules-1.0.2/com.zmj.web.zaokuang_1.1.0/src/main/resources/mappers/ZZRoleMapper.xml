@@ -384,4 +384,13 @@
         </set>
         where Role_Id = #{roleId,jdbcType=VARCHAR}
     </update>
+
+	<!--根据userId查询关联的所有角色，返回一个角色集合-->
+	<select id="listRolesByUserId" resultMap="BaseResultMap">
+		select zz_role.Role_Id, Role_Name, Role_Value
+		from zz_role, zz_roleuser
+		where zz_role.Role_Id=zz_roleuser.Role_Id
+		and zz_role.IsDel=0 and User_Id=#{userId}
+	</select>
+
 </mapper>

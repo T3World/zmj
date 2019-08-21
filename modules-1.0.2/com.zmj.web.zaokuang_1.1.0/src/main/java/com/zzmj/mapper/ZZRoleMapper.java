@@ -94,4 +94,12 @@ public interface ZZRoleMapper {
     int updateByPrimaryKey(ZZRoleEntity record);
 
     List<ZZRoleEntity> listRoleAll();
+
+    /**
+     * 根据userId查询关联的所有角色，返回一个角色集合
+     * @param userId
+     * @return
+     */
+    List<ZZRoleEntity> listRolesByUserId(String userId);
+
 }

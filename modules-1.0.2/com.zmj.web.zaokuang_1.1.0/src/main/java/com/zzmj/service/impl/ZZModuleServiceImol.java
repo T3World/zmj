@@ -139,4 +139,25 @@ public class ZZModuleServiceImol implements ZZModuleService {
 		List<HashMap<String, Object>> result = zzModuleMapper.getUserMoudel(userId);
 		return result;
 	}
+
+	/**
+	 * 根据角色Id查询跟该角色关联的所有模块值，返回值List<String>
+	 * @param roleId
+	 * @return
+	 */
+	@Override
+	public List<String> getModuleValuesByRoleId(String roleId) {
+		if (null == roleId || roleId.equals("")) {
+			return null;
+		}
+		List<String> list = this.zzModuleMapper.getModuleValuesByRoleId(roleId);
+		//System.out.println("list的值是：" + list.toString());
+		if (list.size() > 0) {
+			return list;
+		} else {
+			return null;
+		}
+	}
+
+
 }

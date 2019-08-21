@@ -401,13 +401,13 @@
 		where M_Id = #{mId,jdbcType=VARCHAR}
 	</update>
 
-	<select id="countModuleAll" resultType="Integer">
+	<select id="countModuleAll" resultType="java.lang.Integer">
 		select count(*) from
 		ZZ_Module
 		where IsDel = 0
 	</select>
 
-	<select id="countModuleByKeyword" resultType="Integer">
+	<select id="countModuleByKeyword" resultType="java.lang.Integer">
 		select count(*)
 		from ZZ_Module  
 		where IsDel = 0
@@ -451,7 +451,24 @@
 		where c.User_Id = #{userId,jdbcType=INTEGER} ORDER BY a.SortCode
 	</select>
 
-	<select id="countSonModuleByMid" parameterType="String" resultType="int">
-		select count(*) from ZZ_Module where M_PId=#{mid}
+
+	<select id="countSonModuleByMid" parameterType="string" resultType="java.lang.Integer">
+		select count(*) from ZZ_Module where isDel = 0 and M_PId=#{mid}
 	</select>
+    <select id="listModuleValueByUserId" resultMap="BaseResultMap" parameterType="string">
+		select distinct M_Value,M_Id,M_Name,M_Url,M_PId,SortCode from ZZ_Module where isDel = 0 and M_Id = any(
+			select Module_Id from ZZ_RoleModule where Role_Id = any(
+				select Role_Id	from ZZ_RoleUser where User_Id = #{userId,jdbcType=INTEGER}
+			)
+		)
+	</select>
+
+	<!--根据角色Id查询跟该角色关联的所有模块值-->
+	<select id="getModuleValuesByRoleId" resultType="java.lang.String">
+		select M_Value
+		from zz_module, zz_rolemodule
+		where zz_module.M_Id=zz_rolemodule.Module_Id
+		and zz_module.IsDel=0 and Role_Id=#{roleId}
+	</select>
+
 </mapper>

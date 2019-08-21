@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzmj.mapper.ZZDeviceMapper" >
+    <resultMap id="BaseResultMap" type="com.zzmj.pojo.entity.ZZDevice" >
+        <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Device_Id" property="deviceId" jdbcType="VARCHAR" />
+        <result column="Device_Name" property="deviceName" jdbcType="VARCHAR" />
+        <result column="Device_Alias" property="deviceAlias" jdbcType="VARCHAR" />
+        <result column="Device_Firm" property="deviceFirm" jdbcType="VARCHAR" />
+        <result column="Device_Model" property="deviceModel" jdbcType="VARCHAR" />
+        <result column="Device_Img" property="deviceImg" jdbcType="VARCHAR" />
+        <result column="DeviceType_Id" property="deviceTypeId" jdbcType="VARCHAR" />
+        <result column="SortCode" property="sortCode" jdbcType="VARCHAR" />
+        <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
+        <result column="isDel" property="isDel" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.zzmj.pojo.entity.ZZDevice" extends="BaseResultMap" >
+        <result column="Deivce_Attribute" property="deivceAttribute" jdbcType="LONGVARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        Id, Device_Id, Device_Name, Device_Alias, Device_Firm, Device_Model, Device_Img,
+        DeviceType_Id, SortCode, UpdateTime, isDel
+    </sql>
+    <sql id="Blob_Column_List" >
+        Deivce_Attribute
+    </sql>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zzmj.pojo.entity.ZZDeviceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+        and isDel=0
+    </select>
+
+    <select id="selectByExampleWithBLOBss" resultMap="ResultMapWithBLOBs" parameterType="com.zzmj.pojo.entity.ZZDeviceExample" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        where isDel=0 and Device_Id = #{deviceId,jdbcType=VARCHAR}
+
+    </select>
+
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZDeviceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExampleWithBLOBsAndPage" resultMap="ResultMapWithBLOBs" parameterType="com.zzmj.pojo.entity.ZZDeviceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZDeviceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from zz_device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZDeviceExample" >
+        delete from zz_device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZDeviceExample" resultType="java.lang.Integer" >
+        select count(*) from zz_device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update zz_device
+        <set >
+            <if test="record.id != null" >
+                Id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceId != null" >
+                Device_Id = #{record.deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceName != null" >
+                Device_Name = #{record.deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceAlias != null" >
+                Device_Alias = #{record.deviceAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceFirm != null" >
+                Device_Firm = #{record.deviceFirm,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceModel != null" >
+                Device_Model = #{record.deviceModel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceImg != null" >
+                Device_Img = #{record.deviceImg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceTypeId != null" >
+                DeviceType_Id = #{record.deviceTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sortCode != null" >
+                SortCode = #{record.sortCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDel != null" >
+                isDel = #{record.isDel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deivceAttribute != null" >
+                Deivce_Attribute = #{record.deivceAttribute,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map" >
+        update zz_device
+        set Id = #{record.id,jdbcType=VARCHAR},
+        Device_Id = #{record.deviceId,jdbcType=VARCHAR},
+        Device_Name = #{record.deviceName,jdbcType=VARCHAR},
+        Device_Alias = #{record.deviceAlias,jdbcType=VARCHAR},
+        Device_Firm = #{record.deviceFirm,jdbcType=VARCHAR},
+        Device_Model = #{record.deviceModel,jdbcType=VARCHAR},
+        Device_Img = #{record.deviceImg,jdbcType=VARCHAR},
+        DeviceType_Id = #{record.deviceTypeId,jdbcType=VARCHAR},
+        SortCode = #{record.sortCode,jdbcType=VARCHAR},
+        UpdateTime = #{record.updateTime,jdbcType=VARCHAR},
+        isDel = #{record.isDel,jdbcType=VARCHAR},
+        Deivce_Attribute = #{record.deivceAttribute,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update zz_device
+        set Id = #{record.id,jdbcType=VARCHAR},
+        Device_Id = #{record.deviceId,jdbcType=VARCHAR},
+        Device_Name = #{record.deviceName,jdbcType=VARCHAR},
+        Device_Alias = #{record.deviceAlias,jdbcType=VARCHAR},
+        Device_Firm = #{record.deviceFirm,jdbcType=VARCHAR},
+        Device_Model = #{record.deviceModel,jdbcType=VARCHAR},
+        Device_Img = #{record.deviceImg,jdbcType=VARCHAR},
+        DeviceType_Id = #{record.deviceTypeId,jdbcType=VARCHAR},
+        SortCode = #{record.sortCode,jdbcType=VARCHAR},
+        UpdateTime = #{record.updateTime,jdbcType=VARCHAR},
+        isDel = #{record.isDel,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        where Id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from zz_device
+        where Id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.zzmj.pojo.entity.ZZDevice" >
+        insert into zz_device (Id, Device_Id, Device_Name,
+        Device_Alias, Device_Firm, Device_Model,
+        Device_Img, DeviceType_Id, SortCode,
+        UpdateTime, isDel, Deivce_Attribute
+        )
+        values (#{id,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR},
+        #{deviceAlias,jdbcType=VARCHAR}, #{deviceFirm,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR},
+        #{deviceImg,jdbcType=VARCHAR}, #{deviceTypeId,jdbcType=VARCHAR}, #{sortCode,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR}, #{deivceAttribute,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.zzmj.pojo.entity.ZZDevice" >
+        insert into zz_device
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            Id,
+            Device_Id,
+            Device_Name,
+            Device_Alias,
+            Device_Firm,
+            Device_Model,
+            Device_Img,
+            DeviceType_Id,
+            SortCode,
+            UpdateTime,
+            isDel,
+            Deivce_Attribute,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{id,jdbcType=VARCHAR},
+            #{deviceId,jdbcType=VARCHAR},
+            #{deviceName,jdbcType=VARCHAR},
+            #{deviceAlias,jdbcType=VARCHAR},
+            #{deviceFirm,jdbcType=VARCHAR},
+            #{deviceModel,jdbcType=VARCHAR},
+            #{deviceImg,jdbcType=VARCHAR},
+            #{deviceTypeId,jdbcType=VARCHAR},
+            #{sortCode,jdbcType=VARCHAR},
+            #{updateTime,jdbcType=VARCHAR},
+            #{isDel,jdbcType=VARCHAR},
+            #{deivceAttribute,jdbcType=LONGVARCHAR},
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zzmj.pojo.entity.ZZDevice" >
+        update zz_device
+        <set >
+            <if test="deviceId != null" >
+                Device_Id = #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceName != null" >
+                Device_Name = #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceAlias != null" >
+                Device_Alias = #{deviceAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceFirm != null" >
+                Device_Firm = #{deviceFirm,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceModel != null" >
+                Device_Model = #{deviceModel,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceImg != null" >
+                Device_Img = #{deviceImg,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceTypeId != null" >
+                DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="sortCode != null" >
+                SortCode = #{sortCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null" >
+                isDel = #{isDel,jdbcType=VARCHAR},
+            </if>
+            <if test="deivceAttribute != null" >
+                Deivce_Attribute = #{deivceAttribute,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where Id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByDeviceTypeId" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM `zz_device`
+        <where>
+            <if test="deviceTypeId != null">
+                DeviceType_Id=#{deviceTypeId,jdbcType=VARCHAR} and
+            </if>
+             isDel='0'
+        </where>
+    </select>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zzmj.pojo.entity.ZZDevice" >
+        update zz_device
+        set Device_Id = #{deviceId,jdbcType=VARCHAR},
+        Device_Name = #{deviceName,jdbcType=VARCHAR},
+        Device_Alias = #{deviceAlias,jdbcType=VARCHAR},
+        Device_Firm = #{deviceFirm,jdbcType=VARCHAR},
+        Device_Model = #{deviceModel,jdbcType=VARCHAR},
+        Device_Img = #{deviceImg,jdbcType=VARCHAR},
+        DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR},
+        SortCode = #{sortCode,jdbcType=VARCHAR},
+        UpdateTime = #{updateTime,jdbcType=VARCHAR},
+        isDel = #{isDel,jdbcType=VARCHAR},
+        Deivce_Attribute = #{deivceAttribute,jdbcType=LONGVARCHAR}
+        where Id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.zzmj.pojo.entity.ZZDevice" >
+        update zz_device
+        set Device_Id = #{deviceId,jdbcType=VARCHAR},
+        Device_Name = #{deviceName,jdbcType=VARCHAR},
+        Device_Alias = #{deviceAlias,jdbcType=VARCHAR},
+        Device_Firm = #{deviceFirm,jdbcType=VARCHAR},
+        Device_Model = #{deviceModel,jdbcType=VARCHAR},
+        Device_Img = #{deviceImg,jdbcType=VARCHAR},
+        DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR},
+        SortCode = #{sortCode,jdbcType=VARCHAR},
+        UpdateTime = #{updateTime,jdbcType=VARCHAR},
+        isDel = #{isDel,jdbcType=VARCHAR}
+        where Id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 下面四个sql用来查询总条数 -->
+    <select id="getAllCount" parameterType="com.zzmj.pojo.entity.ZZDevice"
+            resultType="java.lang.Integer">
+        select count(*) from zz_device where isDel='0'
+    </select>
+
+    <select id="countDeviceByKeyword" resultType="java.lang.Integer">
+        select count(*) from zz_device where isDel='0'
+        and (Device_Name like concat('%',#{keyword},'%')
+        OR Device_Alias LIKE concat('%',#{keyword},'%'))
+    </select>
+
+    <select id="getCountBydeviceTypeId"  parameterType="com.zzmj.pojo.entity.ZZDevice"
+            resultType="java.lang.Integer">
+        select count(*) from zz_device as d where d.isDel='0'
+        and d.DeviceType_Id=#{deviceTypeId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="countDeviceByDeviceTypeIdAndByKeyword" resultType="java.lang.Integer">
+        SELECT count(*) FROM zz_device
+        WHERE DeviceType_Id = #{deviceTypeId} and isDel = 0
+        AND (Device_Name LIKE concat('%',#{keyword},'%')
+        OR Device_Alias LIKE concat('%',#{keyword},'%'))
+    </select>
+
+    <!-- 查询出所有的表数据   以下四个sql用于查询数据-->
+    <select id="listZZDeviceAll" resultMap="ResultMapWithBLOBs">
+        SELECT * FROM zz_device
+        WHERE isDel = '0'
+        ORDER BY SortCode
+        limit #{rowNo},
+        #{pageSize}
+    </select>
+
+    <select id="listDeviceByKeyword" resultMap = "ResultMapWithBLOBs">
+        SELECT * FROM zz_device WHERE isDel = '0'
+        AND (Device_Name LIKE concat('%',#{keyword},'%')
+        OR Device_Alias LIKE concat('%',#{keyword},'%'))
+        ORDER BY SortCode LIMIT #{rowNo},#{pageSize}
+    </select>
+
+    <select id="listZZDeviceBydeviceTypeId" resultMap = "ResultMapWithBLOBs">
+        SELECT * FROM zz_device WHERE DeviceType_Id = #{deviceTypeId} and
+        isDel = '0' ORDER BY SortCode LIMIT #{rowNo},#{pageSize}
+    </select>
+
+    <select id="getlikeKeyWordAndDevicetypeId" resultMap="ResultMapWithBLOBs">
+        SELECT * FROM zz_device where
+        DeviceType_Id = #{deviceTypeId}
+        AND (Device_Name LIKE concat('%',#{keyword},'%')
+        OR Device_Alias LIKE concat('%',#{keyword},'%'))
+        and isDel = 0 ORDER BY SortCode LIMIT #{rowNo},#{pageSize}
+    </select>
+
+    <!-- 根据工作面id和设备类型id查询所有设备的集合 -->
+    <select id="selectDeviceByWorkfaceAndDeviceTypeId" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        where Device_Id in(
+        select Device_Id from zz_workfacedevice
+        where Workface_Id = #{workfaceId,jdbcType=LONGVARCHAR}
+        and DeviceType_Id = #{deviceTypeId,jdbcType=LONGVARCHAR})
+        and isdel='0'
+    </select>
+
+
+    <!-- 查询所有设备的集合-->
+    <select id="selectAllDevice" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        where isDel='0'
+    </select>
+    
+    <select id="selectByDeviceId" resultMap="ResultMapWithBLOBs">
+    	select 
+    	 <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from zz_device
+        where Device_Id =#{deviceId}
+        and isDel='0'
+    </select>
+</mapper>

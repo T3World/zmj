@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzmj.mapper.ZZWorkfaceDeviceMapper" >
+    <resultMap id="BaseResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceDevice" >
+        <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+        <result column="Device_Id" property="deviceId" jdbcType="VARCHAR" />
+        <result column="Device_Count" property="deviceCount" jdbcType="VARCHAR" />
+        <result column="Device_Codes" property="deviceCodes" jdbcType="VARCHAR" />
+        <result column="SortCode" property="sortCode" jdbcType="VARCHAR" />
+        <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
+        <result column="isDel" property="isDel" jdbcType="VARCHAR" />
+        <result column="DeviceType_Id" property="deviceTypeId" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="WorkfaceDeviceInfoMap" type="com.zzmj.pojo.vo.WorkfaceDeviceInfo">
+        <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+        <result column="DeviceType_Id" property="deviceTypeId" jdbcType="VARCHAR" />
+        <result column="Device_Id" property="deviceId" jdbcType="VARCHAR" />
+        <result column="Device_Name" property="deviceName" jdbcType="VARCHAR" />
+        <result column="Device_Alias" property="deviceAlias" jdbcType="VARCHAR" />
+        <result column="Device_Firm" property="deviceFirm" jdbcType="VARCHAR" />
+        <result column="Device_Model" property="deviceModel" jdbcType="VARCHAR" />
+        <result column="Device_Count" property="deviceCount" jdbcType="VARCHAR" />
+        <result column="Device_Codes" property="deviceCodes" jdbcType="VARCHAR" />
+        <result column="SortCode" property="sortCode" jdbcType="VARCHAR" />
+        <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
+        <result column="isDel" property="isDel" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        Id, Workface_Id, Device_Id, Device_Count, Device_Codes, SortCode, UpdateTime, isDel,DeviceType_Id
+    </sql>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDeviceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from zz_workfacedevice
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDeviceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from zz_workfacedevice
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDeviceExample" >
+        delete from zz_workfacedevice
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <select id="countByExample" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDeviceExample" resultType="java.lang.Integer" >
+        select count(*) from zz_workfacedevice
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update zz_workfacedevice
+        <set >
+            <if test="record.id != null" >
+                Id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workfaceId != null" >
+                Workface_Id = #{record.workfaceId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceId != null" >
+                Device_Id = #{record.deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceCount != null" >
+                Device_Count = #{record.deviceCount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceCodes != null" >
+                Device_Codes = #{record.deviceCodes,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sortCode != null" >
+                SortCode = #{record.sortCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDel != null" >
+                isDel = #{record.isDel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceTypeId != null" >
+                DeviceType_Id = #{record.deviceTypeId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update zz_workfacedevice
+        set Id = #{record.id,jdbcType=VARCHAR},
+        Workface_Id = #{record.workfaceId,jdbcType=VARCHAR},
+        Device_Id = #{record.deviceId,jdbcType=VARCHAR},
+        Device_Count = #{record.deviceCount,jdbcType=VARCHAR},
+        Device_Codes = #{record.deviceCodes,jdbcType=VARCHAR},
+        SortCode = #{record.sortCode,jdbcType=VARCHAR},
+        UpdateTime = #{record.updateTime,jdbcType=VARCHAR},
+        isDel = #{record.isDel,jdbcType=VARCHAR},
+        DeviceType_Id = #{record.deviceTypeId,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from zz_workfacedevice
+        where Id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from zz_workfacedevice
+        where Id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDevice" >
+        insert into zz_workfacedevice (Id, Workface_Id, Device_Id,
+        Device_Count, Device_Codes, SortCode,
+        UpdateTime, isDel,DeviceType_Id)
+        values (#{id,jdbcType=VARCHAR}, #{workfaceId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR},
+        #{deviceCount,jdbcType=VARCHAR}, #{deviceCodes,jdbcType=VARCHAR}, #{sortCode,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR},#{deviceTypeId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDevice" >
+        insert into zz_workfacedevice
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            Id,
+            Workface_Id,
+            Device_Id,
+            Device_Count,
+            Device_Codes,
+            SortCode,
+            UpdateTime,
+            isDel,
+            DeviceType_Id,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{id,jdbcType=VARCHAR},
+            #{workfaceId,jdbcType=VARCHAR},
+            #{deviceId,jdbcType=VARCHAR},
+            #{deviceCount,jdbcType=VARCHAR},
+            #{deviceCodes,jdbcType=VARCHAR},
+            #{sortCode,jdbcType=VARCHAR},
+            #{updateTime,jdbcType=VARCHAR},
+            #{isDel,jdbcType=VARCHAR},
+            #{deviceTypeId,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDevice" >
+        update zz_workfacedevice
+        <set >
+            <if test="workfaceId != null" >
+                Workface_Id = #{workfaceId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null" >
+                Device_Id = #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceCount != null" >
+                Device_Count = #{deviceCount,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceCodes != null" >
+                Device_Codes = #{deviceCodes,jdbcType=VARCHAR},
+            </if>
+            <if test="sortCode != null" >
+                SortCode = #{sortCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null" >
+                isDel = #{isDel,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null" >
+                DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zzmj.pojo.entity.ZZWorkfaceDevice" >
+        update zz_workfacedevice
+        set Workface_Id = #{workfaceId,jdbcType=VARCHAR},
+        Device_Id = #{deviceId,jdbcType=VARCHAR},
+        Device_Count = #{deviceCount,jdbcType=VARCHAR},
+        Device_Codes = #{deviceCodes,jdbcType=VARCHAR},
+        SortCode = #{sortCode,jdbcType=VARCHAR},
+        UpdateTime = #{updateTime,jdbcType=VARCHAR},
+        isDel = #{isDel,jdbcType=VARCHAR},
+        DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR}
+        where Id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByWorkfaceId" parameterType="java.lang.String" resultType="string">
+        SELECT Device_Id FROM `zz_workfacedevice` where Workface_Id=#{workfaceId,jdbcType=VARCHAR};
+    </select>
+
+    <select id="listWorkfaceDeviceByPage" resultMap="WorkfaceDeviceInfoMap">
+        select
+        a.Id as Id,
+        a.Workface_Id as Workface_Id,
+        a.Device_Id as Device_Id,
+        a.Device_Count as Device_Count,
+        a.Device_Codes as Device_Codes,
+        a.SortCode as SortCode,
+        a.UpdateTime as UpdateTime,
+        a.DeviceType_Id as DeviceType_Id,
+        b.Device_Name as Device_Name,
+        b.Device_Model as Device_Model
+        from zz_workfacedevice as a
+        inner join ZZ_Device as b
+        on a.Device_Id = b.Device_Id
+        <where>
+            <if test="workfaceId != null" >
+                a.Workface_Id = #{workfaceId,jdbcType=VARCHAR} and
+            </if>
+            <if test="deviceTypeId != null" >
+                a.DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR} and
+            </if>
+            <if test="true">
+                a.isDel = '0'
+            </if>
+        </where>
+        order by a.SortCode
+        limit #{rowNo},#{pageSize}
+    </select>
+
+    <select id="countWorkfaceDevice" resultType="int">
+        select count(*)
+        from zz_workfacedevice
+        <where>
+            <if test="workfaceId != null" >
+                Workface_Id = #{workfaceId,jdbcType=VARCHAR} and
+            </if>
+            <if test="deviceTypeId != null" >
+                DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR} and
+            </if>
+            isDel = '0'
+        </where>
+    </select>
+    <select id="selectWorkfaceDeviceInfo" resultMap="WorkfaceDeviceInfoMap" parameterType="string">
+        select
+        a.Workface_Id as Workface_Id,
+        a.Device_Id as Device_Id,
+        a.DeviceType_Id as DeviceType_Id,
+        a.Device_Count as Device_Count,
+        a.Device_Codes as Device_Codes,
+        a.SortCode as SortCode,
+        a.UpdateTime as UpdateTime,
+        b.Device_Name as Device_Name,
+        b.Device_Alias as Device_Alias,
+        b.Device_Firm as Device_Firm,
+        b.Device_Model as Device_Model
+        from zz_workfacedevice as a
+        inner join
+        zz_device as b
+        on a.Device_Id = b.Device_Id
+        where
+        a.Workface_Id = #{workfaceId,jdbcType=VARCHAR} and
+        a.DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR} and
+        find_in_set(#{code},a.Device_Codes) > 0
+    </select>
+
+    <select id="selectWorkfaceDeviceInfoSimple" resultMap="WorkfaceDeviceInfoMap" parameterType="string">
+        select
+        a.Device_Id as Device_Id,
+        a.DeviceType_Id as DeviceType_Id,
+        b.Device_Name as Device_Name,
+        b.Device_Alias as Device_Alias,
+        b.Device_Firm as Device_Firm,
+        b.Device_Model as Device_Model
+        from zz_workfacedevice as a
+        inner join
+        zz_device as b
+        on a.Device_Id = b.Device_Id
+        where
+        a.Workface_Id = #{workfaceId,jdbcType=VARCHAR} and
+        a.DeviceType_Id = #{deviceTypeId,jdbcType=VARCHAR} and
+        find_in_set(#{code},a.Device_Codes) > 0
+    </select>
+    <select id="selectWorkfaceDeviceInfoByWorkfaceId" resultMap="WorkfaceDeviceInfoMap" parameterType="string">
+        select
+        a.Device_Id as Device_Id,
+        a.DeviceType_Id as DeviceType_Id,
+        b.Device_Name as Device_Name,
+        b.Device_Alias as Device_Alias,
+        b.Device_Firm as Device_Firm,
+        b.Device_Model as Device_Model
+        from zz_workfacedevice as a
+        inner join
+        zz_device as b
+        on a.Device_Id = b.Device_Id
+        where
+        a.Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+    </select>
+	<select id="selectWorkfaceDeviceByDeviceId" resultType="Integer">
+		select count(*)
+		from zz_workfacedevice
+		where Device_Id =#{deviceId}
+		and isDel='0'
+	</select>
+	
+	<select id="selectWorkfaceDeviceById" resultMap="BaseResultMap">
+		select    
+		<include refid="Base_Column_List" />
+		from zz_workfacedevice
+		where Id=#{id}
+	</select>
+
+	<!--此sql废弃  -->
+	<update id="batchDel">
+		update zz_workfacedevice
+		set isDel='1'
+		where id in
+		<foreach collection="List" open="(" close=")" separator="," item="id">
+			#{id}
+		</foreach>
+	</update>
+	<update id="update">
+		update zz_workfacedevice set isDel='1'
+		where id=#{id}
+	</update>
+
+</mapper>

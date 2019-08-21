@@ -388,7 +388,16 @@
 		SELECT COUNT(*) FROM ZZ_Org WHERE IsDel=0;
 	</select>
 
-	<select id="listOrgByPId" parameterType="String" resultType="map">
+	<select id="selectByPid" resultType="map">
+		select 
+		Org_Id, Org_PId, Org_Name, Org_Alias, Org_Info, CreateTime, UpdateTime,
+		SortCode,
+		`Status`
+		 from ZZ_Org 
+		 where Org_PId=0 and isDel=0
+	</select>
+
+	<select id="listOrgByPId" parameterType="string" resultType="map">
 		select
 		Org_Id, Org_PId, Org_Name, Org_Alias, Org_Info, CreateTime, UpdateTime,
 		SortCode,
@@ -401,7 +410,7 @@
 		order by SortCode ASC
 	</select>
 
-	<select id="getOrgByOrgId" resultType="map" parameterType="String">
+	<select id="getOrgByOrgId" resultType="map" parameterType="string">
 		select
 		Org_Id, Org_PId, Org_Name, Org_Alias, Org_Info, CreateTime, UpdateTime,
 		SortCode, Org_PIds,
@@ -417,7 +426,94 @@
 	<select id="getOrgIdByPId" resultMap="BaseResultMap" parameterType="com.zzmj.pojo.entity.ZZOrgExample">
 		select * from ZZ_Org where Org_Id = #{orgId,jdbcType=VARCHAR}
 	</select>
+
+	<!--从组织机构中获取所有的集团-->
+	<select id="listAllGroup" resultMap="BaseResultMap">
+		select * from zz_org where Org_PId='0'
+	</select>
+
+	<!--表中所有数据的分页查询-->
+	<select id="listOrgs" resultMap="BaseResultMap">
+		select * from zz_org where Org_PId='0' order by SortCode limit #{rowNo}, #{pageSize}
+	</select>
+
+
+	<select id="getAllCount" resultType="int">
+		select count(*) from zz_org where Org_PId='0'
+	</select>
+	<select id="getAllCount2" resultType="int">
+		select count(*) from zz_org where Org_PId!='0' and IsDel=0
+	</select>
+
+	<select id="getCountByKeyword" resultType="int">
+		select count(*) from zz_org
+		where Org_PId='0' and Org_Name like concat('%',#{keyword},'%')
+	</select>
+	<select id="getCountByKeyword2" resultType="int">
+		select count(*) from zz_org
+		where Org_Name like concat('%',#{keyword},'%') and IsDel=0
+	</select>
+
+	<select id="getCountByGroupId" resultType="int">
+		select count(*) from zz_org where Org_PId=#{groupId} and IsDel=0
+	</select>
+	<select id="getCountByGroupIdAndByKeyword" resultType="int">
+		select count(*) from zz_org
+		where Org_PId=#{groupId} and Org_Name like concat('%',#{keyword},'%') and IsDel=0
+	</select>
+
+	<select id="selectOrgList" resultMap="BaseResultMap">
+		select * from zz_org where Org_PId='0' order by SortCode limit #{rowNo},#{pageSize}
+	</select>
+	<select id="selectOrgList2" resultMap="BaseResultMap">
+		select * from zz_org where Org_PId!='0' and IsDel=0 order by SortCode limit #{rowNo},#{pageSize}
+	</select>
+
+	<select id="selectOrgListByKeyword" resultMap="BaseResultMap">
+		select * from zz_org
+		where Org_PId='0' and Org_Name like concat('%',#{keyword},'%')
+		order by SortCode limit #{rowNo},#{pageSize}
+	</select>
+	<select id="selectOrgListByKeyword2" resultMap="BaseResultMap">
+		select * from zz_org
+		where Org_PId!='0' and Org_Name like concat('%',#{keyword},'%') and IsDel=0
+		order by SortCode limit #{rowNo},#{pageSize}
+	</select>
+
+	<!--根据groupId查询该集团下所有矿井公司-->
+	<select id="listOrgsByGroupId" resultMap="BaseResultMap">
+		select * from zz_org where Org_PId=#{groupId}
+	</select>
+	<select id="listOrgsByGroupId2" resultMap="BaseResultMap">
+		select * from zz_org where Org_PId=#{groupId} and IsDel=0
+		order by SortCode limit #{rowNo},#{pageSize}
+	</select>
+
+	<select id="listOrgsByGroupIdAndByKeyword" resultMap="BaseResultMap">
+		select * from zz_org
+		where Org_PId=#{groupId} and Org_Name like concat('%',#{keyword},'%') and IsDel=0
+		order by SortCode limit #{rowNo},#{pageSize}
+	</select>
+
+	<!-- 根据矿井公司的org_id 查询该矿井公司的name -->
+	<select id="selectByOrgId" resultType="java.lang.String">
+		select Org_Name from zz_Org where Org_Id=#{orgId}
+	</select>
 	
+	<!-- 根据页面传过来的集团的Id 查询集团下所有的矿井公司的Id -->
+	<select id="selectOrgIdsByOrgId" resultType="java.lang.String">
+		select Org_Id from ZZ_Org where Org_Pid=#{orgPid} and IsDel=0
+	</select>
 	
-	
+	<!-- 查询org表中所有的数据 -->
+	 <select id="selectAll" resultMap="BaseResultMap">
+		select 
+		 <include refid="Base_Column_List" />
+		from zz_Org 
+		where isDel !='1'
+		and Org_PId =#{pid}
+		order by SortCode
+	</select>
+
+
 </mapper>

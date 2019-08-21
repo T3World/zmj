@@ -8,6 +8,19 @@
 		<result column="Role_Id" property="roleId" jdbcType="VARCHAR" />
 		<result column="User_Id" property="userId" jdbcType="VARCHAR" />
 	</resultMap>
+    <resultMap id="RoleMap" type="com.zzmj.pojo.entity.ZZRoleEntity">
+        <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Role_Id" property="roleId" jdbcType="VARCHAR" />
+        <result column="Role_Name" property="roleName" jdbcType="VARCHAR" />
+        <result column="Role_Value" property="roleValue" jdbcType="VARCHAR" />
+        <result column="Role_Des" property="roleDes" jdbcType="VARCHAR" />
+        <result column="CreatePerson" property="createperson" jdbcType="VARCHAR" />
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+        <result column="SortCode" property="sortcode" jdbcType="VARCHAR" />
+        <result column="Status" property="status" jdbcType="VARCHAR" />
+        <result column="IsDel" property="isdel" jdbcType="INTEGER" />
+    </resultMap>
 	<sql id="Base_Column_List">
 		Id, Role_Id, User_Id
 	</sql>
@@ -193,23 +206,23 @@
 		where Id = #{id,jdbcType=VARCHAR}
 	</update>
 
-	<select id="selectUserIdsByRoleId" parameterType="String"
-		resultType="String">
+	<select id="selectUserIdsByRoleId" parameterType="string"
+		resultType="string">
 		select User_Id from ZZ_RoleUser where Role_Id=#{roleId}
 	</select>
 	
-	<select id="selectRoleIdsByUserId" parameterType="String"
-		resultType="String">
+	<select id="selectRoleIdsByUserId" parameterType="string"
+		resultType="string">
 		select Role_Id from ZZ_RoleUser where User_Id=#{userId}
 	</select>
 
-	<delete id="deleteByUserId" parameterType="String">
+	<delete id="deleteByUserId" parameterType="string">
 		delete from ZZ_RoleUser
 		where User_Id=#{userId}
 	</delete>
 
-	<select id="selectRoleValueByUserId" parameterType="String"
-		resultType="Integer">
+	<select id="selectRoleValueByUserId" parameterType="string"
+		resultType="integer">
 		select
 		count(*)
 		from
@@ -217,8 +230,13 @@
 		where
 		b.User_Id = #{userId,jdbcType=VARCHAR}
 		and
-		b.Role_Id = (select Role_Id from ZZ_Role where Role_Value='admin')
+		b.Role_Id = any(select Role_Id from ZZ_Role where Role_Value='admin')
 	</select>
+    <select id="listRoleNamesByUserId" parameterType="string" resultMap="RoleMap">
+        select distinct Role_Name,Role_Value from ZZ_Role where IsDel=0 and Role_Id = any(
+            select Role_Id	from ZZ_RoleUser where User_Id = #{userId,jdbcType=VARCHAR}
+        )
+    </select>
 
 
 </mapper>

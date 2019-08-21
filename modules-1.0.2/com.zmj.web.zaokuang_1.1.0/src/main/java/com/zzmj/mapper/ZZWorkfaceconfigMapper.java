@@ -110,4 +110,9 @@ public interface ZZWorkfaceconfigMapper {
      * @return: List<Map<String,Object>>
      */
     Map<String, Object> selectConfigByWorkfaceId(@Param("workfaceId") String workfaceId);
+
+    /**
+     * 根据工作面id查询工作面配置
+     */
+    ZZWorkfaceconfigEntity selectWorkfaceConfigByWorkfaceId(String workfaceId);
 }

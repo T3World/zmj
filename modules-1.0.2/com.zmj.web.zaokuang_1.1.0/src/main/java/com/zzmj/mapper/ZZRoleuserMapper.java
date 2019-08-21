@@ -1,5 +1,6 @@
 package com.zzmj.mapper;
 
+import com.zzmj.pojo.entity.ZZRoleEntity;
 import com.zzmj.pojo.entity.ZZRoleuserEntity;
 import com.zzmj.pojo.entity.ZZRoleuserExample;
 import org.apache.ibatis.annotations.Param;
@@ -119,4 +120,6 @@ public interface ZZRoleuserMapper {
      * @return: int
      */
     int selectRoleValueByUserId(@Param("userId") String userId);
+
+    List<ZZRoleEntity> listRoleNamesByUserId(@Param("userId") String userId);
 }

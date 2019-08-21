@@ -211,4 +211,15 @@ public class ZZOrgEntity implements Serializable {
         this.workfaces = workfaces;
     }
 
+	@Override
+	public String toString() {
+		return "ZZOrgEntity [id=" + id + ", orgId=" + orgId + ", orgPid="
+				+ orgPid + ", orgName=" + orgName + ", orgAlias=" + orgAlias
+				+ ", orgInfo=" + orgInfo + ", createtime=" + createtime
+				+ ", updatetime=" + updatetime + ", sortcode=" + sortcode
+				+ ", status=" + status + ", isdel=" + isdel + ", orgPids="
+				+ orgPids + ", orgChildren=" + orgChildren + ", workfaces="
+				+ workfaces + "]";
+	}
+
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zzmj.pojo.entity.WorkfaceAndConfig;
 import com.zzmj.pojo.vo.SysResult;
 import com.zzmj.service.ZZWorkfaceService;
+import com.zzmj.service.ZZWorkfaceconfigService;
 import com.zzmj.util.ErrorUtil;
 
 /**
@@ -22,6 +23,9 @@ import com.zzmj.util.ErrorUtil;
 public class WorkfaceController {
 	@Autowired
 	private ZZWorkfaceService zzWorkfaceService;
+	@Autowired
+	private ZZWorkfaceconfigService zzWorkfaceconfigService;
+	
 
 	@RequestMapping(value = "/addZZWorkface", method = RequestMethod.POST)
 	public SysResult addZZWorkface(WorkfaceAndConfig wac) {
@@ -79,7 +83,19 @@ public class WorkfaceController {
 		try {
 			return zzWorkfaceService.stopWorkface(workfaceId, workfaceState);
 		} catch (RuntimeException e) {
-			e.getMessage();
+			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
+		}
+
+	}
+	
+	/**
+	 * 根据工作面id 查询工作面配置表
+	 */
+	@RequestMapping(value = "/selectWorkfaceConfigByWorkfaceId")
+	public SysResult selectWorkfaceConfigByWorkfaceId(@RequestParam(name="workfaceId") String workfaceId) {
+		try {
+			return zzWorkfaceconfigService.selectWorkfaceConfigByWorkfaceId(workfaceId);
+		} catch (RuntimeException e) {
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
 		}
 

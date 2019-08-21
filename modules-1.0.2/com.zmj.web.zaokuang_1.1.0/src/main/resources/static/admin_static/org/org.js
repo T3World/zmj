@@ -2,7 +2,7 @@ var ORG_PID = '';
 var t3w = null;
 var keyword = null;
 var xie = "";
-
+var orgTreeData = null;
 var orgTree1 = null;
 var orgTree2 = null;
 
@@ -11,8 +11,8 @@ $(document).ready(function(){
 });
 // 初始化页面
 function initPage(){
-	loadOrgTreeData();	
-	loadOrgTableData(null,1,11);
+	loadOrgTreeData();
+	loadOrgTableData(null,1,20);
 	update();
 	$('#orgAddBtn').on('click',function(){
 		/**
@@ -20,6 +20,7 @@ function initPage(){
 		 * @returns
 		 */
 		 $('#Org_PId').val('');
+		 $('#Org_PName').val('');
 		 $('#Org_Name').val('');
 		 $('#Org_Alias').val('');
 		 $('#Org_Info').val('');
@@ -33,10 +34,6 @@ function initPage(){
 		var Org_Info =  $('#Org_Info').val();
 		var SortCode =  $('#SortCode').val();
 		// 非空校验
-		if(Org_PId==""){
-			alert("父级组织机构内容不能为空,请选择父级机构，再重新提交");
-			return;
-		}
 		if(Org_Name==""){
 			alert("组织机构名称不能为空,请填写组织机构名称，再重新提交");
 			return;
@@ -67,9 +64,7 @@ function initPage(){
 			}else{
 				$('#sss').alert();
 				alert(data.Error_Msg);
-				
 			}
-			
 		},'json');
 	});
 }
@@ -99,11 +94,12 @@ function loadOrgTableData(keyword,pageNo,pageSize){
 			row += '<td>'+data[i].orgInfo+'</td>';
 			row += '<td>'+data[i].sortcode+'</td>';
 			row += '<td>'+caozuo(data[i])+'</td>';
+			row += '<td hidden>'+data[i].orgPid+'</td>';
 			row += '</tr>';
 		}
 		// 接收传递过来的参数
-		tw3 = json;
-		console.log(tw3);
+		t3w = json;
+		console.log(t3w);
 		page(json.Data);
 		$('#tableData').html(row);
 	},'json');
@@ -120,7 +116,7 @@ function doSearch(){
 //根据页码翻页
 function doThisPage(pageNo){
 	var pageSize = t3w.Data.pageSize;
-	loadUsersByOrgId(keyword,pageNo,pageSize);
+    loadOrgTableData(keyword,pageNo,pageSize);
 }
 
 
@@ -157,8 +153,8 @@ function js_method() {
 		var td = $(this).find("td");
 		var orgId = td[0].innerHTML;
 		var orgName = td[2].innerHTML;
-		
 		var sub = orgName.substring(0,2);
+		var orgpname =getPnameFromPid(td[7].innerHTML);
 		if(sub=="--"){
 			re = orgName.replace("--","");
 		}else{
@@ -167,7 +163,8 @@ function js_method() {
 		var orgAlias = td[3].innerHTML;
 		var orgInfo = td[4].innerHTML;
 		var sortcode = td[5].innerHTML;
-		$("#OnlyId").val(orgId);
+		$("#Org_Id2").val(orgId);
+		$("#Org_PName2").val(orgpname);
 		$("#Org_Name2").val(re);
 		$('#Org_Alias2').val(orgAlias);
 		$('#Org_Info2').val(orgInfo);
@@ -181,35 +178,35 @@ function js_method() {
 function update(){
 	$('#updateOrgBtn').on('click',function(){
 		//1、获取表单的内容
-		var OnlyId = $("#OnlyId").val();
-		var Org_Name =  $('#Org_Name2').val();
-		var Org_Alias =  $('#Org_Alias2').val();
-		var Org_Info =  $('#Org_Info2').val();
-		var SortCode =  $('#SortCode2').val();
+		var Org_Id2 = $("#Org_Id2").val();
+		var Org_Name2 =  $('#Org_Name2').val();
+		var Org_Alias2 =  $('#Org_Alias2').val();
+		var Org_Info2 =  $('#Org_Info2').val();
+		var SortCode2 =  $('#SortCode2').val();
 		// 非空校验
-		if(Org_Name==""){
+		if(Org_Name2==""){
 			alert("组织机构名称不能为空,请填写组织机构名称，再重新提交");
 			return;
 		}
-		if(Org_Alias==""){
+		if(Org_Alias2==""){
 			alert("组织机构别名不能为空,请填写组织机构别名，再重新提交");
 			return;
 		}
-		if(Org_Info==""){
+		if(Org_Info2==""){
 			alert("组织机构简介不能为空,请填写组织机构简介，再重新提交");
 			return;
 		}
-		if(SortCode==""){
+		if(SortCode2==""){
 			alert("组织机构排序码不能为空,请填写组织机构排序码，再重新提交");
 			return;
 		}
 		
 		$.post('/SysBase/Org/updateZZOrgById',{
-			orgId:OnlyId,
-			orgName:Org_Name,
-			orgAlias:Org_Alias,
-			orgInfo:Org_Info,
-			sortcode:SortCode,
+			orgId:Org_Id2,
+			orgName:Org_Name2,
+			orgAlias:Org_Alias2,
+			orgInfo:Org_Info2,
+			sortcode:SortCode2,
 			},function(data){
 			if(data.Code=='2000'){
 				$('#myModal').modal('hide');
@@ -256,13 +253,11 @@ function delmethod(orgId){
 /**
  * 搜索框
  */
-function search(){
-	$.post('',{data},function(data){
-		
-	},'json');
-}
-
-
+// function search(){
+// 	$.post('',{data},function(data){
+//
+// 	},'json');
+// }
 
 /**
  * 加载组织机构树
@@ -288,11 +283,10 @@ function loadOrgTreeData (){
 	};
 	
 	$.get('/SysBase/Org/getOrgTree',null,function(data){
-		
+        orgTreeData = data;
 		orgTree1 = $.fn.zTree.init($(".org_tree"), setting,data);
 		setting.callback.onClick = onInputTreeClick;
 		orgTree2 = $.fn.zTree.init($("#orgTree2"), setting,data);
-		
 		orgTree1.expandAll(true);
 		orgTree2.expandAll(true);
 		
@@ -302,21 +296,23 @@ function loadOrgTreeData (){
 }
 
 function onTreeClick(event,treeId,treeNode,clickFlag){
-	console.log(treeNode.orgId);
+	console.log("pid: "+treeNode.orgId);
 	
 }
 function onInputTreeClick(event,treeId,treeNode,clickFlag){
-	$('#Org_PId').val(treeNode.orgName);
+	$('#Org_PName').val(treeNode.orgName);
+	$('#Org_PName2').val(treeNode.orgName);
+	$('#Org_PId').val(treeNode.orgId);
+	$('#Org_PId2').val(treeNode.orgId);
 	ORG_PID = treeNode.orgId;
 	console.log(ORG_PID);
 	hideMenu();
 }
 
 function showMenu() {
-	var orgPId = $("#Org_PId");
-	var orgPIdOffset = $("#Org_PId").offset();
+	var orgPId = $("#Org_PName");
+	var orgPIdOffset = $("#Org_PName").offset();
 	$("#menuContent").css({left:orgPIdOffset.left + "px", top:orgPIdOffset.top + orgPId.outerHeight() + "px"}).slideDown("fast");
-
 	$("body").bind("mousedown", onBodyDown);
 }
 function hideMenu() {
@@ -434,7 +430,12 @@ function page(data){
  * 分页结束
  */ 
 
-
-
+function  getPnameFromPid(pid) {
+    for (var i in orgTreeData){
+       if(orgTreeData[i].orgId == pid) {
+           return orgTreeData[i].orgName;
+       }
+    }
+}
 
 

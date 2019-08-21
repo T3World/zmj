@@ -1,7 +1,10 @@
 package com.zzmj.pojo.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class ZZModuleEntity implements Serializable {
 	private static final long serialVersionUID = -3983211087236674481L;
@@ -96,6 +99,12 @@ public class ZZModuleEntity implements Serializable {
 	 * @ibatorgenerated 2018-12-08 14:48:37
 	 */
 	private String status;
+
+	/**
+	 * 子模块
+	 * */
+	@JSONField(name = "modules")
+	private List<ZZModuleEntity> children;
 
 	private ZZRolemoduleEntity zzRolemoduleEntity;
 
@@ -236,4 +245,11 @@ public class ZZModuleEntity implements Serializable {
 		this.zzRolemoduleEntity = zzRolemoduleEntity;
 	}
 
+    public List<ZZModuleEntity> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<ZZModuleEntity> children) {
+        this.children = children;
+    }
 }

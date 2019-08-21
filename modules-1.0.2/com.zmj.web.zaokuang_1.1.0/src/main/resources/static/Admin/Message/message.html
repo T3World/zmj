@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=message-width, initial-scale=1">
+    <link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="/admin_static/message/message.css" rel="stylesheet">
+    <script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/zTree/js/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <title>消息通知列表</title>
+</head>
+<body>
+<div class="main">
+    <div class="right_content pull-left ">
+        <div class="tool_button">
+            <button type="button" class="btn btn-danger" data-toggle="modal" onclick="delChecked()">批量删除</button>
+            <!--<button type="button" class="btn btn-primary right_button" data-toggle="modal" onclick="addmethod()" hidden>添加通知</button>-->
+            <span class="pull-right">
+                <select class="btn btn-default" onchange="changeMessageType()" id="messageTypeSelect">
+                    <option value="2">集团通知</option>
+                    <option value="1">矿井通知</option>
+                </select>
+                <input id="dateSelector" type="date" class="form-control right_button" onchange="changeDate()"/>
+				<button class="btn btn-primary right_button" type="button" onclick="freshMeat()">查询</button>
+			</span>
+        </div>
+        <div class="tool_button">
+
+        </div>
+        <div class="clearfix" style="height:100%">
+            <div class="data pull-left" id="roleData" style="padding:10px;width:calc(100% - 0px);margin-right:10px" >
+                <!-- Table -->
+                <table  class="table table-bordered table-header">
+                    <thead>
+                    <tr>
+                        <th class="text-center" width="20px" ><input type="checkbox" onchange="selectAllMessage(this)" class="messageCheckBox" id="messageAllCheckBox"></th>
+                        <th class="text-center" width="20px">No</th>
+                        <th class="text-center" hidden>id</th>
+                        <th class="text-center w15">矿井公司</th>
+                        <th class="text-center w50">通知内容</th>
+                        <th class="text-center w10">发送人</th>
+                        <th class="text-center w10">时间</th>
+                        <th class="text-center ">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="paging">
+            <ul id="pageBtn" class="pagination">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="MyOnlyModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">通知</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="moduleForm" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="messageTypeId">通知类型：</label>
+                        <div class="col-lg-6">
+                            <select class="btn btn-default col-lg-6"  id="messageTypeId" name="messageTypeId">
+                                <option value="1">集团通知</option>
+                                <option value="2">矿井通知</option>
+                            </select>
+                        </div>
+                        <span id="messageTypeId_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="messageName">矿井公司：</label>
+                        <div class="col-lg-6">
+                            <input type="text"  id="messageId" hidden>
+                            <input type="text" class="form-control" id="messageName" name="messageName" placeholder="请输入设备名称">
+                        </div>
+                        <span id="messageName_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="messageAlias">设备别名：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="messageAlias" name="messageAlias" placeholder="请输入设备别名">
+                        </div>
+                        <span id="messageAlias_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="messageModel">设备型号：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="messageModel" name="messageModel" placeholder="请输入设备型号">
+                        </div>
+                        <span id="messageModel_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="messageFirm">设备厂商：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="messageFirm" name="messageFirm" placeholder="请输入设备厂商">
+                        </div>
+                        <span id="messageFirm_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >设备属性：</label>
+                        <div class="col-lg-6">
+                            <input type="button" class="btn btn-success" value="添加属性" onclick="addAttributeSelect()">
+                        </div>
+                        <span id="messageAttribute_msg" class="error_msg"></span>
+                    </div>
+                    <div id="messageAttribute"></div>
+
+                    <!--<div class="form-group">-->
+                    <!--<label class="col-lg-3 control-label">设备图片：</label>-->
+                    <!--<div class="col-lg-2">-->
+                    <!--<img src="" id="messageImg" class="img-preview" />-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-2">-->
+                    <!--<input type="image" class="btn btn-default" value="上传图片" onclick="uploadImg()">-->
+                    <!--</div>-->
+                    <!--<span id="messageImg_msg" class="error_msg"></span>-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="SortCode">排序码：</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="SortCode" name="SortCode">
+                        </div>
+                        <span id="SortCode_msg" class="text-center error_msg"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="submitModal()">保 存</button>
+                </div>
+                <input type="hidden" value='0' id="subflag" />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/admin_static/message/message.js"></script>
+
+</body>
+</html>

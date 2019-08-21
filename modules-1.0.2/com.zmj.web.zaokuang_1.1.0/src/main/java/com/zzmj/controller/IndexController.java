@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zzmj.pojo.vo.SysResult;
 import com.zzmj.util.ErrorUtil;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/Admin/index")
 public class IndexController {

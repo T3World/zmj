@@ -8,6 +8,9 @@ import com.zzmj.service.impl.ZZRoleUserServiceImpl;
 import com.zzmj.service.impl.ZZUserServiceImpl;
 import com.zzmj.util.ErrorUtil;
 import com.zzmj.util.exception.DoSqlFailedException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,6 +31,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/SysBase/User")
 public class UserController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private ZZUserServiceImpl userServiceImpl;
@@ -40,6 +46,38 @@ public class UserController {
 	@Autowired
 	private ZZModuleServiceImol zzModuleServiceImol;
 
+	
+	/**
+	 * 更改启用状态
+	 * @param userId
+	 * @param isuse
+	 */
+	@RequestMapping("/updateIsUse")
+	@ResponseBody
+	public SysResult updateIsUse(String userId,String isuse) {
+		try {
+			return this.userServiceImpl.updateIsUse(userId,isuse);
+		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
+			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
+		}
+	}
+	
+	/**
+	 * 注册方法
+	 * @param zzUserEntity
+	 * @return
+	 */
+	@RequestMapping("/registUserEntity")
+	@ResponseBody
+	public SysResult registUserEntity(ZZUserEntity zzUserEntity) {
+		try {
+			return this.userServiceImpl.registUserEntity(zzUserEntity);
+		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
+			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
+		}
+	}
 	/**
 	 * 新增方法
 	 *
@@ -53,6 +91,7 @@ public class UserController {
 		try {
 			return this.userServiceImpl.addZZUserEntity(userEntity);
 		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
 		}
 	}
@@ -70,6 +109,7 @@ public class UserController {
 		try {
 			return this.userServiceImpl.updateZZUserEntity(userEntity, userEntity.getUserId());
 		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
 		}
 	}
@@ -89,6 +129,7 @@ public class UserController {
 			flag = this.userServiceImpl.delUser(userId);
 		} catch (DoSqlFailedException e) {
 			e.printStackTrace();
+			logger.info(e.getMessage());
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), flag);
 		}
 		SysResult result = new SysResult(ErrorUtil.CODE2000, "ok", flag);
@@ -107,6 +148,7 @@ public class UserController {
 		try {
 			return this.userServiceImpl.getZZUserById(userId);
 		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
 		}
 	}
@@ -137,7 +179,6 @@ public class UserController {
 	/**
 	 * 给用户赋予角色权限
 	 *
-	 * @param request
 	 * @param response
 	 * @return
 	 */
@@ -148,13 +189,15 @@ public class UserController {
 		try {
 			return this.userServiceImpl.addUserRole(userId, roleIds);
 		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
 		}
 	}
 
 	/**
-	 * 获得组织结构列表值右面的方法。，并加上分页判断
+	 * 获得组织结构列表值右面的方法。，并加上分页判断  (shixian)
 	 *
+	 *点击组织机构(集团  矿井)==>获取该组织结构下的用户及其所属公司  (后台管理)加分页
 	 * @return
 	 */
 	@RequestMapping("/getUserListData")
@@ -166,6 +209,7 @@ public class UserController {
 		try {
 			return this.userServiceImpl.listUserPage(orgId, keyword, pageNo, pageSize);
 		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
 		}
 	}
@@ -182,6 +226,7 @@ public class UserController {
 		try {
 			return this.userServiceImpl.getUserRole(userId);
 		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
 			return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
 		}
 	}

@@ -119,4 +119,16 @@ public interface ZZModuleMapper {
 	 * */
 	int countSonModuleByMid(@Param("mid") String mid);
 
+	/**
+	 * 根据用户ID查询所有的模块值
+	 * */
+	List<ZZModuleEntity> listModuleValueByUserId(@Param("userId") String userId);
+
+	/**
+	 * 根据角色Id查询跟该角色关联的所有模块值
+	 * @param roleId
+	 * @return
+	 */
+	List<String> getModuleValuesByRoleId(String roleId);
+
 }

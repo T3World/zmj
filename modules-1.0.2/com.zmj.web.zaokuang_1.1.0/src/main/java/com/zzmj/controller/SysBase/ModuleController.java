@@ -12,6 +12,8 @@ import com.zzmj.service.ZZModuleService;
 import com.zzmj.util.ErrorUtil;
 import com.zzmj.util.exception.DoSqlFailedException;
 
+import java.util.List;
+
 /**
  *
  * @author hushixian umr
@@ -64,6 +66,16 @@ public class ModuleController {
             e.printStackTrace();
             return new SysResult(ErrorUtil.CODE5000, e.getMessage(), null);
         }
+    }
+
+    /**
+     * 根据角色Id查询跟该角色关联的所有模块值，返回值List<String>(只用于测试)
+     * @param roleId
+     * @return
+     */
+    @RequestMapping(value = "/getModuleValuesByRoleId", method = RequestMethod.POST)
+    public List<String> getModuleValuesByRoleId(@RequestParam(name = "roleId", required = false) String roleId) {
+        return this.zzModuleService.getModuleValuesByRoleId(roleId);
     }
 
 }

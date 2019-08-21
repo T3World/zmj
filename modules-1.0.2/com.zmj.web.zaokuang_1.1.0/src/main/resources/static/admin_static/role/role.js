@@ -18,7 +18,7 @@ function loadRoleData(){
 				row += '<td align="center">'+parseInt(parseInt(i)+1)+'</td>';
 				row += '<td align="center">'+data[i].roleName+'</td>';
 				row += '<td align="center">'+data[i].roleValue+'</td>';
-				row += '<td align="center">'+data[i].roleDes+'</td>';
+				row += '<td align="left">'+data[i].roleDes+'</td>';
 				row += '<td align="center">'+data[i].sortcode+'</td>';
 				row += '<td align="center">'+operate(data[i].roleId)+'</td>';
 				row += '</tr>';

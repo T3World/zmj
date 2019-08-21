@@ -14,26 +14,27 @@
 	</sql>
 
 	<resultMap id="WorkfaceConfigResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity">
-
 		<id column="Id" property="id" jdbcType="VARCHAR" />
 		<result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
 		<result column="Belt_Type" property="beltType" jdbcType="VARCHAR" />
-		<result column="Font_MinPressure" property="fontMinpressure"
-			jdbcType="VARCHAR" />
-		<result column="Font_MaxPressure" property="fontMaxpressure"
-			jdbcType="VARCHAR" />
-		<result column="Back_MinPressure" property="backMinpressure"
-			jdbcType="VARCHAR" />
-		<result column="Back_MaxPressure" property="backMaxpressure"
-			jdbcType="VARCHAR" />
+		<result column="Font_MinPressure" property="fontMinpressure" jdbcType="VARCHAR" />
+		<result column="Font_MaxPressure" property="fontMaxpressure" jdbcType="VARCHAR" />
+		<result column="Back_MinPressure" property="backMinpressure" jdbcType="VARCHAR" />
+		<result column="Back_MaxPressure" property="backMaxpressure" jdbcType="VARCHAR" />
 		<result column="Support_Dir" property="supportDir" jdbcType="INTEGER" />
-		<result column="Support_Count" property="supportCount"
-			jdbcType="INTEGER" />
+		<result column="Support_Count" property="supportCount" jdbcType="INTEGER" />
 		<result column="Conveyor_Dir" property="conveyorDir" jdbcType="INTEGER" />
-		<result column="Pressure_ChartType" property="pressureCharttype"
-			jdbcType="VARCHAR" />
-		<result column="ShearerPos_CacheTime" property="shearerposCachetime"
-			jdbcType="VARCHAR" />
+		<result column="Pressure_ChartType" property="pressureCharttype" jdbcType="VARCHAR" />
+		<result column="ShearerPos_CacheTime" property="shearerposCachetime" jdbcType="VARCHAR" />
+		<result column="Workface_Length" property="workfaceLength" jdbcType="VARCHAR"/>
+		<result column="Workface_AbleLength" property="workfaceAbleLength" jdbcType="VARCHAR"/>
+		<result column="Workface_CoalThickness" property="workfaceCoalThickness" jdbcType="VARCHAR"/>
+		<result column="Workface_Inclination" property="workfaceInclination" jdbcType="VARCHAR"/>
+		<result column="Workface_AverageHeight" property="workfaceAverageHeight" jdbcType="VARCHAR"/>
+		<result column="Workface_StartTime" property="workfaceStartTime" jdbcType="VARCHAR"/>
+		<result column="Morning_Shift" property="morningShift" jdbcType="VARCHAR"/>
+		<result column="Afternoon_Shift" property="afternoonShift" jdbcType="VARCHAR"/>
+		<result column="Night_Shift" property="nightShift" jdbcType="VARCHAR"/>
 	</resultMap>
 
 	<resultMap id="WorkfaceResultMap" type="com.zzmj.pojo.entity.ZZWorkfaceEntity">
@@ -56,7 +57,7 @@
 			javaType="com.zzmj.pojo.entity.ZZWorkfaceconfigEntity" resultMap="WorkfaceConfigResultMap" />
 	</resultMap>
 
-	<select id="countWorkfaceAll" resultType="Integer">
+	<select id="countWorkfaceAll" resultType="integer">
 		select count(*) from
 		ZZ_Workface as A inner join ZZ_WorkfaceConfig as B on A.Workface_Id =
 		B.Workface_Id inner join ZZ_Org as C on A.Org_Id = C.Org_Id
@@ -64,7 +65,7 @@
 		A.IsDel = 0
 	</select>
 
-	<select id="countWorkfaceByOrgId" resultType="Integer">
+	<select id="countWorkfaceByOrgId" resultType="integer">
 		select count(*)
 		from
 		ZZ_Workface as A inner join ZZ_WorkfaceConfig as B on
@@ -74,7 +75,7 @@
 		A.Org_Id = #{orgId} and A.IsDel = 0
 	</select>
 
-	<select id="countWorkfaceByOrgIdAndByKeyword" resultType="Integer">
+	<select id="countWorkfaceByOrgIdAndByKeyword" resultType="integer">
 		select count(*)
 		from ZZ_Workface A inner join ZZ_WorkfaceConfig B on
 		A.Workface_Id =
@@ -85,7 +86,7 @@
 		Workface_Alias like
 		concat('%',#{keyword},'%'))
 	</select>
-	<select id="countWorkfaceByKeyword" resultType="Integer">
+	<select id="countWorkfaceByKeyword" resultType="integer">
 		select count(*)
 		from ZZ_Workface A inner join ZZ_WorkfaceConfig B on
 		A.Workface_Id =
@@ -129,6 +130,24 @@
         Pressure_ChartType,
         B.ShearerPos_CacheTime as
         ShearerPos_CacheTime,
+        B.Workface_Length as
+		Workface_Length,
+		B.Workface_AbleLength as
+		Workface_AbleLength,
+		B.Workface_CoalThickness AS
+		Workface_CoalThickness,
+		B.Workface_Inclination AS
+		Workface_Inclination,
+		B.Workface_AverageHeight AS
+		Workface_AverageHeight,
+		B.Workface_StartTime AS
+		Workface_StartTime,
+		B.Morning_Shift AS
+		Morning_Shift,
+		B.Afternoon_Shift AS
+		Afternoon_Shift,
+		B.Night_Shift AS
+		Night_Shift,
         C.Org_Name as Org_Name
         from
         ZZ_Workface as A inner
@@ -182,6 +201,24 @@
 		Pressure_ChartType,
 		B.ShearerPos_CacheTime as
 		ShearerPos_CacheTime,
+		B.Workface_Length as
+		Workface_Length,
+		B.Workface_AbleLength as
+		Workface_AbleLength,
+		B.Workface_CoalThickness AS
+		Workface_CoalThickness,
+		B.Workface_Inclination AS
+		Workface_Inclination,
+		B.Workface_AverageHeight AS
+		Workface_AverageHeight,
+		B.Workface_StartTime AS
+		Workface_StartTime,
+		B.Morning_Shift AS
+		Morning_Shift,
+		B.Afternoon_Shift AS
+		Afternoon_Shift,
+		B.Night_Shift AS
+		Night_Shift,
 		C.Org_Name as Org_Name
 		from
 		ZZ_Workface as A inner
@@ -226,6 +263,24 @@
 		Pressure_ChartType,
 		B.ShearerPos_CacheTime as
 		ShearerPos_CacheTime,
+		B.Workface_Length as
+		Workface_Length,
+		B.Workface_AbleLength as
+		Workface_AbleLength,
+		B.Workface_CoalThickness AS
+		Workface_CoalThickness,
+		B.Workface_Inclination AS
+		Workface_Inclination,
+		B.Workface_AverageHeight AS
+		Workface_AverageHeight,
+		B.Workface_StartTime AS
+		Workface_StartTime,
+		B.Morning_Shift AS
+		Morning_Shift,
+		B.Afternoon_Shift AS
+		Afternoon_Shift,
+		B.Night_Shift AS
+		Night_Shift,
 		C.Org_Name as Org_Name
 		from
 		ZZ_Workface as A inner
@@ -271,6 +326,24 @@
 		Pressure_ChartType,
 		B.ShearerPos_CacheTime as
 		ShearerPos_CacheTime,
+		B.Workface_Length as
+		Workface_Length,
+		B.Workface_AbleLength as
+		Workface_AbleLength,
+		B.Workface_CoalThickness AS
+		Workface_CoalThickness,
+		B.Workface_Inclination AS
+		Workface_Inclination,
+		B.Workface_AverageHeight AS
+		Workface_AverageHeight,
+		B.Workface_StartTime AS
+		Workface_StartTime,
+		B.Morning_Shift AS
+		Morning_Shift,
+		B.Afternoon_Shift AS
+		Afternoon_Shift,
+		B.Night_Shift AS
+		Night_Shift,
 		C.Org_Name as Org_Name
 		from
 		ZZ_Workface as A inner
@@ -288,7 +361,7 @@
 		limit
 		#{rowNo},#{pageSize}
 	</select>
-	<select id="listWorkfaceNoPage" resultType="map" parameterType="String">
+	<select id="listWorkfaceNoPage" resultType="map" parameterType="string">
 		select
 		Workface_Id, Org_Id, Workface_Name,
 		Workface_Alias,
@@ -610,4 +683,16 @@
 		#{workfaceId,jdbcType=VARCHAR}
 	</update>
 
+	<select id="selectId" resultType="String">
+	select Id from zz_workfaceconfig
+	where Workface_Id =#{workfaceId,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectworkfaceIdByOrgId" resultType="String">
+		select Workface_Id
+		from zz_workface
+		where Org_Id=#{orgId,jdbcType=VARCHAR}
+		and isDel=0
+	</select>
+	
 </mapper>

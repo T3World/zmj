@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.zzmj.mapper.ZZRoleuserMapper;
 import com.zzmj.mapper.ZZUserMapper;
+import com.zzmj.pojo.entity.ZZDevice;
 import com.zzmj.pojo.entity.ZZOrgEntity;
 import com.zzmj.pojo.entity.ZZRoleEntity;
 import com.zzmj.pojo.entity.ZZRoleuserEntity;
@@ -46,6 +47,79 @@ public class ZZUserServiceImpl implements ZZUserService {
 	@Autowired
 	private ZZOrgServiceImpl orgServiceImpl;
 
+	
+	
+	
+	/**
+	 * 修改启用状态
+	 * @return 
+	 */
+	
+	public SysResult updateIsUse(String userId,String isuse){
+		if (null == userId || userId.equals("")) 
+			return new SysResult(ErrorUtil.CODE2001, "用户id参数不能为空!", null);
+		if (null == isuse || isuse.equals("")) 
+			return new SysResult(ErrorUtil.CODE2001, "启用参数不能为空!", null);
+
+		if ("1".equals(isuse)) {
+			isuse = "0";
+		} else {
+			isuse = "1";
+		}
+		try {
+			int flag=zzUserMapper.updateIsUse(userId,isuse);
+			if (flag > 0) {
+				return new SysResult(ErrorUtil.CODE2000, "启用状态修改成功", flag);
+			} else {
+				return new SysResult(ErrorUtil.CODE2001, "启用状态修改失败", null);
+			}
+		} catch (Exception e) {
+			logger.info("修改启用状态出现异常！！");
+			e.printStackTrace();
+			throw new DoSqlFailedException("修改启用状态出现异常！！！");
+		}
+	}
+	
+	/**
+	 * 用户注册  判断用户(User_Account 是否存在)
+	 */
+	@Override
+	public SysResult registUserEntity(ZZUserEntity zzUserEntity) {
+		
+		// 得到用户账号
+		String useraAcount = zzUserEntity.getUserAccount();
+		int flag = 1;
+		// 判断用户账号是否存在
+		try {
+			flag = this.getifUserAccountExistTwo(useraAcount);
+		} catch (DoSqlFailedException e) {
+			e.printStackTrace();
+			return new SysResult(ErrorUtil.CODE2001, e.getMessage(), flag);
+		}
+		
+		try {
+			zzUserEntity.setId(CodeUtil.createUuid36());
+			zzUserEntity.setUserId(CodeUtil.createUuid36());
+			String pw = zzUserEntity.getUserPassword();
+			zzUserEntity.setUserPassword(MD5Util.md5(pw));
+			zzUserEntity.setCreatetime(new Date());
+			zzUserEntity.setUpdatetime(new Date());
+			zzUserEntity.setIsdel(0);
+			zzUserEntity.setIsuse("0");
+			//调用的是下面添加用户的方法中  zzUserMapper.insert() 同一个方法
+			int n = zzUserMapper.insert(zzUserEntity);
+			if (n > 0) {
+				return new SysResult(ErrorUtil.CODE2000, "用户注册成功", zzUserEntity);
+			} else {
+				return new SysResult(ErrorUtil.CODE2001, "用户注册失败", null);
+			}
+		} catch (Exception e) {
+			logger.info("用户注册出现异常");
+			e.printStackTrace();
+			throw new DoSqlFailedException("用户注册出现异常");
+		}
+	}
+	
 	/**
 	 * 添加用户的方法
 	 *
@@ -59,8 +133,9 @@ public class ZZUserServiceImpl implements ZZUserService {
 		int flag = 1;
 		// 判断用户名是否存在
 		try {
-			flag = this.getifUserAccountExist(account);
+			flag = this.getifUserAccountExistTwo(account);
 		} catch (DoSqlFailedException e) {
+			logger.info(e.getMessage());
 			e.printStackTrace();
 			return new SysResult(ErrorUtil.CODE2001, e.getMessage(), flag);
 		}
@@ -80,17 +155,17 @@ public class ZZUserServiceImpl implements ZZUserService {
 			zzUserEntity.setUserAccount(account); // 账户名
 			zzUserEntity.setOrgId(userEntity.getOrgId());
 			zzUserEntity.setIsdel(0); // 0是未删除，1是删除
+			zzUserEntity.setIsuse("0");
 			int n = zzUserMapper.insert(zzUserEntity);
 			if (n > 0) {
 				return new SysResult(ErrorUtil.CODE2000, "用户添加成功", zzUserEntity);
 			} else {
-				return new SysResult(ErrorUtil.CODE2001, "用户添加成功", null);
+				return new SysResult(ErrorUtil.CODE2001, "用户添加失败", null);
 			}
 		} catch (RuntimeException e) {
-			logger.info("用户添加出现异常");
+			logger.info(e.getMessage());
 			e.printStackTrace();
 			throw new DoSqlFailedException("用户添加出现异常");
-
 		}
 	}
 
@@ -230,36 +305,43 @@ public class ZZUserServiceImpl implements ZZUserService {
 	}
 
 	/**
-	 *
-	 * @param keyword  关键字
-	 * @param pageNo   从第几行开始显示
-	 * @param pageSize 每页显示的条数
+	 * 查询总条数  分为四种情况
+	 * @param orgId
+	 * @param keyword
 	 * @return
 	 */
 	public int getCount(String orgId, String keyword) {
-		int count = 0;
-		if (orgId == null && keyword.equals("%%")) {
-			// 执行查询所有的条数
-			count = zzUserMapper.allCount();
+		if(null==orgId || orgId.equals("")){
+			if(null==keyword || keyword.equals("")){
+				return zzUserMapper.allCount();	//orgId和keyword都为空的情况下
+			}
+			return zzUserMapper.getCountByKeyWord(keyword);	//orgId为空 keyword不为空的情况下
 		}
-		if (orgId != null && keyword.equals("%%")) {
-			// 查询orgId 关键字为空的所有条数，进行分页
-			count = zzUserMapper.getCountByOrgIdANDKeyword(orgId, keyword);
-		}
-
-		return count;
+			
+			if(null==keyword || keyword.equals("")){
+				return zzUserMapper.getCountByOrgId(orgId);	//orgId不为空 keyword为空的情况下
+			}
+			Integer count=zzUserMapper.getCountByOrgIdAndKeyWord(orgId,keyword);
+			System.out.println(count+"**************");
+			return count;
+//		return zzUserMapper.getCountByOrgIdAndKeyWord(orgId,keyword);	//orgId keyword都不为空的情况下
+		
 	}
 
 	/**
-	 * @param orgId    公司id
+	 * @param orgId    集团Org_Id 或者矿井公司Org_Id
 	 * @param keyword  关键字
-	 * @param pageNo   从第几行开始显示
+	 * @param pageNo   第几页
 	 * @param pageSize 每页显示的条数
 	 * @return
 	 */
 	@Override
 	public SysResult listUserPage(String orgId, String keyword, Integer pageNo, Integer pageSize) {
+		
 		try {
+			// 分页查询先查询结果总数
+			int count = this.getCount(orgId, keyword);
+			System.out.println(count+"++++++++++++++++++_---------------");
 			if (pageNo == null) {
 				pageNo = 1;
 			} else {
@@ -270,22 +352,18 @@ public class ZZUserServiceImpl implements ZZUserService {
 			} else {
 				pageSize = pageSize;
 			}
-			if (keyword == null || keyword.equals("")) {
+			/*if (keyword == null || keyword.equals("")) {
 				keyword = "%%";
 			} else {
 				keyword = "%" + keyword + "%";
-			}
-			if (orgId != null) {
-				ZZOrgEntity entity = orgServiceImpl.getOrgIdByPId(orgId);
-				if (entity.getOrgPid().equals("0")) {
-					orgId = null;
-				}
-			}
-			// 分页查询先查询结果总数
-			int count = this.getCount(orgId, keyword);
-			// 封装到分页查询包装类中
+			}*/
+			
+			// 封装到分页查询包装类中  每页第几条开始
 			Integer rowNo = (pageNo - 1) * pageSize;
 			List<ZZUserEntity> list = listUserByPage(orgId, keyword, rowNo, pageSize);
+			for(ZZUserEntity zzUserEntity:list){		//打印查询的数据
+				System.out.println(zzUserEntity);
+			}
 			return new SysResult(ErrorUtil.CODE2000, "获取成功",
 					new PageObject<ZZUserEntity>(pageNo, pageSize, count, list));
 		} catch (RuntimeException e) {
@@ -297,21 +375,23 @@ public class ZZUserServiceImpl implements ZZUserService {
 	}
 
 	private List<ZZUserEntity> listUserByPage(String orgId, String keyword, Integer rowNo, Integer pageSize) {
-		if (null == orgId && keyword.equals("%%")) {
-			// 当null == orgId &&
-			// keyword.equals("%%")时，表示是初始化列表信息，需要查询出来所有的用户信息，并分页显示
-			return zzUserMapper.listUserAll(rowNo, pageSize);
-		}
-		if (keyword.equals("%%")) {
-			// 当keyword关键字为空的时候，查询该公司下，所有的用户，并分页
-			System.out.println("当keyword为空时，走到这一步了");
-			return zzUserMapper.listUserByOrgId(orgId, rowNo, pageSize);
-		} else {
-			// 这是当keyword不为空时，orgId也不为空，根据关键字和orgId查询并分页
-			System.out.println("当keyword不为空OrgId也不为空，走到这一步了");
-			return zzUserMapper.getlikeKeyWord(keyword, rowNo, pageSize);
-		}
-
+	
+		if(null==orgId || orgId.equals("")){
+			if(null==keyword || keyword.equals("")){
+				System.out.println(orgId+"   "+keyword+"-----");
+				return zzUserMapper.listUserAll(rowNo, pageSize);	//orgId和keyword都为空的情况下
+			}
+			System.out.println(orgId+"   "+keyword+"++++++");
+			return zzUserMapper.getlikeKeyWord(keyword, rowNo, pageSize);	//orgId为空 keyword不为空的情况下
+		}else{
+			
+			if(null==keyword || keyword.equals("")){
+				System.out.println(orgId+"   "+keyword+"*****");
+				return zzUserMapper.listUserByOrgId(orgId, rowNo, pageSize);	//orgId不为空 keyword为空的情况下
+			}
+		}	
+		System.out.println(orgId+"   "+keyword+"#######");
+		return zzUserMapper.getListUserByOrgIdAndKeyWord(orgId,keyword,rowNo,pageSize);	//orgId keyword都不为空的情况下
 	}
 
 	@Override
@@ -336,15 +416,38 @@ public class ZZUserServiceImpl implements ZZUserService {
 	 * (non-Javadoc)
 	 *
 	 * @see com.zzmj.service.ZZUserService#getifUserAccountExist(java.lang.String)
+	 * 用着不起作用
 	 */
 	@Override
 	public int getifUserAccountExist(String account) throws DoSqlFailedException {
 		ZZUserExample example = new ZZUserExample();
 		example.createCriteria().andUserAccountEqualTo(account);
+		example.createCriteria().andIsdelEqualTo(1);
 		int flag = this.zzUserMapper.countByExample(example);
 		if (flag > 0)
 			throw new DoSqlFailedException("该用户名已存在!");
 		return flag;
+	}
+	
+	/**
+	 * 新增、注册用户的时候  如果数据库中有重名用户且该用户如果iSDel为1，则可以新增。  
+	 * 如果isDel为0，不可以新增
+	 */
+	@Override
+	public int getifUserAccountExistTwo(String account){
+		
+		try {
+			int flag = this.zzUserMapper.selectCountByAccount(account);
+			if (flag >0 ) {
+				throw new DoSqlFailedException("该用户名已存在!");
+			}
+			return flag;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("该用户名已存在!!", e);
+			throw new DoSqlFailedException("该用户名已存在!!!");
+		}
+		
 	}
 
 	@Override

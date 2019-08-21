@@ -3,12 +3,21 @@ package com.zzmj.mapper;
 import com.zzmj.pojo.entity.ZZUserEntity;
 import com.zzmj.pojo.entity.ZZUserExample;
 import com.zzmj.pojo.vo.LoginResult;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
 public interface ZZUserMapper {
+	
+	/**
+	 * 更改用户启用状态
+	 * @param userId
+	 * @param isuse
+	 * @return
+	 */
+	int updateIsUse(@Param("userId") String userId,@Param("isuse")String isuse);
     /**
      * 条件统计 参数:查询条件,null为整张表 返回:查询个数
      * 
@@ -110,7 +119,7 @@ public interface ZZUserMapper {
      * @param pageSize 每页显示的条数
      * @return
      */
-    List<ZZUserEntity> getlikeKeyWord(@Param("keyWord") String keyWord, @Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
+    List<ZZUserEntity> getlikeKeyWord(@Param("keyword") String keyWord, @Param("rowNo") Integer pageNo, @Param("pageSize") Integer pageSize);
 
     /**
      * @Title: listWorkfaceAll
@@ -126,7 +135,12 @@ public interface ZZUserMapper {
 	 * @return
 	 */
 	int allCount();
+	
+	int getCountByKeyWord(String keyword);
+	
+	int getCountByOrgId(String orgId);
 
+	Integer getCountByOrgIdAndKeyWord(@Param("keyword")String keyword,@Param("orgId")String orgId);
 	/**
 	 * 根据组织机构id和关键字查询，该组织机构下所拥有的所有用户信息
 	 * 
@@ -145,7 +159,11 @@ public interface ZZUserMapper {
      * @return: List<ZZUserEntity>
      */
     List<ZZUserEntity> listUserByOrgId(@Param("orgId") String orgId, @Param("rowNo") int rowNo, @Param("pageSize") int pageSize);
-
+ 
+    List<ZZUserEntity> getListUserByOrgIdAndKeyWord
+    (@Param("orgId") String orgId, @Param("keyword") String keyword,@Param("rowNo") int rowNo,@Param("pageSize") int pageSize);
+    
+    
     LoginResult selectForLogin(@Param("userAccount") String userAccount, @Param("userPassword") String userPassword);
 
     /**
@@ -164,5 +182,6 @@ public interface ZZUserMapper {
      * @return
      */
     List<ZZUserEntity> getUserMoudel(@Param("userId") String userId);
+	int selectCountByAccount(String account);
 
 }

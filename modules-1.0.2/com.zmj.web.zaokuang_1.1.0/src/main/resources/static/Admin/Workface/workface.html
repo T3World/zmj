@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
-	<link href="/admin_static/workface/w.css" rel="stylesheet"/>
-	<script type="text/javascript" src="/script/jquery-1.11.1.min.js"></script>
-	<script src="/zTree/js/jquery.ztree.all.min.js"></script>
-	<script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<title>工作面管理</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="/admin_static/workface/w.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+    <script src="/zTree/js/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <title>工作面管理</title>
 </head>
 <body>
 <div class="main clearfix">
-	<div class="left_org pull-left" >
-		<span class="title">组织机构</span>
-		<ul id="orgTree" class="org_tree ztree"></ul>
-	</div>
-	<div class="right_content pull-left">
-		<div class="tool_button">
-			<button type="button" class="btn btn-primary"
-					data-toggle="modal" onclick="showAddModel()">新增工作面</button>
-			<span class="pull-right">
+    <div class="left_org pull-left" >
+        <span class="title">组织机构</span>
+        <ul id="orgTree" class="org_tree ztree"></ul>
+    </div>
+    <div class="right_content pull-left">
+        <div class="tool_button">
+            <button type="button" class="btn btn-primary"
+                    data-toggle="modal" onclick="showAddModel()">新增工作面</button>
+            <span class="pull-right">
 				<input id="doSearch" type="text" class="form-control" style="display: inline-block;width:300px" />
 				<button class="btn btn-default" type="button"	onclick="doSearch()">搜索</button>
 			</span>
-		</div>
-		<div class="data" style="padding:10px;" >
-			<!-- Table -->
-			<table  class="table table-bordered table-header">
-				<thead>
-				<tr>
-					<th class="text-center" width="20px">No</th>
-					<th class="text-center">工作面名称</th>
-					<th class="text-center w10">工作面代号</th>
-					<th class="text-center w15">所属矿井</th>
-					<th class="text-center w10">状态</th>
-					<th class="text-center">工作面类型</th>
-					<th class="text-center">排序码</th>
-					<th class="text-center w25">操作</th>
-				</tr>
-				</thead>
-				<tbody id="tbody">
-				</tbody>
-			</table>
-		
-		</div>
-		<div class="paging">
-				<ul id="pageBtn" class="pagination">
-				</ul>
-		</div>
-	</div>
+        </div>
+        <div class="data" style="padding:10px;" >
+            <!-- Table -->
+            <table  class="table table-bordered table-header">
+                <thead>
+                <tr>
+                    <th class="text-center" width="20px">No</th>
+                    <th class="text-center">工作面名称</th>
+                    <th class="text-center w10">工作面代号</th>
+                    <th class="text-center w15">所属矿井</th>
+                    <th class="text-center w10">状态</th>
+                    <th class="text-center">工作面类型</th>
+                    <th class="text-center">排序码</th>
+                    <th class="text-center w25">操作</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+
+        </div>
+        <div class="paging">
+            <ul id="pageBtn" class="pagination">
+            </ul>
+        </div>
+    </div>
 </div>
 
 
@@ -60,338 +60,1612 @@
 <!-- 模态框 -->
 <!-- addModal -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-	 aria-labelledby="addModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel">添加工作面</h4>
-			</div>
-			<!-- 表单!!! -->
-			<form id="workfaceForm" class="form-horizontal" action=""
-				  onsubmit="return false">
-				<div class="modal-body" id="mbody">
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="orgList">公司名称:</label>
-						<div class="col-lg-6">
-							<select id="orgList" name="orgId" class="form-control">
+     aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">添加工作面</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="workfaceForm" class="form-horizontal" action=""
+                  onsubmit="return false">
+                <div class="modal-body" id="mbody">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="orgList">公司名称:</label>
+                        <div class="col-lg-6">
+                            <select id="orgList" name="orgId" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label class="col-lg-3 control-label" for="workfaceName">工作面名称:</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="workfaceName"
+                                   placeholder="请输入工作面名称" name="workfaceName">
+                        </div>
+                        <span id="workfaceName_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceAlias">工作面别名:</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="workfaceAlias"
+                                   name="workfaceAlias" placeholder="请输入工作面别名">
+                        </div>
+                        <span id="workfaceAlias_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">工作面类型:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="workfaceType" id="workfaceType1" value="1">智能化工作面
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="workfaceType" id="workfaceType2" value="0">自动化工作面
+                        </label>
+                        </div>
+                        <span id="workfaceType_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="supportCount">支架数量:</label>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" id="supportCount"
+                                   name="supportCount">
+                        </div>
+                        <label class="col-lg-1 control-label">架</label> <span
+                            id="supportCount_msg" class="col-lg-offset-3 error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">支架方向:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="supportDir" id="supportDir1" value="0">小端
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="supportDir" id="supportDir2" value="1">大端
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >运输机方向:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="conveyorDir" id="conveyorDir1" value="1">左
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="conveyorDir" id="conveyorDir2" value="0">右
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="shearerposCachetime">煤机缓存时间:</label>
+                        <div class="col-lg-6">
+                            <select id="shearerposCachetime" name="shearerposCachetime" class="form-control">
+                                <option value="3600">1小时</option>
+                                <option value="7200">2小时</option>
+                                <option value="7200">3小时</option>
+                                <option value="7200">4小时</option>
+                                <option value="7200">5小时</option>
+                                <option value="7200">6小时</option>
+                                <option value="7200">7小时</option>
+                                <option value="7200">8小时</option>
+                                <option value="7200">9小时</option>
+                                <option value="7200">10小时</option>
+                                <option value="7200">11小时</option>
+                                <option value="7200">12小时</option>
+                                <option value="7200">13小时</option>
+                                <option value="7200">14小时</option>
+                                <option value="7200">15小时</option>
+                                <option value="7200">16小时</option>
+                                <option value="7200">17小时</option>
+                                <option value="7200">18小时</option>
+                                <option value="7200">19小时</option>
+                                <option value="7200">20小时</option>
+                                <option value="7200">21小时</option>
+                                <option value="7200">22小时</option>
+                                <option value="7200">23小时</option>
+                                <option value="7200">24小时</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >皮带类型:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="beltType" id="beltType1" value="0">单皮带
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="beltType" id="beltType2" value="1">多级皮带
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="fontMinpressure">前柱初撑力:</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="fontMinpressure" class="form-control"
+                                   id="fontMinpressure">
+                        </div>
+                        <label class="col-lg-1 control-label" for="fontMaxpressure">~</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="fontMaxpressure" class="form-control"
+                                   id="fontMaxpressure">
+                        </div>
+                        <label class="col-lg-1 control-label">Mpa</label> <span
+                            id="fontPressure" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="backMinpressure">后柱最大值:</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="backMinpressure" class="form-control"
+                                   id="backMinpressure">
+                        </div>
+                        <label class="col-lg-1 control-label" for="backMaxpressure">~</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="backMaxpressure" class="form-control"
+                                   id="backMaxpressure">
+                        </div>
+                        <label class="col-lg-1 control-label">Mpa</label> <span
+                            id="backPressure" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="pressureCharttype">立柱压力图表:</label>
+                        <div class="col-lg-6">
+                            <label class="checkbox-inline"> <input type="checkbox"
+                                                                   checked name="pressureCharttype" id="inlineCheckbox1" value="10">
+                                前柱
+                            </label> <label class="checkbox-inline"> <input type="checkbox"
+                                                                            name="pressureCharttype" id="inlineCheckbox2" value="01">
+                            后柱
+                        </label>
+                        </div>
+                        <span id="pressureCharttype" class="text-center error_msg"></span>
+                    </div>
 
-							</select>
-						</div>
-					</div>
-					<div class="form-group" >
-						<label class="col-lg-3 control-label" for="workfaceName">工作面名称:</label>
-						<div class="col-lg-6">
-							<input type="text" class="form-control" id="workfaceName"
-								   placeholder="请输入工作面名称" name="workfaceName">
-						</div>
-						<span id="workfaceName_msg" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="workfaceAlias">工作面别名:</label>
-						<div class="col-lg-6">
-							<input type="text" class="form-control" id="workfaceAlias"
-								   name="workfaceAlias" placeholder="请输入工作面别名">
-						</div>
-						<span id="workfaceAlias_msg" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">工作面类型:</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="workfaceType" id="workfaceType1" value="1">智能化工作面
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="workfaceType" id="workfaceType2" value="0">自动化工作面
-						</label>
-						</div>
-						<span id="workfaceType_msg" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="supportCount">支架数量:</label>
-						<div class="col-lg-2">
-							<input type="text" class="form-control" id="supportCount"
-								   name="supportCount">
-						</div>
-						<label class="col-lg-1 control-label">架</label> <span
-							id="supportCount_msg" class="col-lg-offset-3 error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">支架方向:</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="supportDir" id="supportDir1" value="0">小端
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="supportDir" id="supportDir2" value="1">大端
-						</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="conveyorDir">运输机方向</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="conveyorDir" id="conveyorDir1" value="1">左
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="conveyorDir" id="conveyorDir2" value="0">右
-						</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="shearerposCachetime">煤机缓存时间</label>
-						<div class="col-lg-6">
-							<select id="shearerposCachetime" name="shearerposCachetime"
-									class="form-control">
-								<option value="3600">1小时</option>
-								<option value="7200">2小时</option>
-								<option value="7200">3小时</option>
-								<option value="7200">4小时</option>
-								<option value="7200">5小时</option>
-								<option value="7200">6小时</option>
-								<option value="7200">7小时</option>
-								<option value="7200">8小时</option>
-								<option value="7200">9小时</option>
-								<option value="7200">10小时</option>
-								<option value="7200">11小时</option>
-								<option value="7200">12小时</option>
-								<option value="7200">13小时</option>
-								<option value="7200">14小时</option>
-								<option value="7200">15小时</option>
-								<option value="7200">16小时</option>
-								<option value="7200">17小时</option>
-								<option value="7200">18小时</option>
-								<option value="7200">19小时</option>
-								<option value="7200">20小时</option>
-								<option value="7200">21小时</option>
-								<option value="7200">22小时</option>
-								<option value="7200">23小时</option>
-								<option value="7200">24小时</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="beltType">皮带类型</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="beltType" id="beltType1" value="0">单皮带
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="beltType" id="beltType2" value="1">多级皮带
-						</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="fontMinpressure">前柱初撑力</label>
-						<div class="col-lg-2">
-							<input type="text" name="fontMinpressure" class="form-control"
-								   id="fontMinpressure">
-						</div>
-						<label class="col-lg-1 control-label" for="fontMaxpressure">~</label>
-						<div class="col-lg-2">
-							<input type="text" name="fontMaxpressure" class="form-control"
-								   id="fontMaxpressure">
-						</div>
-						<label class="col-lg-1 control-label">Mpa</label> <span
-							id="fontPressure" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="backMinpressure">后柱最大值</label>
-						<div class="col-lg-2">
-							<input type="text" name="backMinpressure" class="form-control"
-								   id="backMinpressure">
-						</div>
-						<label class="col-lg-1 control-label" for="backMaxpressure">~</label>
-						<div class="col-lg-2">
-							<input type="text" name="backMaxpressure" class="form-control"
-								   id="backMaxpressure">
-						</div>
-						<label class="col-lg-1 control-label">Mpa</label> <span
-							id="backPressure" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="pressureCharttype">立柱压力图表</label>
-						<div class="col-lg-6">
-							<label class="checkbox-inline"> <input type="checkbox"
-																   checked name="pressureCharttype" id="inlineCheckbox1" value="10">
-								前柱
-							</label> <label class="checkbox-inline"> <input type="checkbox"
-																			name="pressureCharttype" id="inlineCheckbox2" value="01">
-							后柱
-						</label>
-						</div>
-						<span id="pressureCharttype" class="text-center error_msg"></span>
-					</div>
-					<div class="form-group">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceLength">工作面长度:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceLength" name="workfaceLength">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceAbleLength">可采走向长度:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceAbleLength" name="workfaceAbleLength">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceCoalThickness">煤层厚度:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceCoalThickness" name="workfaceCoalThickness">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceInclination">工作面倾角:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceInclination" name="workfaceInclination">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceAverageHeight">平均采高:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceAverageHeight" name="workfaceAverageHeight">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceStartTime">工作面开始时间:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceStartTime" name="workfaceStartTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >早班时间范围:</label>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftHourS" name="morningShiftHourS" class="form-control select-time">
+
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftMiniteS" name="morningShiftMiniteS" class="select-time form-control" >
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <label class="unit control-label col-lg-1">-</label>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftHourE" name="morningShiftHourE" class="form-control select-time">
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftMiniteE" name="morningShiftMiniteE" class="form-control select-time">
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <span id="morningShift_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="fontMinpressure">午班时间范围:</label>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftHourS" name="afternoonShiftHourS" class="form-control select-time">
+
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftMiniteS" name="afternoonShiftMiniteS" class="select-time form-control" >
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <label class="unit control-label col-lg-1">-</label>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftHourE" name="afternoonShiftHourE" class="form-control select-time">
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftMiniteE" name="afternoonShiftMiniteE" class="form-control select-time">
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <span id="afternoonShift_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="fontMinpressure">晚班时间范围:</label>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftHourS" name="nightShiftHourS" class="form-control select-time">
+
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftMiniteS" name="nightShiftMiniteS" class="select-time form-control" >
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <label class="unit control-label col-lg-1">-</label>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftHourE" name="nightShiftHourE" class="form-control select-time">
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftMiniteE" name="nightShiftMiniteE" class="form-control select-time">
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <span id="nightShift_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
                         <label class="col-lg-3 control-label" for="sortcode">排序码:</label>
                         <div class="col-lg-3">
                             <input type="text" class="form-control" id="sortcode" name="sortcode">
                         </div>
                     </div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="submit" class="btn btn-primary"
-							onclick="addWorkface()">提交</button>
-				</div>
-			</form>
-		</div>
-	</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="addWorkface()">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <!-- editModal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel2">添加工作面</h4>
-			</div>
-			<!-- 表单!!! -->
-			<form id="workfaceForm_edit" class="form-horizontal" action="" onsubmit="return false">
-				<div class="modal-body" id="mbody_edit">
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="orgList_edit">公司名称:</label>
-						<div class="col-lg-6">
-							<select id="orgList_edit" name="orgId_edit" class="form-control">
-								<option value="1231312321312">1</option>
-								<option value="2134214132421">2</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="workfaceName_edit">工作面名称:</label>
-						<div class="col-lg-6">
-							<input type="text" class="form-control" id="workfaceName_edit" name="workfaceName_edit">
-						</div>
-						<span id="workfaceName_msg_edit" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="workfaceAlias_edit">工作面别名:</label>
-						<div class="col-lg-6">
-							<input type="text" class="form-control" id="workfaceAlias_edit"
-								   name="workfaceAlias_edit" placeholder="请输入工作面别名">
-						</div>
-						<span id="workfaceAlias_msg_edit" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">工作面类型:</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="workfaceType_edit" id="workfaceType1_edit" value="1">智能化工作面
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="workfaceType_edit" id="workfaceType2_edit" value="0">自动化工作面
-						</label>
-						</div>
-						<span id="workfaceType_msg_edit" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="supportCount_edit">支架数量:</label>
-						<div class="col-lg-2">
-							<input type="text" class="form-control" id="supportCount_edit"
-								   name="supportCount_edit">
-						</div>
-						<label class="col-lg-1 control-label">架</label> <span
-							id="supportCount_msg_edit" class="col-lg-offset-3 error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">支架方向:</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="supportDir_edit" id="supportDir1_edit" value="0">小端
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="supportDir_edit" id="supportDir2_edit" value="1">大端
-						</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="conveyorDir_edit">运输机方向</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="conveyorDir_edit" id="conveyorDir1_edit" value="1">左
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="conveyorDir_edit" id="conveyorDir2_edit" value="0">右
-						</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label"
-							   for="shearerposCachetime_edit">煤机缓存时间</label>
-						<div class="col-lg-6">
-							<select id="shearerposCachetime_edit"
-									name="shearerposCachetime_edit" class="form-control">
-								<option value="3600">1小时</option>
-								<option value="7200">2小时</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="beltType_edit">皮带类型</label>
-						<div class="col-lg-6">
-							<label class="radio-inline"> <input type="radio" checked
-																name="beltType_edit" id="beltType1_edit" value="0">单皮带
-							</label> <label class="radio-inline"> <input type="radio"
-																		 name="beltType_edit" id="beltType2_edit" value="1">多级皮带
-						</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="fontMinpressure_edit">前柱初撑力</label>
-						<div class="col-lg-2">
-							<input type="text" name="fontMinpressure_edit" class="form-control" id="fontMinpressure_edit">
-						</div>
-						<label class="col-lg-1 control-label" for="fontMaxpressure_edit">~</label>
-						<div class="col-lg-2">
-							<input type="text" name="fontMaxpressure_edit"
-								   class="form-control" id="fontMaxpressure_edit">
-						</div>
-						<label class="col-lg-1 control-label">Mpa</label> <span
-							id="fontPressure_edit" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label" for="backMinpressure_edit">后柱最大值</label>
-						<div class="col-lg-2">
-							<input type="text" name="backMinpressure_edit" class="form-control" id="backMinpressure_edit">
-						</div>
-						<label class="col-lg-1 control-label" for="backMaxpressure_edit">~</label>
-						<div class="col-lg-2">
-							<input type="text" name="backMaxpressure_edit"
-								   class="form-control" id="backMaxpressure_edit">
-						</div>
-						<label class="col-lg-1 control-label">Mpa</label> <span
-							id="backPressure_edit" class="error_msg"></span>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label"
-							   for="pressureCharttype_edit">立柱压力图表</label>
-						<div class="col-lg-6">
-							<label class="checkbox-inline"> <input type="checkbox"
-																   checked name="pressureCharttype_edit" id="inlineCheckbox1_edit"
-																   value="10"> 前柱
-							</label> <label class="checkbox-inline"> <input type="checkbox"
-																			name="pressureCharttype_edit" id="inlineCheckbox2_edit"
-																			value="01"> 后柱
-						</label>
-						</div>
-						<span id="pressureCharttype_edit" class="text-center error_msg"></span>
-					</div>
-					<div class="form-group">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">添加工作面</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="workfaceForm_edit" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body" id="mbody_edit">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="orgList_edit">公司名称:</label>
+                        <div class="col-lg-6">
+                            <select id="orgList_edit" name="orgId_edit" class="form-control">
+                                <option value="1231312321312">1</option>
+                                <option value="2134214132421">2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceName_edit">工作面名称:</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="workfaceName_edit" name="workfaceName_edit">
+                        </div>
+                        <span id="workfaceName_msg_edit" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceAlias_edit">工作面别名:</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="workfaceAlias_edit"
+                                   name="workfaceAlias_edit" placeholder="请输入工作面别名">
+                        </div>
+                        <span id="workfaceAlias_msg_edit" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">工作面类型:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="workfaceType_edit" id="workfaceType1_edit" value="1">智能化工作面
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="workfaceType_edit" id="workfaceType2_edit" value="0">自动化工作面
+                        </label>
+                        </div>
+                        <span id="workfaceType_msg_edit" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="supportCount_edit">支架数量:</label>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" id="supportCount_edit"
+                                   name="supportCount_edit">
+                        </div>
+                        <label class="col-lg-1 control-label">架</label> <span
+                            id="supportCount_msg_edit" class="col-lg-offset-3 error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">支架方向:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="supportDir_edit" id="supportDir1_edit" value="0">小端
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="supportDir_edit" id="supportDir2_edit" value="1">大端
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >运输机方向:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="conveyorDir_edit" id="conveyorDir1_edit" value="1">左
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="conveyorDir_edit" id="conveyorDir2_edit" value="0">右
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"
+                               for="shearerposCachetime_edit">煤机缓存时间:</label>
+                        <div class="col-lg-6">
+                            <select id="shearerposCachetime_edit"
+                                    name="shearerposCachetime_edit" class="form-control">
+                                <option value="3600">1小时</option>
+                                <option value="7200">2小时</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">皮带类型:</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"> <input type="radio" checked
+                                                                name="beltType_edit" id="beltType1_edit" value="0">单皮带
+                            </label> <label class="radio-inline"> <input type="radio"
+                                                                         name="beltType_edit" id="beltType2_edit" value="1">多级皮带
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="fontMinpressure_edit">前柱初撑力:</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="fontMinpressure_edit" class="form-control" id="fontMinpressure_edit">
+                        </div>
+                        <label class="col-lg-1 control-label" for="fontMaxpressure_edit">~</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="fontMaxpressure_edit"
+                                   class="form-control" id="fontMaxpressure_edit">
+                        </div>
+                        <label class="col-lg-1 control-label">Mpa</label> <span
+                            id="fontPressure_edit" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="backMinpressure_edit">后柱最大值:</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="backMinpressure_edit" class="form-control" id="backMinpressure_edit">
+                        </div>
+                        <label class="col-lg-1 control-label" for="backMaxpressure_edit">~</label>
+                        <div class="col-lg-2">
+                            <input type="text" name="backMaxpressure_edit"
+                                   class="form-control" id="backMaxpressure_edit">
+                        </div>
+                        <label class="col-lg-1 control-label">Mpa</label> <span
+                            id="backPressure_edit" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"
+                               for="pressureCharttype_edit">立柱压力图表</label>
+                        <div class="col-lg-6">
+                            <label class="checkbox-inline"> <input type="checkbox"
+                                                                   checked name="pressureCharttype_edit" id="inlineCheckbox1_edit"
+                                                                   value="10"> 前柱
+                            </label> <label class="checkbox-inline"> <input type="checkbox"
+                                                                            name="pressureCharttype_edit" id="inlineCheckbox2_edit"
+                                                                            value="01"> 后柱
+                        </label>
+                        </div>
+                        <span id="pressureCharttype_edit" class="text-center error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceLength_edit">工作面长度:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceLength_edit" name="workfaceLength_edit">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceAbleLength_edit">工作面可采走向长度:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceAbleLength_edit" name="workfaceAbleLength_edit">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceCoalThickness_edit">煤层厚度:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceCoalThickness_edit" name="workfaceCoalThickness_edit">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceInclination_edit">工作面倾角:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceInclination_edit" name="workfaceInclination_edit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceAverageHeight_edit">平均采高:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceAverageHeight_edit" name="workfaceAverageHeight_edit">
+                        </div>
+                        <label class="col-lg-1 control-label">米</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="workfaceStartTime_edit">工作面开始时间:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="workfaceStartTime_edit" name="workfaceStartTime_edit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >早班时间范围:</label>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftHourS_edit" name="morningShiftHourS_edit" class="form-control select-time">
+
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftMiniteS_edit" name="morningShiftMiniteS_edit" class="select-time form-control" style="width: 80px">
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <label class="unit control-label col-lg-1">-</label>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftHourE_edit" name="morningShiftHourE_edit" class="form-control select-time">
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="morningShiftMiniteE_edit" name="morningShiftMiniteE_edit" class="form-control select-time">
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <span id="morningShift_edit_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="fontMinpressure">午班时间范围:</label>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftHourS_edit" name="afternoonShiftHourS_edit" class="form-control select-time">
+
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftMiniteS_edit" name="afternoonShiftMiniteS_edit" class="select-time form-control" >
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <label class="unit control-label col-lg-1">-</label>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftHourE_edit" name="afternoonShiftHourE_edit" class="form-control select-time">
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="afternoonShiftMiniteE_edit" name="afternoonShiftMiniteE_edit" class="form-control select-time">
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <span id="afternoonShift_edit_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="fontMinpressure">晚班时间范围:</label>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftHourS_edit" name="nightShiftHourS_edit" class="form-control select-time">
+
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftMiniteS_edit" name="nightShiftMiniteS_edit" class="select-time form-control" >
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <label class="unit control-label col-lg-1">-</label>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftHourE_edit" name="nightShiftHourE_edit" class="form-control select-time">
+                                <option value="00">00时</option>
+                                <option value="01">01时</option>
+                                <option value="02">02时</option>
+                                <option value="03">03时</option>
+                                <option value="04">04时</option>
+                                <option value="05">05时</option>
+                                <option value="06">06时</option>
+                                <option value="07">07时</option>
+                                <option value="08">08时</option>
+                                <option value="09">09时</option>
+                                <option value="10">10时</option>
+                                <option value="11">11时</option>
+                                <option value="12">12时</option>
+                                <option value="13">13时</option>
+                                <option value="14">14时</option>
+                                <option value="15">15时</option>
+                                <option value="16">16时</option>
+                                <option value="17">17时</option>
+                                <option value="18">18时</option>
+                                <option value="19">19时</option>
+                                <option value="20">20时</option>
+                                <option value="21">21时</option>
+                                <option value="22">22时</option>
+                                <option value="23">23时</option>
+                            </select>
+                        </div>
+                        <div class="select-time col-lg-2">
+                            <select id="nightShiftMiniteE_edit" name="nightShiftMiniteE_edit" class="form-control select-time">
+                                <option value="00">00分</option>
+                                <option value="01">01分</option>
+                                <option value="02">02分</option>
+                                <option value="03">03分</option>
+                                <option value="04">04分</option>
+                                <option value="05">05分</option>
+                                <option value="06">06分</option>
+                                <option value="07">07分</option>
+                                <option value="08">08分</option>
+                                <option value="09">09分</option>
+                                <option value="10">10分</option>
+                                <option value="11">11分</option>
+                                <option value="12">12分</option>
+                                <option value="13">13分</option>
+                                <option value="14">14分</option>
+                                <option value="15">15分</option>
+                                <option value="16">16分</option>
+                                <option value="17">17分</option>
+                                <option value="18">18分</option>
+                                <option value="19">19分</option>
+                                <option value="20">20分</option>
+                                <option value="21">21分</option>
+                                <option value="22">22分</option>
+                                <option value="23">23分</option>
+                                <option value="24">24分</option>
+                                <option value="25">25分</option>
+                                <option value="26">26分</option>
+                                <option value="27">27分</option>
+                                <option value="28">28分</option>
+                                <option value="29">29分</option>
+                                <option value="30">30分</option>
+                                <option value="31">31分</option>
+                                <option value="32">32分</option>
+                                <option value="33">33分</option>
+                                <option value="34">34分</option>
+                                <option value="35">35分</option>
+                                <option value="36">36分</option>
+                                <option value="37">37分</option>
+                                <option value="38">38分</option>
+                                <option value="39">39分</option>
+                                <option value="40">40分</option>
+                                <option value="41">41分</option>
+                                <option value="42">42分</option>
+                                <option value="43">43分</option>
+                                <option value="44">44分</option>
+                                <option value="45">45分</option>
+                                <option value="46">46分</option>
+                                <option value="47">47分</option>
+                                <option value="48">48分</option>
+                                <option value="49">49分</option>
+                                <option value="50">50分</option>
+                                <option value="51">51分</option>
+                                <option value="52">52分</option>
+                                <option value="53">53分</option>
+                                <option value="54">54分</option>
+                                <option value="55">55分</option>
+                                <option value="56">56分</option>
+                                <option value="57">57分</option>
+                                <option value="58">58分</option>
+                                <option value="59">59分</option>
+                            </select>
+                        </div>
+                        <span id="nightShift_edit_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
                         <label class="col-lg-3 control-label" for="sortcode_edit">排序码:</label>
                         <div class="col-lg-3">
                             <input type="text" class="form-control" id="sortcode_edit" name="sortcode_edit">
                         </div>
                     </div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="submit" class="btn btn-primary"
-							onclick="editWorkfaceSubmit()">提交</button>
-				</div>
-			</form>
-		</div>
-	</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary"
+                            onclick="editWorkfaceSubmit()">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+<!-- workfaceAccumulateInfo -->
+<div class="modal fade" id="workfaceAccumulateInfoModal" tabindex="-1" role="dialog" aria-labelledby="accumulateInfoModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="workfaceAccumulateInfoModalTitle">工作面名称-运行累计</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="workfaceAccumulateInfo" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="workfaceAccumulateInfoId" hidden>
+                        <label class="col-lg-2 control-label" for="workfaceRunningTime">运行时间:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="workfaceRunningTime" name="workfaceRunningTime" onchange="changeFlag()">
+                            <label class="unit control-label">小时</label>
+                        </div>
+                        <label class="col-lg-2 control-label" for="workfaceCycleNumber">循环数:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="workfaceCycleNumber" name="workfaceCycleNumber" onchange="changeFlag()">
+                            <label class="unit control-label">个</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="workfaceAccuPropulsion">推进度:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="workfaceAccuPropulsion" name="workfaceAccuPropulsion" onchange="changeFlag()">
+                            <label class="unit  control-label" >米</label>
+                        </div>
+                        <label class="col-lg-2 control-label" for="workfaceExcessCoal">过煤量:</label>
+                        <div class="col-lg-4">
+                            <input type="text" id="workfaceExcessCoal" name="workfaceExcessCoal" onchange="changeFlag()">
+                            <label class="unit  control-label" >吨</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="commitWorkfaceAccumulateInfo()">保存</button>
+                </div>
+                <div hidden>
+                    <input id="workfaceAccumulateInfoFlag" type="text" name="workfaceAccumulateInfoFlag">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <script type="text/javascript" src="/admin_static/workface/w.js"></script>
 </body>

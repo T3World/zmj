@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,8 @@ import com.zzmj.util.CodeUtil;
 import com.zzmj.util.ErrorUtil;
 import com.zzmj.util.exception.DoSqlFailedException;
 import com.zzmj.util.exception.IllegalParamException;
+
+import java.util.List;
 
 /**
  * 
@@ -128,4 +131,15 @@ public class RoleController {
         request.setAttribute("msg", "权限赋予失败");
         return null;
     }
+
+    /**
+     * 根据userId查询关联的所有角色，返回一个角色集合(测试)
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/listRolesByUserId", method = RequestMethod.POST)
+    public List<ZZRoleEntity> listRolesByUserId(@RequestParam(name = "userId", required = false) String userId) {
+        return this.roleService.listRolesByUserId(userId);
+    }
+
 }

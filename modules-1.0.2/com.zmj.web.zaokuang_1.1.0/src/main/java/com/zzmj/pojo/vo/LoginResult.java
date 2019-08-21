@@ -1,13 +1,12 @@
 package com.zzmj.pojo.vo;
 
-import java.io.Serializable;
-
 import com.alibaba.fastjson.annotation.JSONField;
-/**
-* @description:    java类作用描述
-* @author:         umr
-* @date:           2019/5/6
-*/
+import com.zzmj.pojo.entity.ZZModuleEntity;
+import com.zzmj.pojo.entity.ZZRoleEntity;
+
+import java.io.Serializable;
+import java.util.List;
+
 public class LoginResult implements Serializable {
 
     /**
@@ -42,10 +41,42 @@ public class LoginResult implements Serializable {
     @JSONField(name = "Login_Time")
     private Long loginTime;
 
-    @JSONField(name = "Token")
-    private String token;
+    /**
+     * 用户所拥有的所有角色名
+     * */
+    private List<ZZRoleEntity> roles;
+    /**
+     * 用户所拥有的所有模块值
+     * */
+    @JSONField(name = "permit")
+    private List<ZZModuleEntity> rights;
 
+    public LoginResult() {
+    }
 
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public List<ZZRoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<ZZRoleEntity> roles) {
+        this.roles = roles;
+    }
+
+    public List<ZZModuleEntity> getRights() {
+        return rights;
+    }
+
+    public void setRights(List<ZZModuleEntity> rights) {
+        this.rights = rights;
+    }
 
     public String getUserId() {
         return userId;
@@ -119,11 +150,4 @@ public class LoginResult implements Serializable {
         this.loginTime = l;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

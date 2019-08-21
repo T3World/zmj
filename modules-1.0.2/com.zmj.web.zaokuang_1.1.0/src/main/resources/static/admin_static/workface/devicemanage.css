@@ -1,0 +1,120 @@
+.main{
+	padding-top:10px;
+	height:910px;
+
+}
+
+.module{
+	width:380px;
+	border:1px solid #CCC;
+	height:calc(100% - 60px);
+}
+
+.module span.title{
+	display:inline-block;
+	border-bottom:1px solid #F1F1F1;
+	width:100%;
+	padding-top:3px;
+	padding-bottom:3px;
+	text-align:center;
+	background-color:#F1F1F1;
+}
+
+.right_content{
+	position:relative;
+	margin-left:10px;
+	width:calc(100% - 20px);
+	border:1px solid #CCC;
+	height:calc(100% - 10px);
+
+}
+.tool_button{
+	padding-left:10px;
+	padding-top:10px;
+	padding-right:10px;
+}
+
+.right_button{
+	margin-left: 20px;
+}
+.paging{
+	position:absolute;
+	right:0px;
+	bottom:2px;
+	padding:0px;
+
+}
+.paging .pagination{
+	margin:0px;
+}
+
+
+/*宽度比例*/
+.w10 { width: 10%; }
+.w20 { width: 20%; }
+.w30 { width: 30%; }
+.w40 { width: 40%; }
+.w50 { width: 50%; }
+.w60 { width: 60%; }
+.w70 { width: 70%; }
+.w80 { width: 80%; }
+.w90 { width: 90%; }
+.w5 { width: 5%; }
+.w15 { width: 15%; }
+.w25 { width: 25%; }
+.w35 { width: 35%; }
+.w33 { width: 33.333%; }
+.w45 { width: 45%; }
+.w55 { width: 55%; }
+.w65 { width: 65%; }
+.w75 { width: 75%; }
+.w85 { width: 85%; }
+.w95 { width: 95%; }
+
+.zmj-headDiv {
+	width:100%;
+	height:100px;
+}
+.zmj-headTitleDiv {
+	margin-left: 10px;
+	width:calc(100% - 10px); 
+	height:60px;
+	line-height:60px;
+	font-size: 22px; 
+	text-align: left; 
+}
+.zmj-informationIndicating {
+	width:100%; 
+	height:80px; 
+	line-height:80px;
+	font-size: 20px; 
+	text-align: left; 
+	/* background-color: orange; */
+}
+.zmj-commonDiv {
+	float: left; 
+	margin-left: 20px; 
+	width: 360px; 
+	height:80px; 
+	line-height:80px;
+	/* background-color: lightblue; */
+}
+.divRight {
+	margin-left: 150px; 
+}
+.zmj-commonSpan {
+	margin-left: 20px; 
+	margin-right: 20px;
+}
+.zmj-select {
+	width: 300px;
+}
+.zmj-deviceNum {
+	width: 200px;
+}
+.zmj-moTitle {
+	text-align: center;
+}
+.zmj-modal {
+	margin-top: 200px;
+}

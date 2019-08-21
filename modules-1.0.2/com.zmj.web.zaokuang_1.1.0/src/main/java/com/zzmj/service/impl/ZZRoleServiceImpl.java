@@ -138,4 +138,23 @@ public class ZZRoleServiceImpl implements ZZRoleService {
 		}
 	}
 
+	/**
+	 * 根据userId查询关联的所有角色，返回一个角色集合List<Role>
+	 * (角色集合里包含角色Id、角色名、角色值)
+	 * @param userId
+	 * @return
+	 */
+    @Override
+    public List<ZZRoleEntity> listRolesByUserId(String userId) {
+	    if (null == userId || userId.equals("")) {
+	        return null;
+        }
+        List<ZZRoleEntity> list = this.roleMapper.listRolesByUserId(userId);
+	    if (list.size() > 0) {
+	        return list;
+        } else {
+	        return null;
+        }
+    }
+
 }

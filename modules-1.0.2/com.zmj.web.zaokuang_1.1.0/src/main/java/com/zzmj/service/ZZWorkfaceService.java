@@ -3,6 +3,7 @@ package com.zzmj.service;
 import java.util.List;
 import java.util.Map;
 
+import com.zzmj.pojo.entity.Rate;
 import com.zzmj.pojo.entity.WorkfaceAndConfig;
 import com.zzmj.pojo.entity.ZZWorkfaceEntity;
 import com.zzmj.pojo.vo.PageObject;
@@ -64,4 +65,21 @@ public interface ZZWorkfaceService {
     SysResult stopWorkface(String workfaceId, Integer workfaceState);
 
     List<Map<String, Object>> listWorkfaceNoPage(String orgId);
+
+    //根据orgId sourceTime rateType查询综采率平均值
+    SysResult workfaceIdListByOrgId(String orgId,String sourceTime,String rateType);
+    //查询Rate对象的集合的形式
+    public SysResult selectReteValue(String orgIds,String cycle,long startTime,String rateType);
+    //返回单个Rate对象
+    Rate select(String orgIds,String cycle,long startTime,String rateType);
+
+    /**
+     * @param orgIds
+     * @param startTime
+     * @param endTime
+     * @param rateType  率的分类
+     * @return
+     */
+	SysResult selectReteValueSecond(String orgIds, long startTime,long endTime, String rateType);
+    
 }

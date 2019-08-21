@@ -10,6 +10,20 @@ public interface ZZUserService {
 
 	int delUser(String userId) throws DoSqlFailedException;
 
+	
+	/**
+	 * 修改用户启用状态
+	 * @param userId
+	 * @param isuse
+	 */
+    SysResult updateIsUse(String userId,String isuse);
+	/**
+	 * 注册用户
+	 * @param zzUserEntity
+	 * @return
+	 */
+	SysResult registUserEntity(ZZUserEntity zzUserEntity);
+	
 	/**
 	 * 添加用户的方法
 	 *
@@ -95,6 +109,7 @@ public interface ZZUserService {
 	 * @return: int
 	 */
 	int getifUserAccountExist(String account) throws DoSqlFailedException;
+	int getifUserAccountExistTwo(String account);
 
 	int getIfPasswordRight(String userId,String password);
 }

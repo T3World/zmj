@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZCoalMiningRateMapper">
+
+    <resultMap id="BaseResultMap" type="com.zzmj.pojo.entity.ZZCoalMiningRate">
+        <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Rate_Id" property="rateId" jdbcType="VARCHAR" />
+        <result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+        <result column="Comm_NoramlTime" property="commNoramTime" jdbcType="VARCHAR" />
+        <result column="Comm_UnNormalTime" property="commUnNormaTime" jdbcType="VARCHAR" />
+        <result column="Shearer_RunningTime" property="shearerRunningTime" jdbcType="VARCHAR" />
+        <result column="Shearer_UnRunningTime" property="shearerUnRunningTime" jdbcType="VARCHAR" />
+        <result column="Total_Time" property="totalTime" jdbcType="VARCHAR" />
+        <result column="Rate_Value" property="rateValue" jdbcType="VARCHAR" />
+        <result column="Rate_Type" property="rateType" jdbcType="VARCHAR" />
+        <result column="Source_Time" property="sourceTime" jdbcType="VARCHAR" />
+        <result column="Compute_Time" property="computeTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Id, Rate_Id, Workface_Id, Comm_NoramlTime,Comm_UnNormalTime,
+        Shearer_RunningTime,Shearer_UnRunningTime,
+        Total_Time,Rate_Value,Rate_Type,Source_Time,Compute_Time
+    </sql>
+
+    <insert id="addCoalMiningRate" parameterType="com.zzmj.pojo.entity.ZZCoalMiningRate">
+        insert into ZZ_CoalMiningRate(
+            Id, Rate_Id, Workface_Id, Comm_NoramlTime,Comm_UnNormalTime,
+            Shearer_RunningTime,Shearer_UnRunningTime,
+            Total_Time,Rate_Value,Rate_Type,Source_Time,Compute_Time)
+        value (
+            #{id,jdbcType=VARCHAR},
+            #{rateId,jdbcType=VARCHAR},
+            #{workfaceId,jdbcType=VARCHAR},
+            #{commNoramTime,jdbcType=VARCHAR},
+            #{commUnNormaTime,jdbcType=VARCHAR},
+            #{shearerRunningTime,jdbcType=VARCHAR},
+            #{shearerUnRunningTime,jdbcType=VARCHAR},
+            #{totalTime,jdbcType=VARCHAR},
+            #{rateValue,jdbcType=VARCHAR},
+            #{rateType,jdbcType=VARCHAR},
+            #{sourceTime,jdbcType=VARCHAR},
+            #{computeTime,jdbcType=TIMESTAMP});
+    </insert>
+    
+    <update id="updateCoalMiningRateById" parameterType="com.zzmj.pojo.entity.ZZCoalMiningRate">
+      update ZZ_CoalMiningRate
+      <set>
+          <if test="id != null">
+              Id = #{id,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Rate_Id = #{rateId,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Workface_Id = #{workfaceId,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Comm_NoramlTime = #{commNoramTime,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Comm_UnNormalTime = #{commUnNormaTime,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Shearer_RunningTime = #{shearerRunningTime,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Shearer_UnRunningTime = #{shearerUnRunningTime,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Total_Time = #{totalTime,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Rate_Value = #{rateValue,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Rate_Type = #{rateType,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Source_Time = #{sourceTime,jdbcType=VARCHAR},
+          </if>
+          <if test="id != null">
+              Compute_Time = #{computeTime,jdbcType=VARCHAR},
+          </if>
+      </set>
+      where Id = #{id,jdbcType=VARCHAR};
+    </update>
+
+    <delete id="deleteCoalMiningRateById" parameterType="string" >
+        delete from ZZ_CoalMiningRate
+        where Id = #{id,jdbcType=VARCHAR};
+    </delete>
+    
+    <select id="selectWorkfaceRate" resultMap="BaseResultMap">
+        select Rate_Value
+        from ZZ_CoalMiningRate
+        where  Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+                and Source_Time = #{sourceTime,jdbcType=VARCHAR}
+                and Rate_Type = #{rateType,jdbcType=VARCHAR}
+                
+    </select> 
+    
+     <select id="selectWorkfaceRatee" resultType="java.lang.String">
+        select Rate_Value
+        from ZZ_CoalMiningRate
+        where  Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+                and Source_Time = #{sourceTime,jdbcType=VARCHAR}
+                and Rate_Type = #{rateType,jdbcType=VARCHAR}
+                
+    </select> 
+    
+    <select id="selectWorkfaceRateThird" resultType="java.lang.String">
+    select Rate_Value
+        from ZZ_CoalMiningRate
+        where  Workface_Id = #{workfaceId,jdbcType=VARCHAR}
+                and Rate_Type = #{rateType,jdbcType=VARCHAR}
+                 and Source_Time between #{start} and #{end}     
+    </select> 
+    
+    <select id="selectAll" resultMap="BaseResultMap">
+    	select * from ZZ_CoalMiningRate where Rate_Type='4'
+    </select>
+    
+</mapper>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzmj.mapper.ZZWorkfaceGeographyMapper">
+
+    <resultMap id="WorkfaceGeographyMap" type="com.zzmj.pojo.entity.ZZWorkfaceGeography">
+        <id column="Id" property="id" jdbcType="VARCHAR"/>
+        <result column="Org_Id" property="orgId" jdbcType="VARCHAR"/>
+        <result column="Org_Latitude" property="orgLatitude" jdbcType="VARCHAR"/>
+        <result column="Org_Longitude" property="orgLongitude" jdbcType="VARCHAR"/>
+        <result column="SortCode" property="sortCode" jdbcType="VARCHAR"/>
+        <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="IsDel" property="isDel" jdbcType="VARCHAR"/>
+        <association property="zzOrgEntity" javaType="com.zzmj.pojo.entity.ZZOrgEntity">
+            <!--关联表的属性注入-->
+            <id column="Id" property="id"/>
+            <result column="Org_Id" property="orgId"/>
+            <result column="Org_PId" property="orgPid"/>
+            <result column="Org_Name" property="orgName"/>
+        </association>
+    </resultMap>
+
+    <!--插入矿井公司地理信息-->
+    <insert id="insertSelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceGeography">
+        insert into zz_orgpos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            Id,
+            Org_Id,
+            Org_Latitude,
+            Org_Longitude,
+            SortCode,
+            UpdateTime,
+            IsDel,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id},
+            #{orgId},
+            #{orgLatitude},
+            #{orgLongitude},
+            #{sortCode},
+            #{updateTime},
+            #{isDel},
+        </trim>
+    </insert>
+
+    <!--插入矿井集团地理信息-->
+    <insert id="insertSelective2" parameterType="com.zzmj.pojo.entity.ZZWorkfaceGeography">
+        insert into zz_orgpos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            Id,
+            Org_Id,
+            Org_Latitude,
+            Org_Longitude,
+            SortCode,
+            UpdateTime,
+            IsDel,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id},
+            #{groupId},
+            #{orgLatitude},
+            #{orgLongitude},
+            #{sortCode},
+            #{updateTime},
+            #{isDel},
+        </trim>
+    </insert>
+
+    <!--根据Id删除地理信息-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from zz_orgpos where Id=#{id}
+    </delete>
+
+    <!--更新地理信息-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.zzmj.pojo.entity.ZZWorkfaceGeography">
+        update zz_orgpos
+        <set>
+            <if test="orgId != null">
+                Org_Id = #{orgId},
+            </if>
+            <if test="orgLatitude != null">
+                Org_Latitude = #{orgLatitude},
+            </if>
+            <if test="orgLongitude != null">
+                Org_Longitude = #{orgLongitude},
+            </if>
+            <if test="sortCode != null">
+                SortCode = #{sortCode},
+            </if>
+            <if test="updateTime != null">
+                UpdateTime = #{updateTime},
+            </if>
+            <if test="isDel != null">
+                IsDel = #{isDel},
+            </if>
+        </set>
+        where Id = #{id}
+    </update>
+
+    <!--[简单查询表中所有内容](只是看看效果)-->
+    <select id="selectAll" resultMap="WorkfaceGeographyMap">
+        select * from zz_orgpos
+    </select>
+
+    <!--根据集团id查询该集团下的所有矿井信息-->
+    <select id="selectByGroupId" resultMap="WorkfaceGeographyMap">
+        select Org_Name, Org_Longitude, Org_latitude, zz_orgpos.UpdateTime
+        from zz_org, zz_orgpos
+        where zz_org.Org_Id=zz_orgpos.Org_Id and zz_org.Org_PId=#{orgPId}
+    </select>
+
+    <!--查询所有集团下的矿井地理信息-->
+    <!--<select id="selectAllByGroup" resultMap="WorkfaceGeographyMap">-->
+        <!--select Org_Name, Org_Longitude, Org_latitude, zz_workfacegeography.UpdateTime-->
+        <!--from zz_org, zz_workfacegeography-->
+        <!--where zz_org.Org_Id=zz_workfacegeography.Org_Id and zz_org.Org_PId!='0'-->
+    <!--</select>-->
+    <select id="selectAllByGroup" resultMap="WorkfaceGeographyMap">
+        select zz_orgpos.*, Org_Name, Org_PId from zz_org, zz_orgpos
+        where zz_org.Org_Id=zz_orgpos.Org_Id and zz_org.Org_PId!='0'
+    </select>
+
+    <!--查询地理信息总数-->
+    <select id="countGeography" resultType="Integer">
+        select count(*) from zz_org, zz_orgpos
+        where zz_org.Org_Id=zz_orgpos.Org_Id and zz_org.isDel=0 and zz_orgpos.isDel='0'
+    </select>
+
+    <!--根据groupId查找总数-->
+    <select id="countGeographyByGroupId" resultType="Integer">
+        select count(*) from zz_org, zz_orgpos
+        where zz_org.Org_Id=zz_orgpos.Org_Id and zz_org.isDel=0 and zz_orgpos.isDel='0'
+        and Org_PId=#{groupId}
+    </select>
+
+    <!--根据关键字查询总数量-->
+    <select id="countGeographyByKeyword" resultType="Integer">
+        select count(*) from zz_orgpos where isDel='0'
+        and org_Latitude like concat('%', #{keyword}, '%')
+    </select>
+
+    <!--根据关键字和groupId查找数量-->
+    <select id="countGeographyByGroupIdAndByKeyword" resultType="Integer">
+        select count(*) from zz_org, zz_orgpos
+        where zz_org.Org_Id=zz_orgpos.Org_Id and Org_PId=#{groupId}
+        and zz_org.isDel=0 and zz_orgpos.isDel='0'
+        and org_Latitude like concat('%', #{keyword}, '%')
+    </select>
+
+    <!--分页查询，表中所有数据的分页查询-->
+    <select id="listGeography" resultMap="WorkfaceGeographyMap">
+        select zz_orgpos.*, Org_Name, Org_PId from zz_orgpos, zz_org
+        where zz_org.Org_Id=zz_orgpos.Org_Id and zz_orgpos.isDel='0' and zz_org.isDel=0
+        order by zz_orgpos.SortCode limit #{rowNo}, #{pageSize}
+    </select>
+
+    <!--根据关键字，单条件分页查询-->
+    <select id="listGeographyByKeyword" resultMap="WorkfaceGeographyMap">
+        select * from zz_orgpos where isDel='0'
+        and org_Latitude like concat('%', #{keyword}, '%')
+        order by SortCode limit #{rowNo}, #{pageSize}
+    </select>
+
+    <!--根据groupId，单条件分页查询-->
+    <select id="listGeographyByGroupId" resultMap="WorkfaceGeographyMap">
+        select zz_orgpos.*, Org_Name, Org_PId from zz_orgpos, zz_org
+        where zz_org.Org_Id=zz_orgpos.Org_Id and Org_PId=#{groupId}
+        and zz_orgpos.isDel='0' and zz_org.isDel=0
+        order by SortCode limit #{rowNo}, #{pageSize}
+    </select>
+
+    <!--根据groupId查询，不分页-->
+   <!-- <select id="listGeographyByGroupIdNoPage" resultMap="WorkfaceGeographyMap">
+        select zz_orgpos.*, Org_Name, Org_PId from zz_orgpos, zz_org
+        where zz_org.Org_Id=zz_orgpos.Org_Id and Org_PId=#{groupId} and zz_orgpos.isDel='0' and zz_org.isDel=0
+    </select>-->
+    <select id="listGeographyByGroupIdNoPage" resultMap="WorkfaceGeographyMap">
+        select Org_Name, Org_Longitude, Org_Latitude from zz_orgpos, zz_org
+        where zz_org.Org_Id=zz_orgpos.Org_Id and (Org_PId=#{groupId} or zz_orgpos.Org_Id=#{groupId})
+        and zz_orgpos.isDel='0' and zz_org.isDel=0
+    </select>
+
+    <!--双条件分页查询-->
+    <select id="listGeographyByGroupIdAndByKeyword" resultMap="WorkfaceGeographyMap">
+        select zz_orgpos.* from zz_org, zz_orgpos
+        where zz_org.Org_Id=zz_orgpos.Org_Id and Org_PId=#{groupId}
+        and zz_orgpos.isDel='0' and zz_org.isDel=0
+        and org_Latitude like concat('%', #{keyword}, '%')
+        order by SortCode limit #{rowNo}, #{pageSize}
+    </select>
+
+    <!--假删除，根据orgId更新IsDel的状态为1-->
+    <update id="updateIsDel" parameterType="java.lang.String">
+        update zz_orgpos set isDel='1' where Org_Id=#{orgId}
+    </update>
+
+    <!--编辑矿井公司地理信息【实用】-->
+    <update id="updateZZWorkfaceGeographies" parameterType="java.lang.String">
+        update zz_orgpos
+        set Org_Longitude=#{orgLongitude}, Org_Latitude=#{orgLatitude}, UpdateTime=#{currentTime}, SortCode=#{sortCode}
+        where Org_Id=(select Org_Id from zz_org where Org_Name=#{orgName})
+    </update>
+    <!--编辑矿井集团地理信息【实用】-->
+    <update id="updateZZGroupsGeographies" parameterType="java.lang.String">
+        update zz_orgpos
+        set Org_Longitude=#{orgLongitude}, Org_Latitude=#{orgLatitude}, UpdateTime=#{currentTime}, SortCode=#{sortCode}
+        where Org_Id=#{groupId}
+    </update>
+
+    <!--根据orgId查询此条数据是否存在-->
+    <select id="listByOrgId" resultMap="WorkfaceGeographyMap">
+        select * from zz_orgpos where Org_Id=#{orgId}
+    </select>
+
+</mapper>

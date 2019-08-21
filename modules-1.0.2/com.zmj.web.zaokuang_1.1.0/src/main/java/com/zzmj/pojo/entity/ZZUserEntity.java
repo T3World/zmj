@@ -3,7 +3,7 @@ package com.zzmj.pojo.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ZZUserEntity implements Serializable {
+public class  ZZUserEntity implements Serializable {
     /**
      * @Fields: {todo}(用一句话描述这个变量表示什么)
      */
@@ -92,6 +92,11 @@ public class ZZUserEntity implements Serializable {
      * @ibatorgenerated 2018-12-08 14:48:37
      */
     private Integer isdel;
+    
+    /**
+     * isUse (是否启用  0不启用 1启用)
+     */
+    private String isuse;
     private String orgName;
 
     private ZZOrgEntity zzOrgEntity;
@@ -217,5 +222,25 @@ public class ZZUserEntity implements Serializable {
     public void setOrgName(String orgName) {
         this.orgName = orgName;
     }
+
+	public String getIsuse() {
+		return isuse;
+	}
+
+	public void setIsuse(String isuse) {
+		this.isuse = isuse;
+	}
+
+	@Override
+	public String toString() {
+		return "ZZUserEntity [id=" + id + ", userId=" + userId + ", userName="
+				+ userName + ", userAccount=" + userAccount + ", userTel="
+				+ userTel + ", userPassword=" + userPassword + ", userJob="
+				+ userJob + ", orgId=" + orgId + ", createtime=" + createtime
+				+ ", updatetime=" + updatetime + ", status=" + status
+				+ ", isdel=" + isdel + ", isuse=" + isuse + ", orgName="
+				+ orgName + ", zzOrgEntity=" + zzOrgEntity
+				+ ", zzRoleuserEntity=" + zzRoleuserEntity + "]";
+	}
 
 }

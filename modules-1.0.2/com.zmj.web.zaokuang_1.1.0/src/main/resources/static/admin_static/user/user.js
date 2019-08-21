@@ -85,9 +85,6 @@ function onInputTreeClick(event,treeId,treeNode,clickFlag){
  * @returns
  */
 function addUser(){
-	
-	
-	
 	var key =  $('#subflag').val();
 	//根据subflag选择是新增还是修改
 	if($('#subflag').val()==0){
@@ -360,19 +357,59 @@ function fillUserTableData(data){
 		row += '<td>' + records[i].userName + '</td>';
 		row += '<td>' + records[i].userAccount + '</td>';
 		row += '<td>' + records[i].userJob + '</td>';
+        row += '<td>' + formatState(records[i].isuse) + '</td>';
 		row += '<td>' + records[i].zzOrgEntity.orgName+ '</td>';
 		row += '<td align="center">' + operate(records[i]) + '</td>';
 		row += '</tr>';
 	}
 	$('#tableData').html(row);
-	
+}
+
+/** 格式化用户状态 */
+function formatState(state) {
+    if (state == 0) {
+        return "停用";
+    } else {
+        return "启用";
+    }
 }
 
 function operate(data){
 	var html = ' <a href="javascript:openPermitDialog(\''+data.userId+'\')">授权</a> ';
 		html += ' <a href="javascript:void(0);" onclick="openEditDialog(this)">编辑</a> ';
 		html += ' <a href="javascript:delUser(\''+data.userId+'\')">删除</a> ';
-	return html;
+        html += '<a href="javascript:isUse(\'' + data.userId +'\',\'' + data.isuse +'\')">启停</a> ';
+    return html;
+}
+
+/*用户状态启用禁用*/
+function isUse(userId,isuse){
+    if(confirm('确定要启用/禁用该用户吗？')) {
+        console.info(userId);
+        console.info(isuse);
+        $.ajax({
+            type: "POST",
+            url: "/SysBase/User/updateIsUse",
+            data: {
+                userId: userId,
+                isuse: isuse
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.Code == 2000) {
+                    alert(data.Error_Msg);
+                    // 刷新方法
+                    console.log(ORG_PID);
+                    loadUsersByOrgId(ORG_PID);
+                } else {
+                    alert(data.Error_Msg);
+                }
+            },
+            error: function (e) {
+                console.info(e);
+            }
+        })
+    }
 }
 
 function openPermitDialog(userId){

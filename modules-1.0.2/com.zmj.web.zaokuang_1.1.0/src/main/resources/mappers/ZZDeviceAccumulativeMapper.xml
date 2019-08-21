@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZDeviceAccumulativeMapper" >
+  <resultMap id="BaseResultMap" type="com.zzmj.pojo.entity.ZZDeviceAccumulative" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="Device_Id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="Cumulative_Run_Time" property="cumulativeRunTime" jdbcType="VARCHAR" />
+    <result column="Cumulative_Load_Cycles" property="cumulativeLoadCycles" jdbcType="VARCHAR" />
+    <result column="Cumulative_Coal_Weight" property="cumulativeCoalWeight" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  	 <sql id="Base_Column_List" >
+        Id, Device_Id, Cumulative_Run_Time,Cumulative_Load_Cycles,Cumulative_Coal_Weight
+    </sql>
+  
+  <insert id="add">
+  	insert into zz_deviceaccumulative (Id,Device_Id,Cumulative_Run_Time,Cumulative_Load_Cycles,Cumulative_Coal_Weight)
+  	values (#{id,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR},#{cumulativeRunTime,jdbcType=VARCHAR}, 
+  	#{cumulativeLoadCycles,jdbcType=VARCHAR},#{cumulativeCoalWeight,jdbcType=VARCHAR})
+  </insert>
+  <delete id="delete">
+	  delete from zz_deviceaccumulative 
+	  where Device_Id= #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <update id="update">
+	  update zz_deviceaccumulative
+	  set Cumulative_Run_Time=#{cumulativeRunTime,jdbcType=VARCHAR}, 
+	  Cumulative_Load_Cycles=#{cumulativeLoadCycles,jdbcType=VARCHAR},
+	  Cumulative_Coal_Weight=#{cumulativeCoalWeight,jdbcType=VARCHAR}
+	  where Device_Id= #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByDeviceId" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+ 	from zz_deviceaccumulative
+ 	where Device_Id= #{deviceId,jdbcType=VARCHAR}
+  </select>
+
+    <select id="countByDeviceId" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*)
+        from zz_deviceaccumulative
+        where Device_Id = #{deviceId,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -56,4 +56,11 @@ public interface ZZModuleService {
 	 */
 	List<HashMap<String, Object>> getUserMoudel(String userId);
 
+	/**
+	 * 根据角色Id查询跟该角色关联的所有模块值，返回值List<String>
+	 * @param roleId
+	 * @return
+	 */
+	List<String> getModuleValuesByRoleId(String roleId);
+
 }

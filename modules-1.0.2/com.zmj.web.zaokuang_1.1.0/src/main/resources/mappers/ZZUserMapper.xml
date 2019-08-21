@@ -32,6 +32,7 @@
 		<result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
 		<result column="Status" property="status" jdbcType="VARCHAR" />
 		<result column="IsDel" property="isdel" jdbcType="INTEGER" />
+		<result column="IsUse" property="isuse" jdbcType="INTEGER" />
 		<result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
 		<association property="zzOrgEntity" column="Org_Id"
 			javaType="com.zzmj.pojo.entity.ZZOrgEntity" resultMap="orgResultMap" />
@@ -52,7 +53,7 @@
 		Id, User_Id, User_Name, User_Account, User_Password,
 		User_Job,
 		User_Tel,Org_Id, CreateTime,
-		UpdateTime, `Status`, IsDel
+		UpdateTime, `Status`, IsDel,IsUse
 	</sql>
 	<sql id="Example_Where_Clause">
 		<where>
@@ -252,7 +253,7 @@
 		User_Id, User_Name,
 		User_Account, User_Password, User_Job, User_Tel,
 		Org_Id, CreateTime, UpdateTime,
-		`Status`, IsDel)
+		`Status`, IsDel,IsUse)
 		values
 		(#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
 		#{userName,jdbcType=VARCHAR},
@@ -261,7 +262,7 @@
 		#{userTel,jdbcType=VARCHAR},#{orgId,jdbcType=VARCHAR},
 		#{createtime,jdbcType=TIMESTAMP},
 		#{updatetime,jdbcType=TIMESTAMP},
-		#{status,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER})
+		#{status,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}, #{isuse,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.zzmj.pojo.entity.ZZUserEntity">
 		insert into ZZ_User
@@ -377,21 +378,49 @@
 		<!-- SELECT * FROM ZZ_User WHERE IsDel = 0 AND Org_Id = #{orgId,jdbcType=VARCHAR} 
 			AND (User_Name LIKE #{keyWord,jdbcType=VARCHAR} OR User_Account LIKE #{keyWord,jdbcType=VARCHAR}) 
 			limit #{pageNo,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} -->
-		SELECT u.*,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on
+		SELECT u.*,o.Org_Name FROM ZZ_User as u left join ZZ_Org as o on
 		u.Org_Id = o.Org_Id
-		where u.IsDel = 0 AND (u.User_Name LIKE
-		#{keyWord,jdbcType=VARCHAR} OR
-		u.User_Account LIKE
-		#{keyWord,jdbcType=VARCHAR})
-		limit #{pageNo,jdbcType=INTEGER},
+		where u.IsDel = '0' AND 
+		(u.User_Name like concat('%',#{keyword},'%')
+        OR u.User_Account LIKE concat('%',#{keyword},'%'))
+		limit #{rowNo,jdbcType=INTEGER},
 		#{pageSize,jdbcType=INTEGER}
 	</select>
 
 	<select id="allCount" parameterType="com.zzmj.pojo.entity.ZZUserEntity"
 		resultType="java.lang.Integer">
 		<!-- 查询总条数 -->
-		SELECT COUNT(*) FROM ZZ_User WHERE IsDel=0;
+		SELECT COUNT(*) FROM ZZ_User WHERE IsDel='0'
 	</select>
+	<!--orgId为空 keyword不为空的情况下  -->
+	<select id="getCountByKeyWord" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM ZZ_User 
+		WHERE (User_Name like concat('%',#{keyword},'%')
+        OR User_Account LIKE concat('%',#{keyword},'%'))
+		and IsDel='0'
+	</select>
+	
+	<!--orgId不为空 keyword为空的情况下  -->
+	<select id="getCountByOrgId" resultType="java.lang.Integer">
+	 select count(*) from ZZ_User as d where d.isDel='0'
+     and d.Org_Id=#{orgId,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- orgId keyword都不为空的情况下 -->
+	<select id="getCountByOrgIdAndKeyWord" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM ZZ_User 
+		WHERE (User_Name like concat('%',#{keyword},'%') OR User_Account LIKE concat('%',#{keyword},'%'))
+        and Org_Id=#{orgId,jdbcType=VARCHAR}
+		and IsDel=0
+		
+		<!-- SELECT COUNT(*) FROM ZZ_User 
+		WHERE (User_Name like concat('%',#{keyword},'%')
+        OR User_Account LIKE concat('%',#{keyword},'%'))
+        and Org_Id=#{orgId,jdbcType=VARCHAR}
+		and IsDel='0' -->
+	</select>
+	
+	
 	<!-- 查询出所有的列表并分页 -->
 	<select id="listUserAll" resultMap="BaseResultMap"
 		parameterType="com.zzmj.pojo.entity.ZZUserEntity">
@@ -400,9 +429,9 @@
 		<!-- SELECT u.*,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on 
 			u.Org_Id = o.Org_Id where u.IsDel = 0 AND u.Org_Id = #{orgId,jdbcType=VARCHAR} 
 			limit #{rowNo,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} -->
-		SELECT u.* ,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on
+		SELECT u.* ,o.Org_Name FROM ZZ_User as u left join ZZ_Org as o on
 		u.Org_Id = o.Org_Id
-		WHERE u.IsDel = 0 limit #{rowNo,jdbcType=INTEGER},
+		WHERE u.IsDel = '0' limit #{rowNo,jdbcType=INTEGER},
 		#{pageSize,jdbcType=INTEGER}
 	</select>
 	<!-- 根据orgId分页查询 -->
@@ -410,17 +439,29 @@
 		parameterType="com.zzmj.pojo.entity.ZZUserEntity">
 		<!-- SELECT * FROM ZZ_User WHERE Org_Id = #{orgId,jdbcType=VARCHAR} AND 
 			IsDel = 0 limit #{rowNo,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} -->
-		SELECT u.*,o.Org_Name FROM ZZ_User as u inner join ZZ_Org as o on
+		SELECT u.*,o.Org_Name FROM ZZ_User as u left join ZZ_Org as o on
 		u.Org_Id = o.Org_Id
-		where u.IsDel = 0 AND u.Org_Id =
+		where u.IsDel = '0' AND u.Org_Id =
 		#{orgId,jdbcType=VARCHAR}
 		limit #{rowNo,jdbcType=INTEGER},
 		#{pageSize,jdbcType=INTEGER}
 	</select>
+	
+	<!--模糊查询使用concat()函数    更精确 -->
+	<select id="getListUserByOrgIdAndKeyWord" resultMap="BaseResultMap">
+		SELECT u.*,o.Org_Name FROM ZZ_User as u left join ZZ_Org as o on
+		u.Org_Id = o.Org_Id
+		where u.IsDel = '0' 
+		AND (u.User_Name like concat('%',#{keyword},'%') OR u.User_Account LIKE concat('%',#{keyword},'%'))
+		and u.Org_Id =#{orgId,jdbcType=VARCHAR}
+		limit #{rowNo,jdbcType=INTEGER},
+		#{pageSize,jdbcType=INTEGER}
+	</select>
+	
 
 
 	<select id="selectForLogin" resultMap="LoginResultMap"
-		parameterType="String">
+		parameterType="java.lang.String">
 		select
 		User_Id, User_Name, User_Account, User_Job,
 		User_Tel,Org_Id, `Status`
@@ -448,10 +489,21 @@
 	<select id="getCountByOrgIdANDKeyword" parameterType="com.zzmj.pojo.entity.ZZUserEntity"
 		resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM ZZ_User as u WHERE u.IsDel=0 AND
-		u.Org_Id = #{orgId,jdbcType=VARCHAR} AND
-		(u.User_Name LIKE #{keyword,jdbcType=VARCHAR} OR u.User_Account Like
-		#{keyword,jdbcType=VARCHAR})
+		u.Org_Id = #{orgId,jdbcType=VARCHAR} 
+		AND (u.User_Name like concat('%',#{keyword},'%') OR u.User_Account LIKE concat('%',#{keyword},'%'))
 	</select>
 
+	<!--更改用户启用状态  -->
+	<update id="updateIsUse">
+		update ZZ_User set IsUse=#{isuse} where User_Id=#{userId}
+	</update>
 	<!-- 新增自己写的方法结束 -->
+	
+	<select id="selectCountByAccount" resultType="int">
+		select count(*) FROM 
+		zz_user where User_Account=#{account} 
+		and IsDel=0
+	</select>
+	
+	
 </mapper>

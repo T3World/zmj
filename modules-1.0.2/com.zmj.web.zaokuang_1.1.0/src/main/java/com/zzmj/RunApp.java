@@ -1,10 +1,8 @@
 package com.zzmj;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.SpringApplication;
@@ -14,9 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.converter.HttpMessageConverter;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import java.io.IOException;
 
 @MapperScan(basePackages = "com.zzmj.mapper")
 @SpringBootApplication
@@ -27,6 +23,7 @@ public class RunApp {
         SpringApplication app = new SpringApplication(RunApp.class);
         app.setDefaultProperties(yamlPropertiesFactoryBean.getObject());
         app.run(args);
+//        SpringApplication.run(RunApp.class, args);
     }
 
     /**

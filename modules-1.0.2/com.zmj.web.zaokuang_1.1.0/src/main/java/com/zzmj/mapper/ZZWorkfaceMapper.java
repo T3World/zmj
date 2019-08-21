@@ -2,6 +2,7 @@ package com.zzmj.mapper;
 
 import com.zzmj.pojo.entity.ZZWorkfaceEntity;
 import com.zzmj.pojo.entity.ZZWorkfaceExample;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -176,4 +177,8 @@ public interface ZZWorkfaceMapper {
     int stopWorkface(@Param("workfaceId") String workfaceId, @Param("state") Integer state);
 
     List<Map<String, Object>> listWorkfaceNoPage(@Param("orgId") String orgId);
+    
+    String selectId(String workfaceId);
+    
+    List<String> selectworkfaceIdByOrgId(String orgId);
 }

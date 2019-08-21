@@ -41,5 +41,13 @@ public interface ZZRoleService {
     SysResult listRoleAll() throws EmptyResultException;
 
     SysResult delRole(String roleId) throws IllegalParamException;
+
+    /**
+     * 根据userId查询关联的所有角色，返回一个角色集合
+     * (角色集合里包含角色Id、角色名、角色值)
+     * @param userId
+     * @return
+     */
+    List<ZZRoleEntity> listRolesByUserId(String userId);
     
 }

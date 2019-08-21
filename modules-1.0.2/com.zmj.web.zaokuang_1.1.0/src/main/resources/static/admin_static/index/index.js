@@ -22,7 +22,9 @@ $(document).ready(function(){
 		initModules(userId);
 		localStorage.setItem("loginTime",loginTime);
 	}
+
 });
+
 function myclose(){
 	localStorage.clear();
 }
@@ -42,7 +44,6 @@ function initModules(userId){
 }
 
 function createMenu(data){
-
 	var html = "";
 
 	//二级循环
@@ -52,13 +53,13 @@ function createMenu(data){
 
 		if(data[i].M_PId==0){
 			html+='<div class="sBox">\n' +
-			'\t\t<div class="subNav sublist-down">\n' +
+			'\t\t<div class="subNav sublist-up" id="subNav">\n' +
 			'\t\n' +
-			'\t<span class="title-icon glyphicon glyphicon-chevron-down"></span>\n' +
+			'\t<span class="title-icon glyphicon glyphicon-chevron-up"></span>\n' +
 			'\t<span class="sublist-title">'+data[i].M_Name+'</span>\n' +
 			'\t\n' +
 			'</div>';
-			html+='<ul class="navContent" style="display: block">';
+			html+='<ul class="navContent" style="display: none">';
 			for(var j in subData){
 				if(subData[j].M_PId == data[i].M_Id){
 					html+='<li >\n' +
@@ -72,7 +73,6 @@ function createMenu(data){
 			}
 			html+='</ul>';
 		}
-
 	}
 
 	$('.subNavBox').html(html);

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzmj.mapper.ZZMineMessageMapper">
+	 <resultMap id="zzMineMessageResultMap" type="com.zzmj.pojo.entity.ZZMineMessage" >
+        <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Message_Id" property="messageId" jdbcType="VARCHAR" />
+        <result column="User_Id" property="userId" jdbcType="VARCHAR" />
+        <result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+        <result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+        <result column="Message" property="message" jdbcType="VARCHAR" />
+        <result column="MessageType" property="messageType" jdbcType="VARCHAR" />
+        <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
+        <result column="isDel" property="isDel" jdbcType="VARCHAR" />
+    </resultMap>
+	
+	 <resultMap id="mineMessageMap" type="com.zzmj.pojo.entity.MineMessage" >
+	    <id column="Id" property="id" jdbcType="VARCHAR" />
+        <result column="Message_Id" property="messageId" jdbcType="VARCHAR" />
+        <result column="User_Id" property="userId" jdbcType="VARCHAR" />
+        <result column="Org_Id" property="orgId" jdbcType="VARCHAR" />
+        <result column="Workface_Id" property="workfaceId" jdbcType="VARCHAR" />
+        <result column="Message" property="message" jdbcType="VARCHAR" />
+        <result column="MessageType" property="messageType" jdbcType="VARCHAR" />
+        <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
+        <result column="User_Name" property="userName" jdbcType="VARCHAR" />
+        <result column="Org_Name" property="orgName" jdbcType="VARCHAR" />
+        <result column="Workface_Name" property="workfaceName" jdbcType="VARCHAR" />
+    </resultMap>
+	
+	
+	<sql id="zzMineMessageResult" >
+        Id, Message_Id, User_Id, Org_Id, Workface_Id, Message, MessageType,UpdateTime, isDel
+    </sql>
+	
+	<!-- 发送通知sql -->
+	<insert id="postMineMessage">
+	insert into zz_minemessage
+	 (Id,Message_Id,User_Id,Org_Id,Workface_Id,Message,MessageType,UpdateTime,isDel)
+	values
+	(#{id},#{messageId},#{userId},#{orgId},#{workfaceId},#{message},#{messageType},
+	#{updateTime},#{isDel})
+	</insert>
+	
+	
+	<!--获取通知sql 分页查询   查询当天内的总条数-->
+	<select id="getCount" resultType="java.lang.Integer">
+	select count(*) from zz_minemessage where UpdateTime between #{dateee} and #{dateeee}
+	and MessageType=#{messageType}
+	and isDel='0'
+	</select>
+	<!--分页查询   查询当天内每页的数据  只限于通知表中的数据 该sql不符合要求-->
+	<select id="getZZMineMessageByPage" resultMap="zzMineMessageResultMap">
+		select 
+		 <include refid="zzMineMessageResult" />
+		 from zz_minemessage where UpdateTime between #{dateee} and #{dateeee}
+		 and MessageType=#{messageType}
+		and isDel='0'
+		limit #{rowNum},#{pageSize}
+	</select>
+	
+	<!--分页查询   查询当天内每页的数据   包含需要的name  -->
+	<select id="getZZMineMessage" resultMap="mineMessageMap">
+		select a.User_Name as User_Name,b.Org_Name as Org_Name,
+			c.Workface_Name as Workface_Name,d.Id as Id,d.Message_Id as Message_Id,
+			d.User_Id as User_Id,d.Org_Id as Org_Id,d.Workface_Id 
+			as Workface_Id,d.Message as Message,d.MessageType as MessageType,
+			d.UpdateTime as UpdateTime
+		from zz_minemessage as d 
+		inner join ZZ_User as a on d.User_Id = a.User_Id
+		inner join ZZ_Org as b on d.Org_Id =  b.Org_Id
+		left join ZZ_Workface as c on d.Workface_Id = c.Workface_Id
+		where d.MessageType = #{messageType}
+		and d.isdel='0'
+		and d.UpdateTime between #{dateee} and #{dateeee}
+		limit #{rowNum},#{pageSize} 
+	</select>
+	
+	<delete id="deleteById">
+		update zz_minemessage set isDel='1' where id=#{id}
+	</delete>
+</mapper>

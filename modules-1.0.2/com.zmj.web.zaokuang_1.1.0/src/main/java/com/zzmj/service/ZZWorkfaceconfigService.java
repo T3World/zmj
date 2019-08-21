@@ -50,4 +50,8 @@ public interface ZZWorkfaceconfigService {
 
     SysResult updataConfigByWorkfaceId(ZZWorkfaceconfigEntity entity) throws DoSqlFailedException;
 
+    /**
+     * 根据工作面id 查询工作面配置信息
+     */
+    SysResult selectWorkfaceConfigByWorkfaceId(String workfaceId);
 }

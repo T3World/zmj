@@ -111,4 +111,19 @@ public class ZZWorkfaceconfigServiceImpl implements ZZWorkfaceconfigService {
 		}
 	}
 
+	@Override
+	public SysResult selectWorkfaceConfigByWorkfaceId(String workfaceId) {
+		try {
+			ZZWorkfaceconfigEntity zzWorkfaceconfigEntity=zzWorkfaceconfigMapper.selectWorkfaceConfigByWorkfaceId(workfaceId);
+			if(null!=zzWorkfaceconfigEntity)
+				return new SysResult(ErrorUtil.CODE2000, "查询工作面配置成功!", zzWorkfaceconfigEntity);
+			return new SysResult(ErrorUtil.CODE2001, "查询工作面配置失败", null);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			throw new DoSqlFailedException("查询工作面配置失败!", e);
+		}
+	}
+
 }

@@ -8,7 +8,7 @@ var moduleTree2 = null;
 
 $(document).ready(function(){
 	loadModuleTreeData();
-	doAjax(keyword, 1, 11);
+	doAjax(keyword, 1, 20);
 });
 
 /**
@@ -194,7 +194,7 @@ function submitAddModule(data){
 	},function(data){
 		if(data.Code==2000){
 			alert("添加成功!");
-			doAjax(keyword, pageNo, pageSize);
+            freshMeat();
 		}else{
 			alert(data.Error_Msg);
 		}
@@ -244,7 +244,7 @@ function submitEditModule(data){
 	},function(data){
 		if(data.Code==2000){
 			alert("修改成功!");
-			doAjax(keyword, pageNo, pageSize);
+            freshMeat();
 		}else{
 			alert(data.Error_Msg);
 		}
@@ -444,4 +444,15 @@ function doResult(result){
 		return false;
 	}
 	return true;
+}
+
+function freshMeat() {
+    loadModuleTreeData();
+    var pageNo = 1;
+    var pageSize = 20;
+    if (t3w!=null){
+        pageNo = t3w.Data.pageNo;
+        pageSize = t3w.Data.pageSize;
+    }
+    doAjax(keyword, pageNo, pageSize);
 }

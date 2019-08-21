@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link title="" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="/admin_static/dictionary/devicetype.css" rel="stylesheet">
+    <script type="text/javascript" src="/script/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/zTree/js/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <title>设备管理</title>
+</head>
+<body>
+<div class="main">
+    <div class="right_content pull-left ">
+        <div class="tool_button">
+            <button type="button" class="btn btn-danger" data-toggle="modal" onclick="delChecked()">批量删除</button>
+            <button type="button" class="btn btn-primary right_button" data-toggle="modal" onclick="addmethod()">添加设备类型</button>
+        </div>
+        <div class="clearfix" style="height:100%">
+            <div class="data pull-left" id="roleData" style="padding:10px;width:calc(100% - 0px);margin-right:10px" >
+                <!-- Table -->
+                <table  class="table table-bordered table-header">
+                    <thead>
+                    <tr>
+                        <th class="text-center w5" ><input type="checkbox" onchange="selectAllDeviceType(this)" class="deviceTypeCheckBox" id="deviceTypeAllCheckBox"></th>
+                        <th class="text-center" width="30px">No</th>
+                        <th class="text-center" hidden>id</th>
+                        <th class="text-center w20">设备类型名称</th>
+                        <th class="text-center w20">类型别名</th>
+                        <th class="text-center w15">排序码</th>
+                        <th class="text-center w15">更新时间</th>
+                        <th class="text-center ">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="deviceTypeTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="paging">
+            <ul id="pageBtn" class="pagination">
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- 模态框 -->
+<div class="modal fade" id="deviceTypeModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">添加系统资源</h4>
+            </div>
+            <!-- 表单!!! -->
+            <form id="moduleForm" class="form-horizontal" action="" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group" hidden>
+                            <input type="text" class="form-control" id="deviceTypeId" placeholder="id">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceTypeName">设备类型名称：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="deviceTypeName" placeholder="请输入设备类型名称" name="deviceTypeName">
+                        </div>
+                        <span id="deviceTypeName_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceTypeAlias">设备类型英文：</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="deviceTypeAlias" name="deviceTypeAlias" placeholder="请输入类型别名">
+                        </div>
+                        <span id="deviceTypeAlias_msg" class="error_msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="deviceTypeSortCode">排序码：</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="deviceTypeSortCode" name="deviceTypeSortCode">
+                        </div>
+                        <span id="deviceTypeSortCode_msg" class="text-center error_msg"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="submitModal()">保 存</button>
+                </div>
+                <input type="hidden" value='0' id="subflag" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin_static/dictionary/devicetype.js"></script>
+
+</body>
+</html>
